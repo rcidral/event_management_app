@@ -18,7 +18,7 @@ The purpose of this project is to create a desktop application to manage events.
 - The application must be developed using the GitHub repository.
 - The application must be developed using the Scrum methodology.
 - The application must be developed using the Kanban board.
-- The application must be developed using the Trello tool.
+- The application must be developed using the Jira tool.
 
 ## Commands
 
