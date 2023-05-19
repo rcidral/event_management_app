@@ -50,5 +50,76 @@ namespace Models
                 throw e;
             }
         }
+
+        public static List<Event> index()
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Events.ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static List<Event> show(int id)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Events.Where(event_ => event_.Id == id).ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static void update(int id, Event event_, int artistId, int sponsorId, Values values)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    Event eventOld_ = context.Events.Find(id);
+                    eventOld_.Date = event_.Date;
+                    eventOld_.Description = event_.Description;
+                    eventOld_.UserId = event_.UserId;
+                    eventOld_.PlaceId = event_.PlaceId;
+                    eventOld_.TypeId = event_.TypeId;
+
+                    context.SaveChanges();
+                    ArtistEvent.update(id, new ArtistEvent(artistId, eventOld_.Id));
+                    Values.update(id, new Values(values.Date, values.Value, sponsorId, eventOld_.Id));
+                }
+            } 
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static void delete(int id)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    Event event_ = context.Events.Find(id);
+                    context.Events.Remove(event_);
+                    context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

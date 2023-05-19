@@ -17,5 +17,29 @@ namespace Test
                 throw e;
             }
         }
+
+        public static void update(int id, int artistId, int sponsorId, Values values, Event event_)
+        {
+            try
+            {
+                Event.update(id, event_, artistId, sponsorId, values);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static void delete(int id)
+        {
+            try
+            {
+                Event.delete(id);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
