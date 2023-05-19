@@ -3,7 +3,7 @@ using Test;
 namespace Program {
     public class Program {
         public static void Main(string[] args) {
-            UserTest.index();
+            UserTest.show(1);
         }
     }
 }
