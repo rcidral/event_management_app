@@ -112,5 +112,24 @@ namespace Test
                 throw e;
             }
         }
+
+        public static void login(string login, string password)
+        {
+            try
+            {
+                if(User.login(login, password)) 
+                {
+                    MessageBox.Show("Login realizado com sucesso!");
+                }
+                else
+                {
+                    MessageBox.Show("Login ou senha incorretos!");
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

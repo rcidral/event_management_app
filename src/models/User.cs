@@ -94,5 +94,25 @@ namespace Models
                 throw e;
             }
         }
+
+        public static Boolean login(string login, string password)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    User user = context.Users.Where(user => user.Login == login && user.Password == password).FirstOrDefault();
+                    if (user != null)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
