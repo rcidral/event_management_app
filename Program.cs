@@ -6,7 +6,7 @@ namespace Program
     {
         public static void Main(string[] args)
         {
-            ArtistTeste.store();
+            ArtistTeste.index();
         }
     }
 }

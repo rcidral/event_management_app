@@ -25,5 +25,19 @@ namespace Models
                 throw e;
             }
         }
+        public static List<Artist> index()
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Artists.ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
