@@ -10,6 +10,7 @@ namespace Data
         public DbSet<Place> Places { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Sponsor> Sponsors { get; set; }
+        public DbSet<Models.Type> Types { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseMySql(connection, ServerVersion.AutoDetect(connection));
     }

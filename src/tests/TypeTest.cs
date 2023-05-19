@@ -2,20 +2,21 @@ using Models;
 
 namespace Test
 {
-    public class ArtistTest
+    public class TypeTest
     {
         public static void store()
         {
             try
             {
-                Artist artist = new Artist("Test");
-                Artist.store(artist);
+                Models.Type type = new Models.Type("Test");
+                Models.Type.store(type);
             }
             catch (System.Exception e)
             {
                 throw e;
             }
         }
+
         public static void index()
         {
             try
@@ -23,21 +24,21 @@ namespace Test
                 Form form = new Form();
                 form.Width = 500;
                 form.Height = 500;
-                form.Text = "Artists";
+                form.Text = "Types";
 
                 ListView listView = new ListView();
                 listView.Width = 500;
                 listView.Height = 500;
                 listView.View = View.Details;
                 listView.Columns.Add("Id");
-                listView.Columns.Add("Name");
+                listView.Columns.Add("Description");
 
-                List<Artist> artists = Artist.index();
+                List<Models.Type> types = Models.Type.index();
 
-                foreach (Artist artist in artists)
+                foreach (Models.Type type in types)
                 {
-                    ListViewItem item = new ListViewItem(artist.Id.ToString());
-                    item.SubItems.Add(artist.Name);
+                    ListViewItem item = new ListViewItem(type.Id.ToString());
+                    item.SubItems.Add(type.Description);
                     listView.Items.Add(item);
                 }
 
@@ -49,6 +50,7 @@ namespace Test
                 throw e;
             }
         }
+
         public static void show(int id)
         {
             try
@@ -56,21 +58,21 @@ namespace Test
                 Form form = new Form();
                 form.Width = 500;
                 form.Height = 500;
-                form.Text = "Artists";
+                form.Text = "Types";
 
                 ListView listView = new ListView();
                 listView.Width = 500;
                 listView.Height = 500;
                 listView.View = View.Details;
                 listView.Columns.Add("Id");
-                listView.Columns.Add("Name");
+                listView.Columns.Add("Description");
 
-                List<Artist> artists = Artist.show(id);
+                List<Models.Type> types = Models.Type.show(id);
 
-                foreach (Artist artist in artists)
+                foreach (Models.Type type in types)
                 {
-                    ListViewItem item = new ListViewItem(artist.Id.ToString());
-                    item.SubItems.Add(artist.Name);
+                    ListViewItem item = new ListViewItem(type.Id.ToString());
+                    item.SubItems.Add(type.Description);
                     listView.Items.Add(item);
                 }
 
@@ -83,11 +85,11 @@ namespace Test
             }
         }
 
-        public static void update(int id, Artist artist)
+        public static void update(int id, Models.Type type)
         {
             try
             {
-                Artist.update(id, artist);
+                Models.Type.update(id, type);
             }
             catch (System.Exception e)
             {
@@ -99,13 +101,12 @@ namespace Test
         {
             try
             {
-                Artist.delete(id);
+                Models.Type.delete(id);
             }
             catch (System.Exception e)
             {
                 throw e;
             }
         }
-
     }
 }
