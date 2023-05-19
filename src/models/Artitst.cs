@@ -39,5 +39,19 @@ namespace Models
                 throw e;
             }
         }
+        public static List<Artist> show(int id)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Artists.Where(artist => artist.Id == id).ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

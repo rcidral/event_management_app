@@ -6,7 +6,7 @@ namespace Program
     {
         public static void Main(string[] args)
         {
-            ArtistTeste.index();
+            ArtistTeste.show(1);
         }
     }
 }
