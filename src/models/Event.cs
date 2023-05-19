@@ -23,7 +23,7 @@ namespace Models
             TypeId = typeId;
         }
 
-        public static void store(Event event_, int artistId)
+        public static void store(Event event_, int artistId, int sponsorId, Values values)
         {
             try
             {
@@ -34,9 +34,15 @@ namespace Models
                     {
                         throw new System.Exception("Artist not found");
                     }
+                    Sponsor sponsor = context.Sponsors.Find(sponsorId);
+                    if (sponsor == null)
+                    {
+                        throw new System.Exception("Sponsor not found");
+                    }
                     context.Events.Add(event_);
                     context.SaveChanges();
                     ArtistEvent.store(new ArtistEvent(event_.Id, artistId));
+                    Values.store(new Values(values.Date, values.Value, sponsorId, event_.Id));
                 }
             }
             catch (System.Exception e)

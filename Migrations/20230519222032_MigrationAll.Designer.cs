@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230519180224_MigrationArtistEvents")]
-    partial class MigrationArtistEvents
+    [Migration("20230519222032_MigrationAll")]
+    partial class MigrationAll
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -163,6 +163,33 @@ namespace Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Models.Values", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SponsorId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("SponsorId");
+
+                    b.ToTable("Values");
+                });
+
             modelBuilder.Entity("Models.ArtistEvent", b =>
                 {
                     b.HasOne("Models.Artist", "Artist")
@@ -207,6 +234,25 @@ namespace Migrations
                     b.Navigation("Type");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.Values", b =>
+                {
+                    b.HasOne("Models.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Sponsor", "Sponsor")
+                        .WithMany()
+                        .HasForeignKey("SponsorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("Sponsor");
                 });
 #pragma warning restore 612, 618
         }
