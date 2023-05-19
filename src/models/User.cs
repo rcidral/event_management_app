@@ -31,5 +31,19 @@ namespace Models
                 throw e;
             }
         }
+        public static List<User> index()
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Users.ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
