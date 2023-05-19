@@ -99,5 +99,17 @@ namespace Test
                 throw e;
             }
         }
+
+        public static void delete(int id)
+        {
+            try
+            {
+                Place.delete(id);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

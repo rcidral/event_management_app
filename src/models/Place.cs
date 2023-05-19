@@ -77,5 +77,22 @@ namespace Models
                 throw e;
             }
         }
+
+        public static void delete(int id)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    Place place = context.Places.Where(place => place.Id == id).FirstOrDefault();
+                    context.Places.Remove(place);
+                    context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
