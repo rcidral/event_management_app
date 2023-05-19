@@ -6,7 +6,7 @@ namespace Program
     {
         public static void Main(string[] args)
         {
-            ArtistTeste.show(1);
+            ArtistTeste.update(1, new Models.Artist("TEST"));
         }
     }
 }

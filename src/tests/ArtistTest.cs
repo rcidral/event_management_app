@@ -83,5 +83,17 @@ namespace Test
             }
         }
 
+        public static void update(int id, Artist artist)
+        {
+            try
+            {
+                Artist.update(id, artist);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

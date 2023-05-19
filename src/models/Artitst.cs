@@ -53,5 +53,21 @@ namespace Models
                 throw e;
             }
         }
+        public static void update(int id, Artist artist)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    Artist oldArtist = context.Artists.Find(id);
+                    oldArtist.Name = artist.Name;
+                    context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
