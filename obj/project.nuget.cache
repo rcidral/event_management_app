@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aUzFenQfI3AIEaKIrt9XWWjXvUlqwajMIea4A4EDTmJzHtn/d8zvrE6fw+sCJvf3VZZdpvNum9GDFi+9Gpzrhg==",
+  "dgSpecHash": "fdKNrGwlOy34/8rKGplcbU/3ByhsQOSkl9FHcAlDIH70dYCTDBKzKXC8vQVA1uLePxP8wCSLYcyjYaEozalubA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ricid\\www\\senac\\event_management_app\\..csproj",
+  "projectFilePath": "C:\\Users\\ricid\\www\\event_management_app\\..csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ricid\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\ricid\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",
