@@ -34,6 +34,27 @@ namespace Migrations
                     b.ToTable("Artists");
                 });
 
+            modelBuilder.Entity("Models.ArtistEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("ArtistEvents");
+                });
+
             modelBuilder.Entity("Models.Event", b =>
                 {
                     b.Property<int>("Id")
@@ -50,12 +71,17 @@ namespace Migrations
                     b.Property<int>("PlaceId")
                         .HasColumnType("int");
 
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PlaceId");
+
+                    b.HasIndex("TypeId");
 
                     b.HasIndex("UserId");
 
@@ -134,33 +160,50 @@ namespace Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Models.ArtistEvent", b =>
+                {
+                    b.HasOne("Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
+
+                    b.Navigation("Event");
+                });
+
             modelBuilder.Entity("Models.Event", b =>
                 {
                     b.HasOne("Models.Place", "Place")
-                        .WithMany("Events")
+                        .WithMany()
                         .HasForeignKey("PlaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Models.Type", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Models.User", "User")
-                        .WithMany("Events")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Place");
 
+                    b.Navigation("Type");
+
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Models.Place", b =>
-                {
-                    b.Navigation("Events");
-                });
-
-            modelBuilder.Entity("Models.User", b =>
-                {
-                    b.Navigation("Events");
                 });
 #pragma warning restore 612, 618
         }

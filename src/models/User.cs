@@ -8,7 +8,6 @@ namespace Models
         public string Name { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public virtual List<Event> Events { get; set; }
 
         public User(string name, string login, string password)
         {

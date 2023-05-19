@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230519170623_MigrationEvent")]
-    partial class MigrationEvent
+    [Migration("20230519180224_MigrationArtistEvents")]
+    partial class MigrationArtistEvents
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,27 @@ namespace Migrations
                     b.ToTable("Artists");
                 });
 
+            modelBuilder.Entity("Models.ArtistEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("ArtistEvents");
+                });
+
             modelBuilder.Entity("Models.Event", b =>
                 {
                     b.Property<int>("Id")
@@ -53,12 +74,17 @@ namespace Migrations
                     b.Property<int>("PlaceId")
                         .HasColumnType("int");
 
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PlaceId");
+
+                    b.HasIndex("TypeId");
 
                     b.HasIndex("UserId");
 
@@ -137,11 +163,36 @@ namespace Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Models.ArtistEvent", b =>
+                {
+                    b.HasOne("Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
+
+                    b.Navigation("Event");
+                });
+
             modelBuilder.Entity("Models.Event", b =>
                 {
                     b.HasOne("Models.Place", "Place")
                         .WithMany()
                         .HasForeignKey("PlaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Type", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -152,6 +203,8 @@ namespace Migrations
                         .IsRequired();
 
                     b.Navigation("Place");
+
+                    b.Navigation("Type");
 
                     b.Navigation("User");
                 });
