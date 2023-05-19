@@ -95,5 +95,17 @@ namespace Test
             }
         }
 
+        public static void delete(int id)
+        {
+            try
+            {
+                Artist.delete(id);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

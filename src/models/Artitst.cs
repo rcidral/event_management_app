@@ -69,5 +69,22 @@ namespace Models
                 throw e;
             }
         }
+
+        public static void delete(int id)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    Artist artist = context.Artists.Find(id);
+                    context.Artists.Remove(artist);
+                    context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
