@@ -3,7 +3,7 @@ using Test;
 namespace Program {
     public class Program {
         public static void Main(string[] args) {
-            PlaceTest.store();
+            PlaceTest.index();
         }
     }
 }

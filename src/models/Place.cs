@@ -29,5 +29,20 @@ namespace Models
                 throw e;
             }
         }
+
+        public static List<Place> index()
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Places.ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
