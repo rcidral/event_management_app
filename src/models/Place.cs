@@ -44,5 +44,20 @@ namespace Models
                 throw e;
             }
         }
+
+        public static List<Place> show(int id)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Places.Where(place => place.Id == id).ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
