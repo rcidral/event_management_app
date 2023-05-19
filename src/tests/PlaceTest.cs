@@ -87,5 +87,17 @@ namespace Test
                 throw e;
             }
         }
+
+        public static void update(int id, Place place)
+        {
+            try
+            {
+                Place.update(id, place);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

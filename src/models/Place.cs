@@ -59,5 +59,23 @@ namespace Models
                 throw e;
             }
         }
+
+        public static void update(int id, Place place)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    Place oldPlace = context.Places.Where(place => place.Id == id).FirstOrDefault();
+                    oldPlace.Name = place.Name;
+                    oldPlace.Address = place.Address;
+                    context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
