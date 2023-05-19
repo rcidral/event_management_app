@@ -91,5 +91,17 @@ namespace Test
                 throw e;
             }
         }
+
+        public static void update(int id, User user)
+        {
+            try
+            {
+                User.update(id, user);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

@@ -59,5 +59,23 @@ namespace Models
                 throw e;
             }
         }
+        public static void update(int id, User user)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    User userToUpdate = context.Users.Find(id);
+                    userToUpdate.Name = user.Name;
+                    userToUpdate.Login = user.Login;
+                    userToUpdate.Password = user.Password;
+                    context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
