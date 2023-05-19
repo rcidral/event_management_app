@@ -53,7 +53,6 @@ namespace Test
                 throw e;
             }
         }
-
         public static void show(int id)
         {
             try
@@ -91,12 +90,22 @@ namespace Test
                 throw e;
             }
         }
-
         public static void update(int id, User user)
         {
             try
             {
                 User.update(id, user);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+        public static void delete(int id)
+        {
+            try
+            {
+                User.delete(id);
             }
             catch (System.Exception e)
             {

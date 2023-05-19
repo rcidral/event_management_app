@@ -77,5 +77,22 @@ namespace Models
                 throw e;
             }
         }
+
+        public static void delete(int id)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    User userToDelete = context.Users.Find(id);
+                    context.Users.Remove(userToDelete);
+                    context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
