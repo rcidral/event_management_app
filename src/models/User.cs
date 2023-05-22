@@ -114,5 +114,12 @@ namespace Models
                 throw e;
             }
         }
+
+        public static User GetLast()
+        {
+            return index.Last();
+        }
+
     }
+            
 }
