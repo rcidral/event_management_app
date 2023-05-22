@@ -28,32 +28,21 @@ namespace Controllers
 
         }
 
-        public List<Models.User> index()
+        public static IEnumerable<Models.User> index()
         {
-            try
-            {
-                return Models.User.index();
-            }
-            catch (System.Exception e)
-            {
-                throw e;
-            }
+            return Models.User.index();
         }
 
-        public static User show(int id)
+        public static Models.User show(int id)
         {
-            User user = (
-               from User in User.index()
-               where User.id == id
-               select User
-            ).First();
-
-            if (user == null)
+            Model.User LastUser = Models.User.Last();
+            if(id < 0 ||  LastUser.id != id)
             {
-                throw new Exception("Usuário não encontrado");
+                throw new Exception("Id não encontrado");
             }
 
-            return user;
+            return Models.User.show(id);
+            
         }
 
         public static update(int id, string name, string email, string senha)

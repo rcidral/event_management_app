@@ -27,33 +27,6 @@ public class Values
         return new Values(date, value, sponsorId, eventId);
     }
 
-    public List<Models.Values> index()
-    {
-        try
-        {
-            return Models.Values.index();
-        }
-        catch (System.Exception e)
-        {
-            throw e;
-        }
-    }
-
-    public static Values show(int id)
-    {
-        Values values = (
-              from Values in Values.index()
-              where Values.id == id
-              select Values
-        ).First();
-
-        if (values == null)
-        {
-            throw new Exception("Valor não encontrado");
-        }
-
-        return values;
-    }
 
     public static update(int id, DateOnly date, double value, int sponsorId, int eventId)
     {
@@ -79,12 +52,17 @@ public class Values
 
     }
 
-    public static delete(int id)
+    public static void delete(string StringId)
     {
-        Values values = Models.Values.show(id);
-        Models.Values.delete(values);
-
-        return values;
+        int id = Convert.ToInt32(StringId);
+        try
+        {
+            Models.Values.delete(id);
+        }
+        catch (System.Exception e)
+        {
+            throw e;
+        }   
     }
 
 
