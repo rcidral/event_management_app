@@ -6,12 +6,17 @@ using Models;
 
         public class ArtistEvent{
 
-            public void store(Models.ArtistEvent artistEvent){
-                try{
-                    Models.ArtistEvent.store(artistEvent);
-                }catch(System.Exception e){
-                    throw e;
+            public void store(int artistId, int eventId){
+                if(artistId == null)
+                {
+                    throw new Exception("Artista não pode ser vazio");
                 }
+                if(eventId == null)
+                {
+                    throw new Exception("Evento não pode ser vazio");
+                }
+                return new ArtistEvent(artistId, eventId);
+
             }
 
                public List<Models.ArtistEvent> index(){
@@ -23,27 +28,41 @@ using Models;
                }
 
                  public List<Models.ArtistEvent> show(int id){
-                     try{
-                          return Models.ArtistEvent.show(id);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
+                        ArtistEvent artistEvent = (
+                            from ArtistEvent in ArtistEvent.index()
+                            where ArtistEvent.id == id
+                            select ArtistEvent
+                        ).First();
+        
+                            if(artistEvent == null)
+                            {
+                                throw new Exception("Artista não encontrado");
+                        }
+        
+                            return artistEvent;
                  }
 
-                 public void update(int id, Models.ArtistEvent artistEvent){
-                     try{
-                          Models.ArtistEvent.update(id, artistEvent);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
+                 public static update(int id, Models.ArtistEvent artistEvent){
+                        ArtistEvent artistEvent = Models.ArtistEvent.show(id);
+
+                        if(!String.IsNullOrEmpty(artistEvent.artistId))
+                        {
+                            artistEvent.artistId = artistEvent.artistId;
+                        }
+                        if(!String.IsNullOrEmpty(artistEvent.eventId))
+                        {
+                            artistEvent.eventId = artistEvent.eventId;
+                        }
+
+                        return artistEvent;
                  }
 
-                 public void delete(int id){
-                     try{
-                          Models.ArtistEvent.delete(id);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
+                 public static delete(int id){
+                        ArtistEvent artistEvent = ArtistEvent.show(id);
+
+                        Models.ArtistEvent.delete(id);
+
+                        return artistEvent;
                  }
 
                  

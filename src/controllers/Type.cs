@@ -6,44 +6,53 @@ using Models;
 
         public class Type{
 
-           public void store(Models.Type type){
-               try{
-                   Models.Type.store(type);
-               }catch(System.Exception e){
-                   throw e;
+           public static store(string Description){
+               if(String.IsNullOrEmpty(Description))
+               {
+                   throw new Exception("Descrição não pode ser vazio");
                }
+
+               return new Type(Description);
            }
 
               public List<Models.Type> index(){
-                try{
-                     return Models.Type.index();
-                }catch(System.Exception e){
-                     throw e;
-                }
+                    try{
+                         return Models.Type.index();
+                    }catch(System.Exception e){
+                         throw e;
+                    }
               }
 
-                public List<Models.Type> show(int id){
-                    try{
-                         return Models.Type.show(id);
-                    }catch(System.Exception e){
-                         throw e;
+                public static Type show(int id){
+                    Type type = (
+                        from Type in Type.index()
+                        where Type.id == id
+                        select Type
+                    ).First();
+    
+                        if(type == null)
+                        {
+                            throw new Exception("Tipo não encontrado");
                     }
+    
+                        return type;
                 }
 
-                public void update(int id, Models.Type type){
-                    try{
-                         Models.Type.update(id, type);
-                    }catch(System.Exception e){
-                         throw e;
+                public static update(int id, string Description){
+                    Type type = Models.Type.show(id);
+                    if(!String.IsNullOrEmpty(type.Description)){
+                        Description = Description;
                     }
+                    return type;
+
+                    
                 }
 
-                public void delete(int id){
-                    try{
-                         Models.Type.delete(id);
-                    }catch(System.Exception e){
-                         throw e;
-                    }
+                public static delete(int id){
+                    Type type = Models.Type.show(id);
+                    Models.Type.delete(type);
+
+                    return type;
                 }
 
                 

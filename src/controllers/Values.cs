@@ -2,50 +2,90 @@ using System;
 using System.Collections.Generic;
 using Models;
 
-    namespace Controllers{
+public class Values
+{
 
-        public class Event{
+    public static store(DateOnly date, double value, int sponsorId, int eventId)
+    {
+        if (String.IsNullOrEmpty(date))
+        {
+            throw new Exception("Data não pode ser vazio");
+        }
+        if (String.IsNullOrEmpty(value))
+        {
+            throw new Exception("Valor não pode ser vazio");
+        }
+        if (String.IsNullOrEmpty(sponsorId))
+        {
+            throw new Exception("Patrocinador não pode ser vazio");
+        }
+        if (String.IsNullOrEmpty(eventId))
+        {
+            throw new Exception("Evento não pode ser vazio");
+        }
 
-            public void store(Models.Event @event){
-                try{
-                    Models.Event.store(@event);
-                }catch(System.Exception e){
-                    throw e;
-                }
-            }
+        return new Values(date, value, sponsorId, eventId);
+    }
 
-               public List<Models.Event> index(){
-                 try{
-                      return Models.Event.index();
-                 }catch(System.Exception e){
-                      throw e;
-                 }
-               }
-
-                 public List<Models.Event> show(int id){
-                     try{
-                          return Models.Event.show(id);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
-                 }
-
-                 public void update(int id, Models.Event @event){
-                     try{
-                          Models.Event.update(id, @event);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
-                 }
-
-                 public void delete(int id){
-                     try{
-                          Models.Event.delete(id);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
-                 }
-
-                 
+    public List<Models.Values> index()
+    {
+        try
+        {
+            return Models.Values.index();
+        }
+        catch (System.Exception e)
+        {
+            throw e;
         }
     }
+
+    public static Values show(int id)
+    {
+        Values values = (
+              from Values in Values.index()
+              where Values.id == id
+              select Values
+        ).First();
+
+        if (values == null)
+        {
+            throw new Exception("Valor não encontrado");
+        }
+
+        return values;
+    }
+
+    public static update(int id, DateOnly date, double value, int sponsorId, int eventId)
+    {
+        Values values = Models.Values.show(id);
+        if (!String.IsNullOrEmpty(values.date))
+        {
+            date = date;
+        }
+        if (!String.IsNullOrEmpty(values.value))
+        {
+            value = value;
+        }
+        if (!String.IsNullOrEmpty(values.sponsorId))
+        {
+            sponsorId = sponsorId;
+        }
+        if (!String.IsNullOrEmpty(values.eventId))
+        {
+            eventId = eventId;
+        }
+        return values;
+
+
+    }
+
+    public static delete(int id)
+    {
+        Values values = Models.Values.show(id);
+        Models.Values.delete(values);
+
+        return values;
+    }
+
+
+}

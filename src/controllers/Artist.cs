@@ -6,12 +6,13 @@ using Models;
 
         public class Artist{
 
-            public void store(Models.Artist artist){
-                try{
-                    Models.Artist.store(artist);
-                }catch(System.Exception e){
-                    throw e;
+            public void store(string name){
+                if(String.IsNullOrEmpty(name))
+                {
+                    throw new Exception("Nome não pode ser vazio");
                 }
+
+                return Models.Artist.store(name);
             }
 
                public List<Models.Artist> index(){
@@ -23,27 +24,40 @@ using Models;
                }
 
                  public List<Models.Artist> show(int id){
-                     try{
-                          return Models.Artist.show(id);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
+                        Artist artist = (
+                            from Artist in Artist.index()
+                            where Artist.id == id
+                            select Artist
+                        ).First();
+    
+                            if(artist == null)
+                            {
+                                throw new Exception("Artista não encontrado");
+                        }
+    
+                            return artist;
                  }
 
                  public void update(int id, Models.Artist artist){
-                     try{
-                          Models.Artist.update(id, artist);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
+                        Artist artist = Models.Artist.show(id);
+
+                        if(!String.IsNullOrEmpty(artist.name))
+                        {
+                            artist.name = artist.name;
+                        }
                  }
 
-                 public void delete(int id){
-                     try{
-                          Models.Artist.delete(id);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
+                 public static delete(int id){
+                        Artist artist = Artist.show(id);
+
+                        if(artist == null)
+                        {
+                            throw new Exception("Artista não encontrado");
+                        }
+
+                        Models.Artist.delete(id);
+
+                        return artist;
                  }
 
                  

@@ -2,50 +2,71 @@ using System;
 using System.Collections.Generic;
 using Models;
 
-    namespace Controllers{
+namespace Controllers
+{
 
-        public class Sponsor{
+    public class Sponsor
+    {
 
-            public void store(Models.Sponsor sponsor){
-                try{
-                    Models.Sponsor.store(sponsor);
-                }catch(System.Exception e){
-                    throw e;
-                }
+        public static store(string name)
+        {
+            if(String.IsNullOrEmpty(name))
+            {
+                throw new Exception("Nome não pode ser vazio");
+
+                return new Sponsor(name);
+            }
+        }
+
+        public List<Models.Sponsor> index()
+        {
+            try
+            {
+                return Models.Sponsor.index();
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static Sponsor show(int id)
+        {
+            Sponsor sponsor = (
+                from Sponsor in Sponsor.index()
+                where Sponsor.id == id
+                select Sponsor
+            ).First();
+
+            if (sponsor == null)
+            {
+                throw new Exception("Patrocinador não encontrado");
             }
 
-               public List<Models.Sponsor> index(){
-                 try{
-                      return Models.Sponsor.index();
-                 }catch(System.Exception e){
-                      throw e;
-                 }
-               }
-
-                 public List<Models.Sponsor> show(int id){
-                     try{
-                          return Models.Sponsor.show(id);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
-                 }
-
-                 public void update(int id, Models.Sponsor sponsor){
-                     try{
-                          Models.Sponsor.update(id, sponsor);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
-                 }
-
-                 public void delete(int id){
-                     try{
-                          Models.Sponsor.delete(id);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
-                 }
-
-                 
+            return sponsor;
         }
+
+        public static update(int id, string name)
+        {
+            Sponsor sponsor = Models.Sponsor.show(id);
+
+            if (!String.IsNullOrEmpty(name))
+            {
+                sponsor.name = name;
+            }
+            return sponsor;
+
+            
+        }
+
+        public static delete(int id)
+        {
+            Sponsor sponsor = Models.Sponsor.show(id);
+            Models.Sponsor.delete(id);
+
+            return sponsor;
+        }
+
+
     }
+}

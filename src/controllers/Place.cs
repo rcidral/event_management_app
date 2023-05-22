@@ -6,12 +6,17 @@ using Models;
 
         public class Place{
 
-            public void store(Models.Place place){
-                try{
-                    Models.Place.store(place);
-                }catch(System.Exception e){
-                    throw e;
+            public void store(string name, string address){
+                if(String.IsNullOrEmpty(name))
+                {
+                    throw new Exception("Nome não pode ser vazio");
                 }
+                if(String.IsNullOrEmpty(address))
+                {
+                    throw new Exception("Endereço não pode ser vazio");
+                }
+
+                return new Place(name, address);
             }
 
                public List<Models.Place> index(){
@@ -22,28 +27,51 @@ using Models;
                  }
                }
 
-                 public List<Models.Place> show(int id){
-                     try{
-                          return Models.Place.show(id);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
+                 public static Place show(int id){
+                        Place place = (
+                            from Place in Place.index()
+                            where Place.id == id
+                            select Place
+                        ).First();
+    
+                            if(place == null)
+                            {
+                                throw new Exception("Local não encontrado");
+                        }
+    
+                            return place;
                  }
 
                  public void update(int id, Models.Place place){
-                     try{
-                          Models.Place.update(id, place);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
+                        Place place = Models.Place.show(id);
+
+                        if(place == null)
+                        {
+                            throw new Exception("Local não encontrado");
+                        }
+
+                        if(String.IsNullOrEmpty(place.name))
+                        {
+                            throw new Exception("Nome não pode ser vazio");
+                        }
+
+                        if(String.IsNullOrEmpty(place.address))
+                        {
+                            throw new Exception("Endereço não pode ser vazio");
+                        }
+
+                        Models.Place.update(id, place);
                  }
 
                  public void delete(int id){
-                     try{
-                          Models.Place.delete(id);
-                     }catch(System.Exception e){
-                          throw e;
-                     }
+                        Place place = Models.Place.show(id);
+
+                        if(place == null)
+                        {
+                            throw new Exception("Local não encontrado");
+                        }
+
+                        Models.Place.delete(id);
                  }
 
                  
