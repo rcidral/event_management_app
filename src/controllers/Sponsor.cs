@@ -10,9 +10,9 @@ namespace Controllers
 
         public static store(string name)
         {
-            if(String.IsNullOrEmpty(name))
+            if (String.IsNullOrEmpty(name))
             {
-                throw new Exception("Nome não pode ser vazio");
+                throw new Exception("Name cannot be empty");
 
                 return new Sponsor(name);
             }
@@ -40,7 +40,7 @@ namespace Controllers
 
             if (sponsor == null)
             {
-                throw new Exception("Patrocinador não encontrado");
+                throw new Exception("Sponsor not found");
             }
 
             return sponsor;
@@ -55,8 +55,6 @@ namespace Controllers
                 sponsor.name = name;
             }
             return sponsor;
-
-            
         }
 
         public static delete(int id)
@@ -66,7 +64,5 @@ namespace Controllers
 
             return sponsor;
         }
-
-
     }
 }

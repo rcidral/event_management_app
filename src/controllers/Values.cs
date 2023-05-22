@@ -9,19 +9,19 @@ public class Values
     {
         if (String.IsNullOrEmpty(date))
         {
-            throw new Exception("Data não pode ser vazio");
+            throw new Exception("Date cannot be empty");
         }
         if (String.IsNullOrEmpty(value))
         {
-            throw new Exception("Valor não pode ser vazio");
+            throw new Exception("Value cannot be empty");
         }
         if (String.IsNullOrEmpty(sponsorId))
         {
-            throw new Exception("Patrocinador não pode ser vazio");
+            throw new Exception("Sponsor cannot be empty");
         }
         if (String.IsNullOrEmpty(eventId))
         {
-            throw new Exception("Evento não pode ser vazio");
+            throw new Exception("Event cannot be empty");
         }
 
         return new Values(date, value, sponsorId, eventId);

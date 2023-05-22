@@ -13,19 +13,17 @@ namespace Controllers
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new Exception("Nome não pode ser vazio");
+                throw new Exception("Name cannot be empty ");
             }
             if (String.IsNullOrEmpty(email))
             {
-                throw new Exception("Email não pode ser vazio");
+                throw new Exception("Email cannot be empty");
             }
             if (String.IsNullOrEmpty(senha))
             {
-                throw new Exception("Senha não pode ser vazio");
+                throw new Exception("Password cannot be empty");
             }
-
             return new User(name, email, senha);
-
         }
 
         public static IEnumerable<Models.User> index()
@@ -36,13 +34,11 @@ namespace Controllers
         public static Models.User show(int id)
         {
             Model.User LastUser = Models.User.Last();
-            if(id < 0 ||  LastUser.id != id)
+            if (id < 0 || LastUser.id != id)
             {
-                throw new Exception("Id não encontrado");
+                throw new Exception("Id not found");
             }
-
             return Models.User.show(id);
-            
         }
 
         public static update(int id, string name, string email, string senha)
@@ -61,20 +57,14 @@ namespace Controllers
             {
                 user.senha = senha;
             }
+
             return user;
-
-
-
         }
-
         public static delete(int id)
         {
             User user = Models.User.show(id);
             Models.User.delete(user);
-
             return user;
-
-
         }
     }
 }
