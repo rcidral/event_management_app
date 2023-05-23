@@ -115,11 +115,7 @@ namespace Models
             }
         }
 
-        public static User GetLast()
-        {
-            return index.Last();
-        }
-
+        
     }
             
 }

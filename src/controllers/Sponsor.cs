@@ -18,32 +18,19 @@ namespace Controllers
             }
         }
 
-        public List<Models.Sponsor> index()
+        public static IEnumerable<Models.Sponsor> index()
         {
-            try
-            {
-                return Models.Sponsor.index();
-            }
-            catch (System.Exception e)
-            {
-                throw e;
-            }
+            return Models.Sponsor.index();
         }
 
-        public static Sponsor show(int id)
+        public static Models.Sponsor show(int id)
         {
-            Sponsor sponsor = (
-                from Sponsor in Sponsor.index()
-                where Sponsor.id == id
-                select Sponsor
-            ).First();
-
-            if (sponsor == null)
+            Model.Sponsor LastSponsor = Models.Sponsor.Last();
+            if (id < 0 || LastSponsor.id != id)
             {
-                throw new Exception("Sponsor not found");
+                throw new Exception("Id not found");
             }
-
-            return sponsor;
+            return Models.Sponsor.show(id);
         }
 
         public static update(int id, string name)

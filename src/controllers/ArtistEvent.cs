@@ -20,33 +20,19 @@ namespace Controllers{
 
         }
 
-        public List<Models.ArtistEvent> index()
+        public IEnumerable<Models.ArtistEvent> index()
         {
-            try
-            {
-                return Models.ArtistEvent.index();
-            }
-
-            catch (System.Exception e)
-            {
-                throw e;
-            }
+            return Models.ArtistEvent.index();
         }
 
-        public List<Models.ArtistEvent> show(int id)
+        public Models.ArtistEvent show(int id)
         {
-            ArtistEvent artistEvent = (
-                from ArtistEvent in ArtistEvent.index()
-                where ArtistEvent.id == id
-                select ArtistEvent
-            ).First();
-
-            if (artistEvent == null)
+            Model.ArtistEvent LastArtistEvent = Models.ArtistEvent.Last();
+            if (id < 0 || LastArtistEvent.id != id)
             {
-                throw new Exception("Artist not found");
+                throw new Exception("Id not found");
             }
-
-            return artistEvent;
+            return Models.ArtistEvent.show(id);
         }
 
         public static update(int id, Models.ArtistEvent artistEvent)

@@ -22,32 +22,19 @@ namespace Controllers
             return new Place(name, address);
         }
 
-        public List<Models.Place> index()
+        public IEnumerable<Models.Place> index()
         {
-            try
-            {
-                return Models.Place.index();
-            }
-            catch (System.Exception e)
-            {
-                throw e;
-            }
+            return Models.Place.index();
         }
 
-        public static Place show(int id)
+        public Models.Place show(int id)
         {
-            Place place = (
-                from Place in Place.index()
-                where Place.id == id
-                select Place
-            ).First();
-
-            if (place == null)
+            Model.Place LastPlace = Models.Place.Last();
+            if (id < 0 || LastPlace.id != id)
             {
-                throw new Exception("Place not found");
+                throw new Exception("Id not found");
             }
-
-            return place;
+            return Models.Place.show(id);
         }
 
         public void update(int id, Models.Place place)

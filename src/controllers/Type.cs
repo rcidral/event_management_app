@@ -18,31 +18,29 @@ namespace Controllers
             return new Type(Description);
         }
 
-        public List<Models.Type> index()
+        public static IEnumerable<Models.Type> index()
         {
-            try
+            return Models.Type.index();
+        }
+
+        public static Models.Type show(int id)
+        {
+            Model.Type LastType = Models.Type.Last();
+            if (id < 0 || LastType.id != id)
             {
-                return Models.Type.index();
+                throw new Exception("Id not found");
             }
-            catch (System.Exception e)
-            {
-                throw e;
-            }
+            return Models.Type.show(id);
         }
 
         public static Type show(int id)
         {
-            Type type = (
-                from Type in Type.index()
-                where Type.id == id
-                select Type
-            ).First();
-
-            if (type == null)
+            Model.Type LastType = Models.Type.Last();
+            if (id < 0 || LastType.id != id)
             {
-                throw new Exception("Type not found");
+                throw new Exception("Id not found");
             }
-            return type;
+            return Models.Type.show(id);
         }
 
         public static update(int id, string Description)

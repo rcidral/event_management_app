@@ -17,35 +17,22 @@ namespace Controllers
             return Models.Artist.store(name);
         }
 
-        public List<Models.Artist> index()
+        public IEnumerable<Models.Artist> index()
         {
-            try
-            {
-                return Models.Artist.index();
-            }
-            catch (System.Exception e)
-            {
-                throw e;
-            }
+            return Models.Artist.index();
         }
 
-        public List<Models.Artist> show(int id)
+        public Models.Artist show(int id)
         {
-            Artist artist = (
-                from Artist in Artist.index()
-                where Artist.id == id
-                select Artist
-            ).First();
-
-            if (artist == null)
+            Model.Artist LastArtist = Models.Artist.Last();
+            if (id < 0 || LastArtist.id != id)
             {
-                throw new Exception("Artist not found");
+                throw new Exception("Id not found");
             }
+            return Models.Artist.show(id);
+        }   
 
-            return artist;
-        }
-
-        public void update(int id, Models.Artist artist)
+        public static update(int id, Models.Artist artist)
         {
             Artist artist = Models.Artist.show(id);
 
@@ -53,6 +40,8 @@ namespace Controllers
             {
                 artist.name = artist.name;
             }
+
+            return Models.Artist.update(id, artist);
         }
 
         public static delete(int id)
