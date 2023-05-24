@@ -8,14 +8,15 @@ namespace Controllers
     public class Type
     {
 
-        public static store(string Description)
+        public static void store(string Description)
         {
             if (String.IsNullOrEmpty(Description))
             {
                 throw new Exception("Description cannot be empty");
-            }
 
-            return new Type(Description);
+                
+            }
+            Models.Type.store(Description);
         }
 
         public static IEnumerable<Models.Type> index()
@@ -33,32 +34,24 @@ namespace Controllers
             return Models.Type.show(id);
         }
 
-        public static Type show(int id)
+        public static void update(string id)
         {
-            Model.Type LastType = Models.Type.Last();
-            if (id < 0 || LastType.id != id)
+            int id = int32.Parse(id);
+            if (id < 0 || id > Models.Type.Last().Id)
             {
                 throw new Exception("Id not found");
             }
-            return Models.Type.show(id);
+            Models.Type.update(id);
         }
 
-        public static update(int id, string Description)
+        public static void delete(string id)
         {
-            Type type = Models.Type.show(id);
-            if (!String.IsNullOrEmpty(type.Description))
+            int id = int32.Parse(id);
+            if (id < 0 || id > Models.Type.Last().Id)
             {
-                Description = Description;
+                throw new Exception("Id not found");
             }
-            return type;
-        }
-
-        public static delete(int id)
-        {
-            Type type = Models.Type.show(id);
-            Models.Type.delete(type);
-
-            return type;
+            Models.Type.delete(id);
         }
     }
 }

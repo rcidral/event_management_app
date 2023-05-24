@@ -35,29 +35,23 @@ namespace Controllers{
             return Models.ArtistEvent.show(id);
         }
 
-        public static update(int id, Models.ArtistEvent artistEvent)
+        public static void update(string id )
         {
-            ArtistEvent artistEvent = Models.ArtistEvent.show(id);
-
-            if (!String.IsNullOrEmpty(artistEvent.artistId))
+            int id = int32.Parse(id);
+            if(id < 0 || id > Models.ArtistEvent.Last().Id)
             {
-                artistEvent.artistId = artistEvent.artistId;
+                throw new Exception("Id not found");
             }
-            if (!String.IsNullOrEmpty(artistEvent.eventId))
-            {
-                artistEvent.eventId = artistEvent.eventId;
-            }
-
-            return artistEvent;
+            Models.ArtistEvent.update(id);
         }
 
-        public static delete(int id)
+        public static void delete(int id)
         {
-            ArtistEvent artistEvent = ArtistEvent.show(id);
-
+            if(id < 0 || id > Models.ArtistEvent.Last().Id)
+            {
+                throw new Exception("Id not found");
+            }
             Models.ArtistEvent.delete(id);
-            
-            return artistEvent;
         }          
     }
 }

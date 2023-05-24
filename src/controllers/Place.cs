@@ -8,7 +8,7 @@ namespace Controllers
     public class Place
     {
 
-        public void store(string name, string address)
+        public static store(string name, string address)
         {
             if (String.IsNullOrEmpty(name))
             {

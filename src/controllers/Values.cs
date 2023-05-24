@@ -5,7 +5,7 @@ using Models;
 public class Values
 {
 
-    public static store(DateOnly date, double value, int sponsorId, int eventId)
+    public static void store(DateOnly date, double value, int sponsorId, int eventId)
     {
         if (String.IsNullOrEmpty(date))
         {
@@ -24,30 +24,36 @@ public class Values
             throw new Exception("Event cannot be empty");
         }
 
-        return new Values(date, value, sponsorId, eventId);
+        Models.Values.store(date, value, sponsorId, eventId);
     }
 
 
-    public static update(int id, DateOnly date, double value, int sponsorId, int eventId)
+    public static update(int id, string date, string value, string sponsorId, string eventId)
     {
-        Values values = Models.Values.show(id);
-        if (!String.IsNullOrEmpty(values.date))
+        if (id < 0 || id > Models.Values.Last().Id)
         {
-            date = date;
+            throw new Exception("Id not found");
         }
-        if (!String.IsNullOrEmpty(values.value))
+        DateOnly date = DateOnly.Parse(date);
+        if (date == null)
         {
-            value = value;
+            throw new Exception("Date cannot be empty");
         }
-        if (!String.IsNullOrEmpty(values.sponsorId))
+        double value = Convert.ToDouble(value);
+        if (value == null)
         {
-            sponsorId = sponsorId;
+            throw new Exception("Value cannot be empty");
         }
-        if (!String.IsNullOrEmpty(values.eventId))
+        int sponsorId = Convert.ToInt32(sponsorId);
+        int eventId = Convert.ToInt32(eventId);
+        if (sponsorId < 0 || sponsorId > Models.Sponsor.Last().Id)
         {
-            eventId = eventId;
+            throw new Exception("Sponsor id cannot be empty");
         }
-        return values;
+        if (eventId < 0 || eventId > Models.Event.Last().Id)
+        {
+            throw new Exception("Event id cannot be empty");
+        }
 
 
     }

@@ -8,7 +8,7 @@ namespace Controllers
     public class Sponsor
     {
 
-        public static store(string name)
+        public static void store(string name)
         {
             if (String.IsNullOrEmpty(name))
             {
@@ -33,23 +33,22 @@ namespace Controllers
             return Models.Sponsor.show(id);
         }
 
-        public static update(int id, string name)
+        public static void update(int id, string name)
         {
-            Sponsor sponsor = Models.Sponsor.show(id);
-
-            if (!String.IsNullOrEmpty(name))
+            if (id < 0 || id > Models.Sponsor.Last().Id)
             {
-                sponsor.name = name;
+                throw new Exception("Id not found");
             }
-            return sponsor;
+            Models.Sponsor.update(id, name);    
         }
 
-        public static delete(int id)
+        public static void delete(int id)
         {
-            Sponsor sponsor = Models.Sponsor.show(id);
+            if (id < 0 || id > Models.Sponsor.Last().Id)
+            {
+                throw new Exception("Id not found");
+            }
             Models.Sponsor.delete(id);
-
-            return sponsor;
         }
     }
 }

@@ -9,23 +9,23 @@ namespace Controllers
     public class User
     {
 
-        public static store(string name, string email, string senha)
+        public static void store(string name, string login, string password)
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new Exception("Name cannot be empty ");
+                throw new Exception("Name cannot be empty");
             }
-            if (String.IsNullOrEmpty(email))
+            if (String.IsNullOrEmpty(login))
             {
-                throw new Exception("Email cannot be empty");
+                throw new Exception("Login cannot be empty");
             }
-            if (String.IsNullOrEmpty(senha))
+            if (String.IsNullOrEmpty(password))
             {
                 throw new Exception("Password cannot be empty");
             }
-            return new User(name, email, senha);
-        }
 
+            Models.User.store(name, login, password);
+        }
         public static IEnumerable<Models.User> index()
         {
             return Models.User.index();
@@ -41,30 +41,26 @@ namespace Controllers
             return Models.User.show(id);
         }
 
-        public static update(int id, string name, string email, string senha)
+        public static update(string id, string name, string login, string password)
         {
-            User user = Models.User.show(id);
-
-            if (!String.IsNullOrEmpty(name))
+            int id = int32.Parse(id);
+            if (id < 0 || id > Models.User.Last().Id)
             {
-                user.name = name;
+                throw new Exception("Id not found");
             }
-            if (!String.IsNullOrEmpty(email))
-            {
-                user.email = email;
-            }
-            if (!String.IsNullOrEmpty(senha))
-            {
-                user.senha = senha;
-            }
-
-            return user;
+            Models.User.update(id, name, login, password);
         }
-        public static delete(int id)
+
+
+
+        public static delete(string id)
         {
-            User user = Models.User.show(id);
-            Models.User.delete(user);
-            return user;
+            int id = int32.Parse(id);
+            if (id < 0 || id > Models.User.Last().Id)
+            {
+                throw new Exception("Id not found");
+            }
+            Models.User.delete(id);
         }
     }
 }
