@@ -21,12 +21,12 @@ namespace Controllers
 
         }
 
-        public IEnumerable<Models.ArtistEvent> index()
+        public static IEnumerable<Models.ArtistEvent> index()
         {
             return Models.ArtistEvent.index();
         }
 
-        public Models.ArtistEvent show(int id)
+        public static Models.ArtistEvent show(int id)
         {
             Model.ArtistEvent LastArtistEvent = Models.ArtistEvent.Last();
             if (id < 0 || LastArtistEvent.id != id)

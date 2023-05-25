@@ -22,12 +22,12 @@ namespace Controllers
             return new Place(name, address);
         }
 
-        public IEnumerable<Models.Place> index()
+        public static IEnumerable<Models.Place> index()
         {
             return Models.Place.index();
         }
 
-        public Models.Place show(int id)
+        public static Models.Place show(int id)
         {
             Model.Place LastPlace = Models.Place.Last();
             if (id < 0 || LastPlace.id != id)
@@ -37,7 +37,7 @@ namespace Controllers
             return Models.Place.show(id);
         }
 
-        public void update(int id, string name, string address)
+        public static void update(int id, string name, string address)
         {
             if (id < 0 || id == null)
             {
@@ -56,7 +56,7 @@ namespace Controllers
             Models.Place.update(id, name, address);
         }
 
-        public void delete(string id)
+        public static void delete(string id)
         {
             int id = int32.Parse(id);
             if (place == null)

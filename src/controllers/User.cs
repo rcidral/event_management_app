@@ -41,7 +41,7 @@ namespace Controllers
             return Models.User.show(id);
         }
 
-        public static update(string id, string name, string login, string password)
+        public static void update(string id, string name, string login, string password)
         {
             int id = int32.Parse(id);
             if (id < 0 || id == null)
@@ -65,7 +65,7 @@ namespace Controllers
 
 
 
-        public static delete(string id)
+        public static void delete(string id)
         {
             int id = int32.Parse(id);
             if (id < 0 || id == null)

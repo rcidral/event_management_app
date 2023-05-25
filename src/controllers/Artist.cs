@@ -7,7 +7,7 @@ namespace Controllers
     public class Artist
     {
 
-        public void store(string name)
+        public static void store(string name)
         {
             if (String.IsNullOrEmpty(name))
             {
