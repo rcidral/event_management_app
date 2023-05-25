@@ -14,7 +14,7 @@ namespace Controllers
             {
                 throw new Exception("Description cannot be empty");
 
-                
+
             }
             Models.Type.store(Description);
         }
@@ -34,20 +34,24 @@ namespace Controllers
             return Models.Type.show(id);
         }
 
-        public static void update(string id)
+        public static void update(string id, string Description)
         {
             int id = int32.Parse(id);
-            if (id < 0 || id > Models.Type.Last().Id)
+            if (id < 0 || id == null)
             {
                 throw new Exception("Id not found");
             }
-            Models.Type.update(id);
+            if (String.IsNullOrEmpty(Description))
+            {
+                throw new Exception("Description cannot be empty");
+            }
+            Models.Type.update(id, Description);
         }
 
         public static void delete(string id)
         {
             int id = int32.Parse(id);
-            if (id < 0 || id > Models.Type.Last().Id)
+            if (id < 0 || id == null)
             {
                 throw new Exception("Id not found");
             }

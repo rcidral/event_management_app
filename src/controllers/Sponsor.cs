@@ -35,16 +35,20 @@ namespace Controllers
 
         public static void update(int id, string name)
         {
-            if (id < 0 || id > Models.Sponsor.Last().Id)
+            if (id < 0 || id == null)
             {
                 throw new Exception("Id not found");
             }
-            Models.Sponsor.update(id, name);    
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new Exception("Name cannot be empty");
+            }
+            Models.Sponsor.update(id, name);
         }
 
         public static void delete(int id)
         {
-            if (id < 0 || id > Models.Sponsor.Last().Id)
+            if (id < 0 || id == null)
             {
                 throw new Exception("Id not found");
             }

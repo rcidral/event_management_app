@@ -44,9 +44,21 @@ namespace Controllers
         public static update(string id, string name, string login, string password)
         {
             int id = int32.Parse(id);
-            if (id < 0 || id > Models.User.Last().Id)
+            if (id < 0 || id == null)
             {
                 throw new Exception("Id not found");
+            }
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new Exception("Name cannot be empty");
+            }
+            if (String.IsNullOrEmpty(login))
+            {
+                throw new Exception("Login cannot be empty");
+            }
+            if (String.IsNullOrEmpty(password))
+            {
+                throw new Exception("Password cannot be empty");
             }
             Models.User.update(id, name, login, password);
         }
@@ -56,7 +68,7 @@ namespace Controllers
         public static delete(string id)
         {
             int id = int32.Parse(id);
-            if (id < 0 || id > Models.User.Last().Id)
+            if (id < 0 || id == null)
             {
                 throw new Exception("Id not found");
             }

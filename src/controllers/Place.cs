@@ -37,32 +37,28 @@ namespace Controllers
             return Models.Place.show(id);
         }
 
-        public void update(int id, Models.Place place)
+        public void update(int id, string name, string address)
         {
-            Place place = Models.Place.show(id);
-
-            if (place == null)
+            if (id < 0 || id == null)
             {
-                throw new Exception("Place not found");
+                throw new Exception("Id not found");
             }
-
-            if (String.IsNullOrEmpty(place.name))
+            if (String.IsNullOrEmpty(name))
             {
                 throw new Exception("Name cannot be empty");
             }
-
-            if (String.IsNullOrEmpty(place.address))
+            if (String.IsNullOrEmpty(address))
             {
                 throw new Exception("Address cannot be empty");
             }
 
-            Models.Place.update(id, place);
+
+            Models.Place.update(id, name, address);
         }
 
-        public void delete(int id)
+        public void delete(string id)
         {
-            Place place = Models.Place.show(id);
-
+            int id = int32.Parse(id);
             if (place == null)
             {
                 throw new Exception("Place not found");

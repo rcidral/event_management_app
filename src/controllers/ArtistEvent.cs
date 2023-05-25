@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using Models;
 
-namespace Controllers{
-    
+namespace Controllers
+{
+
     public class ArtistEvent
     {
-        public void store(int artistId, int eventId)
+        public static void store(int artistId, int eventId)
         {
             if (artistId == null)
             {
@@ -16,7 +17,7 @@ namespace Controllers{
             {
                 throw new Exception("Event cannot be empty");
             }
-            return new ArtistEvent(artistId, eventId);
+            Models.ArtistEvent.store(artistId, eventId);
 
         }
 
@@ -35,23 +36,24 @@ namespace Controllers{
             return Models.ArtistEvent.show(id);
         }
 
-        public static void update(string id )
+        public static void update(string id)
         {
             int id = int32.Parse(id);
-            if(id < 0 || id > Models.ArtistEvent.Last().Id)
+            if (id < 0 || id == null)
             {
                 throw new Exception("Id not found");
             }
             Models.ArtistEvent.update(id);
         }
 
-        public static void delete(int id)
+        public static void delete(string id)
         {
-            if(id < 0 || id > Models.ArtistEvent.Last().Id)
+            int id = int32.Parse(id);
+            if (id < 0 || id > id == null)
             {
                 throw new Exception("Id not found");
             }
             Models.ArtistEvent.delete(id);
-        }          
+        }
     }
 }

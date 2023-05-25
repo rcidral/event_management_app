@@ -28,9 +28,9 @@ public class Values
     }
 
 
-    public static update(int id, string date, string value, string sponsorId, string eventId)
+    public static void update(int id, string date, string value, string sponsorId, string eventId)
     {
-        if (id < 0 || id > Models.Values.Last().Id)
+        if (id < 0 || id == null)
         {
             throw new Exception("Id not found");
         }
@@ -55,20 +55,19 @@ public class Values
             throw new Exception("Event id cannot be empty");
         }
 
+        Models.Values.update(id, date, value, sponsorId, eventId);
+
 
     }
 
-    public static void delete(string StringId)
+    public static void delete(string id)
     {
-        int id = Convert.ToInt32(StringId);
-        try
+        int id = Convert.ToInt32(id);
+        if (id < 0 || id == null)
         {
-            Models.Values.delete(id);
+            throw new Exception("Id not found");
         }
-        catch (System.Exception e)
-        {
-            throw e;
-        }   
+        Models.Values.delete(id);
     }
 
 

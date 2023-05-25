@@ -30,32 +30,35 @@ namespace Controllers
                 throw new Exception("Id not found");
             }
             return Models.Artist.show(id);
-        }   
-
-        public static update(int id, Models.Artist artist)
-        {
-            Artist artist = Models.Artist.show(id);
-
-            if (!String.IsNullOrEmpty(artist.name))
-            {
-                artist.name = artist.name;
-            }
-
-            return Models.Artist.update(id, artist);
         }
 
-        public static delete(int id)
+        public static void update(string id, string name)
         {
-            Artist artist = Artist.show(id);
+            int id = Convert.ToInt32(id);
+            if (id < 0 || id == null)
+            {
+                throw new Exception("Id not found");
+            }
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new Exception("Name cannot be empty");
+            }
 
-            if (artist == null)
+            Models.Artist.update(id, name);
+        }
+
+        public static void delete(string id)
+        {
+            int id = Convert.ToInt32(id);
+
+            if (id == null)
             {
                 throw new Exception("Artist not found");
             }
 
             Models.Artist.delete(id);
 
-            return artist;
+
         }
     }
 }
