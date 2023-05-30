@@ -12,7 +12,7 @@ using Models;
              {
                  if (artistId != null || artistEvent != null)
                  {
-                     Models.ArtistEvent.store(artistId, artistEvent);
+                     Models.ArtistEvent.store(new Models.ArtistEvent(artistId.Id, artistEvent.Id));
                  }
              }
             

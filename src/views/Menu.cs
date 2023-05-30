@@ -4,7 +4,7 @@ namespace views
 {
     public class Menu
     {
-        public static void Menu()
+        public static void Show()
         {
             Form form = new Form();
             form.Text = "Hello World";

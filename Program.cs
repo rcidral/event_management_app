@@ -1,5 +1,3 @@
-using Test;
-
 namespace Program
 {
     public class Program

@@ -16,7 +16,7 @@ namespace Models
             EventId = eventId;
         }
 
-        public static void  store(Artist artistId, ArtistEvent artistEvent)
+        public static void  store(ArtistEvent artistEvent)
         {
             try
             {
