@@ -66,13 +66,13 @@ namespace Models
             }
         }
 
-        public static List<Event> show(int id)
+        public static Event show(int id)
         {
             try
             {
                 using (Context context = new Context())
                 {
-                    return context.Events.Where(event_ => event_.Id == id).ToList();
+                    return context.Events.Find(id);
                 }
             }
             catch (System.Exception e)

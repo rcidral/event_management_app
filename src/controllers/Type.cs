@@ -2,60 +2,60 @@ using System;
 using System.Collections.Generic;
 using Models;
 
-namespace Controllers
-{
-
-    public class Type
-    {
-
-        public static void store(string Description)
+   namespace Controllers
+   {
+        public class TypeControllers
         {
-            if (String.IsNullOrEmpty(Description))
+            public static void store(Models.Type type)
             {
-                throw new Exception("Description cannot be empty");
-
-
+                if (!String.IsNullOrEmpty(type.Description))
+                {
+                    Models.Type.store(type);
+                }
+                
             }
-            Models.Type.store(Description);
-        }
 
-        public static IEnumerable<Models.Type> index()
-        {
-            return Models.Type.index();
-        }
-
-        public static Models.Type show(int id)
-        {
-            Model.Type LastType = Models.Type.Last();
-            if (id < 0 || LastType.id != id)
+            public static IEnumerable<Models.Type> index()
             {
-                throw new Exception("Id not found");
+                return Models.Type.index();
             }
-            return Models.Type.show(id);
-        }
 
-        public static void update(string id, string Description)
-        {
-            int id = int32.Parse(id);
-            if (id < 0 || id == null)
+            public static Models.Type show(string Id)
             {
-                throw new Exception("Id not found");
+                try
+                {
+                    int id = Int32.Parse(Id);
+                    return Models.Type.show(id);
+                }
+                catch (System.Exception e)
+                {
+                    throw e;
+                }
             }
-            if (String.IsNullOrEmpty(Description))
-            {
-                throw new Exception("Description cannot be empty");
-            }
-            Models.Type.update(id, Description);
-        }
 
-        public static void delete(string id)
-        {
-            int id = int32.Parse(id);
-            if (id < 0 || id == null)
+            public static void update(string IdType,Models.Type type)
             {
-                throw new Exception("Id not found");
+                try
+                {
+                    int id = Int32.Parse(IdType);
+                    if (!String.IsNullOrEmpty(type.Description))
+                    {
+                        Models.Type.update(id, type);
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    throw e;
+                }
             }
-            Models.Type.delete(id);
+
+            public static void delete(int id)
+            {
+                if (id < 0 || id == null)
+                {
+                    throw new Exception("Id cannot be empty");
+                }
+                Models.Type.delete(id);
+            }
         }
-    }
-}
+   }

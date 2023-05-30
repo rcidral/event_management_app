@@ -1,21 +1,23 @@
 using System;
 using System.Collections.Generic;
 using Models;
+using System.Text.RegularExpressions;
 
 namespace Controllers
 {
 
-    public class Sponsor
+    public class SponsorControllers
     {
 
-        public static void store(string name)
-        {
-            if (String.IsNullOrEmpty(name))
+        public static void store(Sponsor sponsor)
+        {   
+            if (String.IsNullOrEmpty(sponsor.Name))
             {
                 throw new Exception("Name cannot be empty");
 
-                return new Sponsor(name);
+                
             }
+            Models.Sponsor.store(sponsor);
         }
 
         public static IEnumerable<Models.Sponsor> index()
@@ -23,27 +25,33 @@ namespace Controllers
             return Models.Sponsor.index();
         }
 
-        public static Models.Sponsor show(int id)
+        public static Sponsor show(string Id)
         {
-            Model.Sponsor LastSponsor = Models.Sponsor.Last();
-            if (id < 0 || LastSponsor.id != id)
+            try
             {
-                throw new Exception("Id not found");
+                int id = Int32.Parse(Id);
+                return Models.Sponsor.show(id);
             }
-            return Models.Sponsor.show(id);
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
 
-        public static void update(int id, string name)
+        public static void update(int id, Models.Sponsor sponsor)
         {
-            if (id < 0 || id == null)
+            try
             {
-                throw new Exception("Id not found");
+                if (String.IsNullOrEmpty(sponsor.Name))
+                {
+                    throw new Exception("Name cannot be empty");
+                }
+                Models.Sponsor.update(id, sponsor);
             }
-            if (String.IsNullOrEmpty(name))
+            catch (System.Exception e)
             {
-                throw new Exception("Name cannot be empty");
+                throw e;
             }
-            Models.Sponsor.update(id, name);
         }
 
         public static void delete(int id)

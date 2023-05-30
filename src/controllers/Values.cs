@@ -2,73 +2,46 @@ using System;
 using System.Collections.Generic;
 using Models;
 
-public class Values
-{
+    namespace Controllers{
 
-    public static void store(DateOnly date, double value, int sponsorId, int eventId)
-    {
-        if (String.IsNullOrEmpty(date))
+        public class ValuesController
         {
-            throw new Exception("Date cannot be empty");
-        }
-        if (String.IsNullOrEmpty(value))
-        {
-            throw new Exception("Value cannot be empty");
-        }
-        if (String.IsNullOrEmpty(sponsorId))
-        {
-            throw new Exception("Sponsor cannot be empty");
-        }
-        if (String.IsNullOrEmpty(eventId))
-        {
-            throw new Exception("Event cannot be empty");
-        }
 
-        Models.Values.store(date, value, sponsorId, eventId);
+            public static void store(Values values)
+            {   
+                if (values.Date != null || values.Value != null || values.SponsorId != null || values.EventId != null)
+                {
+                    Models.Values.store(values);
+                }
+                
+            }
+
+            
+
+            public static void update(int id, Models.Values values)
+            {
+                try
+                {
+                    if (values.Date != null || values.Value != null || values.SponsorId != null || values.EventId != null)
+                    {
+                        Models.Values.update(id, values);
+                    }
+                    
+                }
+                catch (System.Exception e)
+                {
+                    throw e;
+                }
+            }
+
+            public static void delete(string Id)
+            {
+                int id = Int32.Parse(Id);
+                if (id > 0 || id != null)
+                {
+                    Models.Values.delete(id);
+                }
+                
+            }
+        }
     }
-
-
-    public static void update(int id, string date, string value, string sponsorId, string eventId)
-    {
-        if (id < 0 || id == null)
-        {
-            throw new Exception("Id not found");
-        }
-        DateOnly date = DateOnly.Parse(date);
-        if (date == null)
-        {
-            throw new Exception("Date cannot be empty");
-        }
-        double value = Convert.ToDouble(value);
-        if (value == null)
-        {
-            throw new Exception("Value cannot be empty");
-        }
-        int sponsorId = Convert.ToInt32(sponsorId);
-        int eventId = Convert.ToInt32(eventId);
-        if (sponsorId < 0 || sponsorId > Models.Sponsor.Last().Id)
-        {
-            throw new Exception("Sponsor id cannot be empty");
-        }
-        if (eventId < 0 || eventId > Models.Event.Last().Id)
-        {
-            throw new Exception("Event id cannot be empty");
-        }
-
-        Models.Values.update(id, date, value, sponsorId, eventId);
-
-
-    }
-
-    public static void delete(string id)
-    {
-        int id = Convert.ToInt32(id);
-        if (id < 0 || id == null)
-        {
-            throw new Exception("Id not found");
-        }
-        Models.Values.delete(id);
-    }
-
-
-}

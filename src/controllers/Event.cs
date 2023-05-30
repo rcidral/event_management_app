@@ -4,39 +4,17 @@ using Models;
 
 namespace Controllers
 {
-
-    public static class Event
+    public class EventControllers
     {
-        public static void store(string date, string description, int userId, int placeId, int typeId)
+
+        public static void store(Event event_, int artistId, int sponsorId, Values values)
         {
-            DateOnly date = DateOnly.Parse(date);
-            if (date == null)
+            if (event_ != null || artistId != null || sponsorId != null || values != null)
             {
-                throw new Exception("Date cannot be empty");
+                Models.Event.store(event_, artistId, sponsorId, values);
             }
-
-            if (String.IsNullOrEmpty(description))
-            {
-                throw new Exception("Description cannot be empty");
-            }
-
-            if (userId < 0 || userId > Models.User.Last().Id)
-            {
-                throw new Exception("User id cannot be empty");
-            }
-
-            if (placeId < 0 || placeId > Models.Place.Last().Id)
-            {
-                throw new Exception("Place id cannot be empty");
-            }
-
-            if (typeId < 0 || typeId > Models.Type.Last().Id)
-            {
-                throw new Exception("Type id cannot be empty");
-            }
-
-            Models.Event.store(date, description, userId, placeId, typeId);
         }
+
 
         public static IEnumerable<Models.Event> index()
         {
@@ -45,64 +23,40 @@ namespace Controllers
 
         public static Models.Event show(int id)
         {
-            Models.Event LastEvent = Models.Event.Last();
-            if (id < 0 || LastEvent.Id != id)
+            if (id != null)
             {
-                throw new Exception("Id not found");
+                return Models.Event.show(id);
             }
-            return Models.Event.show(id);
+            else
+            {
+                return null;
+            }
         }
 
-        public static void update(string id, string date, string description, int userId, int placeId, int typeId)
+        public static void update(string Id, Models.Event event_, int artistId, int sponsorId, Models.Values values)
         {
-            int id = Int32.Parse(id);
-            DateOnly date = DateOnly.Parse(date);
-
-            if (id < 0 || id == null)
+            try
             {
-                throw new Exception("Id not found");
-            }
-            if (date == null)
-            {
-                throw new Exception("Date cannot be empty");
-            }
+                int id = Int32.Parse(Id);
+                if (id != null || event_ != null || artistId != null || sponsorId != null || values != null)
+                {
+                    Models.Event.update(id, event_, artistId, sponsorId, values);
+                }
 
-            if (String.IsNullOrEmpty(description))
-            {
-                throw new Exception("Description cannot be empty");
             }
-
-            if (userId < 0 || userId > Models.User.Last().Id)
+            catch (System.Exception e)
             {
-                throw new Exception("User id cannot be empty");
+                throw e;
             }
-
-            if (placeId < 0 || placeId > Models.Place.Last().Id)
-            {
-                throw new Exception("Place id cannot be empty");
-            }
-
-            if (typeId < 0 || typeId > Models.Type.Last().Id)
-            {
-                throw new Exception("Type id cannot be empty");
-            }
-
-            Models.Event.update(id, date, description, userId, placeId, typeId);
         }
 
-        public static void delete(string id)
+        public static void delete(int id)
         {
-            int id = Int32.Parse(id);
-
-            if (id < 0 || id == null)
+            if (id != null)
             {
-                throw new Exception("Id not found");
+                Models.Event.delete(id);
             }
 
-            Models.Event.delete(id);
-
-
         }
-
     }
 }

@@ -3,76 +3,80 @@ using System.Collections.Generic;
 using Models;
 using System.Text.RegularExpressions;
 
+
+
 namespace Controllers
 {
-
-    public class User
+    public class UserController
     {
-
-        public static void store(string name, string login, string password)
+        public static void store(User user)
         {
-            if (String.IsNullOrEmpty(name))
+            if (String.IsNullOrEmpty(user.Name))
             {
                 throw new Exception("Name cannot be empty");
             }
-            if (String.IsNullOrEmpty(login))
+            if (String.IsNullOrEmpty(user.Login))
             {
                 throw new Exception("Login cannot be empty");
             }
-            if (String.IsNullOrEmpty(password))
+            if (String.IsNullOrEmpty(user.Password))
             {
                 throw new Exception("Password cannot be empty");
             }
 
-            Models.User.store(name, login, password);
-        }
-        public static IEnumerable<Models.User> index()
-        {
-            return Models.User.index();
-        }
 
-        public static Models.User show(int id)
-        {
-            Model.User LastUser = Models.User.Last();
-            if (id < 0 || LastUser.id != id)
-            {
-                throw new Exception("Id not found");
-            }
-            return Models.User.show(id);
-        }
 
-        public static void update(string id, string name, string login, string password)
-        {
-            int id = int32.Parse(id);
-            if (id < 0 || id == null)
-            {
-                throw new Exception("Id not found");
-            }
-            if (String.IsNullOrEmpty(name))
-            {
-                throw new Exception("Name cannot be empty");
-            }
-            if (String.IsNullOrEmpty(login))
-            {
-                throw new Exception("Login cannot be empty");
-            }
-            if (String.IsNullOrEmpty(password))
-            {
-                throw new Exception("Password cannot be empty");
-            }
-            Models.User.update(id, name, login, password);
+            Models.User.store(user);
         }
 
 
 
-        public static void delete(string id)
+        public static IEnumerable<User> Index()
         {
-            int id = int32.Parse(id);
-            if (id < 0 || id == null)
+            return User.index();
+        }
+
+
+
+        public static User show(string Id)
+        {
+            try
             {
-                throw new Exception("Id not found");
+                int id = Int32.Parse(Id);
+                return Models.User.show(id);
             }
-            Models.User.delete(id);
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        public static void Update(User user)
+        {
+            if(String.IsNullOrEmpty(user.Name)){
+                throw new Exception ("Is not Name or empty");
+            }
+            if(String.IsNullOrEmpty(user.Login))
+            {
+                
+            }
+
+        }
+
+
+
+        public static void Delete(string id)
+        {
+            int Id = Int32.Parse(id);
+            if (Id != null)
+            {
+                Models.User.delete(Id);
+            }
+
+
+
+           
         }
     }
 }

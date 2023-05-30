@@ -7,56 +7,57 @@ namespace Controllers
     public class Artist
     {
 
-        public static void store(string name)
+        public static void store(Models.Artist artist)
         {
-            if (String.IsNullOrEmpty(name))
+            if (!String.IsNullOrEmpty(artist.Name))
             {
-                throw new Exception("Name cannot be empty");
+                Models.Artist.store(artist);
             }
-
-            return Models.Artist.store(name);
+           
+             
         }
+       
 
-        public IEnumerable<Models.Artist> index()
+        public static IEnumerable<Models.Artist> index()
         {
             return Models.Artist.index();
         }
 
-        public Models.Artist show(int id)
+        public static Models.Artist show(int id)
         {
-            Model.Artist LastArtist = Models.Artist.Last();
-            if (id < 0 || LastArtist.id != id)
+            
+            if(id != null)
             {
-                throw new Exception("Id not found");
+               return Models.Artist.show(id);
+            }else{
+                return null;
             }
-            return Models.Artist.show(id);
+
+            
         }
 
-        public static void update(string id, string name)
+        public static void update(Models.Artist artist)
         {
-            int id = Convert.ToInt32(id);
-            if (id < 0 || id == null)
+            
+            if (artist.Id != null || String.IsNullOrEmpty(artist.Name) )
             {
-                throw new Exception("Id not found");
+               Models.Artist.update(artist.Id , artist);
             }
-            if (String.IsNullOrEmpty(name))
-            {
-                throw new Exception("Name cannot be empty");
-            }
+            
 
-            Models.Artist.update(id, name);
+            
         }
 
         public static void delete(string id)
         {
-            int id = Convert.ToInt32(id);
+            int Id = Convert.ToInt32(id);
 
-            if (id == null)
+            if (Id != null)
             {
-                throw new Exception("Artist not found");
+                Models.Artist.delete(Id);
             }
 
-            Models.Artist.delete(id);
+            
 
 
         }
