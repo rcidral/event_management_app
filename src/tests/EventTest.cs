@@ -10,7 +10,7 @@ namespace Test
             try
             {
                 Event event_ = new Event(new DateOnly(2021, 10, 10), "Test", 1, 1, 1);
-                Event.store(event_, 1, 1, new Values(new DateOnly(2021, 10, 10), 1, 1, 1));
+                Event.store(event_, 1, 1, new Models.Values(new DateOnly(2021, 10, 10), 1, 1, 1));
             }
             catch (System.Exception e)
             {
@@ -18,7 +18,7 @@ namespace Test
             }
         }
 
-        public static void update(int id, int artistId, int sponsorId, Values values, Event event_)
+        public static void update(int id, int artistId, int sponsorId, Models.Values values, Event event_)
         {
             try
             {
