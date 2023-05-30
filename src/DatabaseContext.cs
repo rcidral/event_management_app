@@ -13,7 +13,7 @@ namespace Data
         public DbSet<Models.Type> Types { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<ArtistEvent> ArtistEvents { get; set; }
-        public DbSet<Values> Values { get; set; }
+        public DbSet<Models.Values> Values { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseMySql(connection, ServerVersion.AutoDetect(connection));
     }

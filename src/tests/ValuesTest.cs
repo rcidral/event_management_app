@@ -4,12 +4,11 @@ namespace Test
 {
     public class ValuesTest
     {
-        public static void store(Values values)
+        public static void store(Models.Values values)
         {
             try
             {
-                Values values_ = new Values(values.Date, values.Value, values.SponsorId, values.EventId);
-                Values.store(values_);
+                Models.Values.store(new Models.Values(values.Date, values.Value, values.SponsorId, values.EventId));
             }
             catch (System.Exception e)
             {
@@ -17,11 +16,11 @@ namespace Test
             }
         }
 
-        public static void update(int id, Values values)
+        public static void update(int id, Models.Values values)
         {
             try
             {
-                Values.update(id, values);
+                Models.Values.update(id, values);
             }
             catch (System.Exception e)
             {
@@ -33,7 +32,7 @@ namespace Test
         {
             try
             {
-                Values.delete(id);
+                Models.Values.delete(id);
             }
             catch (System.Exception e)
             {
