@@ -34,15 +34,13 @@ namespace Views {
             Color color2 = System.Drawing.ColorTranslator.FromHtml("#3C4046");
             panel3.BackColor = color2;
 
-            string imagePath8 = "src/assets/sprite.png";
+            string imagePath8 = "src/assets/crm.png";
             Image img = Image.FromFile(imagePath8);
             PictureBox pictureBox1 = new PictureBox();
             pictureBox1.Location = new System.Drawing.Point(10, 5);
             pictureBox1.Size = new System.Drawing.Size(200, 100);
             pictureBox1.Image = img;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            
 
             Button button1 = new Button();
             button1.Location = new System.Drawing.Point(15, 110);
@@ -53,7 +51,6 @@ namespace Views {
             button1.Text = "EVENTO";
             button1.TextAlign = ContentAlignment.MiddleCenter;
     
-
 
             string imagePath = "src/assets/icons8-evento-24.png"; 
             Image image = Image.FromFile(imagePath);
@@ -130,7 +127,6 @@ namespace Views {
             button6.FlatAppearance.BorderSize = 0;
             button6.ForeColor = Color.White;
             button6.Text = "USUÁRIO";
-            
 
 
             string imagePath6 = "src/assets/user.png";
@@ -138,12 +134,15 @@ namespace Views {
             image6 = new Bitmap(image6, new Size(26, 26));
             button6.Image = image6;
             button6.ImageAlign = ContentAlignment.MiddleLeft;
+            button6.Click += (sender, e) => {
+                views.UserView.List();
+            };
+                  
 
             Label lineLabel = new Label();
             lineLabel.BackColor = Color.Gray;
             lineLabel.Location = new System.Drawing.Point(15, 470);
             lineLabel.Size = new System.Drawing.Size(180, 1);
-
 
 
             Button button7 = new Button();
@@ -153,6 +152,9 @@ namespace Views {
             button7.FlatAppearance.BorderSize = 0;
             button7.ForeColor = Color.White;
             button7.Text = "SAIR";
+            button7.Click += (sender, e) => { 
+                menu.Close();};
+
      
 
             string imagePath7 = "src/assets/sair.png";
@@ -172,6 +174,8 @@ namespace Views {
             panel1.Controls.Add(button7);
             panel1.Controls.Add(lineLabel);
             panel1.Controls.Add(pictureBox1);
+
+
 
 
             menu.Controls.Add(panel1);

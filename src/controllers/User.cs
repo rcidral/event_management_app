@@ -11,10 +11,10 @@ namespace Controllers
     {
         public static void store(User user)
         {
-            if (String.IsNullOrEmpty(user.Name))
+           /* if (String.IsNullOrEmpty(user.Name))
             {
                 throw new Exception("Name cannot be empty");
-            }
+            }*/
             if (String.IsNullOrEmpty(user.Login))
             {
                 throw new Exception("Login cannot be empty");
@@ -23,9 +23,6 @@ namespace Controllers
             {
                 throw new Exception("Password cannot be empty");
             }
-
-
-
             Models.User.store(user);
         }
 

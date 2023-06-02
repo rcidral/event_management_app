@@ -11,7 +11,7 @@ namespace Views {
 
 
             PictureBox pictureBox = new PictureBox();
-            pictureBox.Load("https://img.icons8.com/?size=512&id=98957&format=png");
+            pictureBox.Load("src/assets/user2.png");
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.Size = new Size(100, 100);
             pictureBox.Location = new Point(190, 0);
@@ -57,6 +57,19 @@ namespace Views {
             button.Size = new Size(100, 40);
             button.Text = "Entrar";
             button.Location = new Point(200, 300);
+            button.Click += (sender, e) =>
+            { /*
+                if (Controllers.UserController.store(EmailTextBox.Text, PasswordTextBox.Text);
+                {
+                    MessageBox.Show("Login realizado com sucesso!");
+
+                }
+                else
+                {
+                    MessageBox.Show("Email ou senha incorretos!");
+                }*/
+                Menu.MenuPage();
+            };
 
             // Adicionar sombra ao botão
             button.Paint += (sender, e) =>
