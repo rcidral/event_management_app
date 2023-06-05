@@ -6,16 +6,16 @@ namespace views{
     public class UserView {
 
         public static bool isOpen = false;
-        public static Form usuarios;
+        public static Form user;
 
         public static void List() {
-            Form usuarios = new Form();
-            usuarios.Text = "Usuários";
-            usuarios.Size = new System.Drawing.Size(418, 366);
-            usuarios.StartPosition = FormStartPosition.CenterScreen;
-            usuarios.FormBorderStyle = FormBorderStyle.FixedSingle;
-            usuarios.MaximizeBox = false;
-            usuarios.MinimizeBox = false;
+            Form user = new Form();
+            user.Text = "Usuários";
+            user.Size = new System.Drawing.Size(418, 366);
+            user.StartPosition = FormStartPosition.CenterScreen;
+            user.FormBorderStyle = FormBorderStyle.FixedSingle;
+            user.MaximizeBox = false;
+            user.MinimizeBox = false;
     
 
             ListView lista = new ListView();
@@ -56,13 +56,7 @@ namespace views{
                 btnAdd.BackColor = Color.Transparent;
             };
 
-            usuarios.Controls.Add(lista);
-            usuarios.Controls.Add(btnAdd);
-            usuarios.ShowDialog();
-
-            
-            /*
-            Button btnEdit = new Button();
+           /* Button btnEdit = new Button();
             btnEdit.Text = "Editar";
             btnEdit.Top = 300;
             btnEdit.Left = 100;
@@ -71,7 +65,7 @@ namespace views{
             btnEdit.ForeColor = Color.Black;
             btnEdit.FlatStyle = FlatStyle.Flat;
             btnEdit.MouseHover += (sender, e) => {
-                btnEdit.BackColor = Color.SkyBlue;
+                btnEdit.BackColor = Color.LimeGreen;
             };
             btnEdit.MouseLeave += (sender, e) => {
                 btnEdit.BackColor = Color.Transparent;
@@ -80,17 +74,125 @@ namespace views{
                 try
                 {
                     string id = lista.SelectedItems[0].Text;
-                    produtos.Close();
-                    produtos.Dispose();
+                    user.Close();
+                    user.Dispose();
                     Editar(Int32.Parse(id));
-                    produtos.Close(); 
+                    user.Close(); 
                 }
                 catch
                 {
                     MessageBox.Show("Selecione um Almoxerifado para editar");
                 }
                 
+            };*/
+
+            user.Controls.Add(lista);
+            user.Controls.Add(btnAdd);
+            user.ShowDialog();
+
+        }
+/*
+
+        public static void Editar(int id) {
+            Models.User user = Controllers.User.(id);
+            Form editar = new Form();
+            editar.Text = "Editar Almoxerifado";
+            editar.Size = new System.Drawing.Size(418, 366);
+            editar.StartPosition = FormStartPosition.CenterScreen;
+            editar.FormBorderStyle = FormBorderStyle.FixedSingle;
+            editar.MaximizeBox = false;
+            editar.MinimizeBox = false;
+
+            Label lblNome = new Label();
+            lblNome.Text = "Nome";
+            lblNome.Top = 25;
+            lblNome.Left = 0;
+            lblNome.Size = new System.Drawing.Size(100, 25);
+
+            TextBox txtNome = new TextBox();
+            txtNome.Top = 25;
+            txtNome.Left = 100;
+            txtNome.Size = new System.Drawing.Size(100, 25);
+            txtNome.Text = almoxerifado.nome;
+
+            Button btnSalvar = new Button();
+            btnSalvar.Text = "Salvar";
+            btnSalvar.Top = 75;
+            btnSalvar.Left = 0;
+            btnSalvar.Size = new System.Drawing.Size(100, 25);
+            btnSalvar.Click += (sender, e) => {
+                    Controllers.Almoxerifado.AlteraAlmoxerifado(id, txtNome.Text);
+                    editar.Hide();
+                    editar.Close();
+                    editar.Dispose();
+                    Listar();   
             };
+
+            Button btnVoltar = new Button();
+            btnVoltar.Text = "Cancelar";
+            btnVoltar.Top = 75;
+            btnVoltar.Left = 100;
+            btnVoltar.Size = new System.Drawing.Size(100, 25);
+            btnVoltar.Click += (sender, e) => {
+                editar.Close();
+            };
+
+            editar.Controls.Add(lblNome);
+            editar.Controls.Add(txtNome);
+            editar.Controls.Add(btnSalvar);
+            editar.Controls.Add(btnVoltar);
+            editar.ShowDialog();
+        }
+         /*   public static void Adicionar() {
+            Form adicionar = new Form();
+            adicionar.Text = "Adicionar Almoxerifado";
+            adicionar.Size = new System.Drawing.Size(418, 366);
+            adicionar.StartPosition = FormStartPosition.CenterScreen;
+            adicionar.FormBorderStyle = FormBorderStyle.FixedSingle;
+            adicionar.MaximizeBox = false;
+            adicionar.MinimizeBox = false;
+
+            Label lblNome = new Label();
+            lblNome.Text = "Nome";
+            lblNome.Top = 25;
+            lblNome.Left = 0;
+            lblNome.Size = new System.Drawing.Size(100, 25);
+
+            TextBox txtNome = new TextBox();
+            txtNome.Top = 25;
+            txtNome.Left = 100;
+            txtNome.Size = new System.Drawing.Size(100, 25);
+
+            Button btnSalvar = new Button();
+            btnSalvar.Text = "Salvar";
+            btnSalvar.Top = 75;
+            btnSalvar.Left = 0;
+            btnSalvar.Size = new System.Drawing.Size(100, 25);
+            btnSalvar.Click += (sender, e) => {
+                    Controllers.Almoxerifado.AdicionaAlmoxerifado(txtNome.Text);
+                    adicionar.Hide();
+                    adicionar.Close();
+                    adicionar.Dispose();
+                    Listar();   
+            };
+
+            Button btnVoltar = new Button();
+            btnVoltar.Text = "Cancelar";
+            btnVoltar.Top = 75;
+            btnVoltar.Left = 100;
+            btnVoltar.Size = new System.Drawing.Size(100, 25);
+            btnVoltar.Click += (sender, e) => {
+                adicionar.Close();
+            };
+
+            adicionar.Controls.Add(lblNome);
+            adicionar.Controls.Add(txtNome);
+            adicionar.Controls.Add(btnSalvar);
+            adicionar.Controls.Add(btnVoltar);
+            adicionar.ShowDialog();
+        }*/
+
+           /*
 
 
             Button BtnRemove = new Button();
@@ -152,105 +254,8 @@ namespace views{
         } 
 
 
-        public static void Adicionar() {
-            Form adicionar = new Form();
-            adicionar.Text = "Adicionar Almoxerifado";
-            adicionar.Size = new System.Drawing.Size(418, 366);
-            adicionar.StartPosition = FormStartPosition.CenterScreen;
-            adicionar.FormBorderStyle = FormBorderStyle.FixedSingle;
-            adicionar.MaximizeBox = false;
-            adicionar.MinimizeBox = false;
-
-            Label lblNome = new Label();
-            lblNome.Text = "Nome";
-            lblNome.Top = 25;
-            lblNome.Left = 0;
-            lblNome.Size = new System.Drawing.Size(100, 25);
-
-            TextBox txtNome = new TextBox();
-            txtNome.Top = 25;
-            txtNome.Left = 100;
-            txtNome.Size = new System.Drawing.Size(100, 25);
-
-            Button btnSalvar = new Button();
-            btnSalvar.Text = "Salvar";
-            btnSalvar.Top = 75;
-            btnSalvar.Left = 0;
-            btnSalvar.Size = new System.Drawing.Size(100, 25);
-            btnSalvar.Click += (sender, e) => {
-                    Controllers.Almoxerifado.AdicionaAlmoxerifado(txtNome.Text);
-                    adicionar.Hide();
-                    adicionar.Close();
-                    adicionar.Dispose();
-                    Listar();   
-            };
-
-            Button btnVoltar = new Button();
-            btnVoltar.Text = "Cancelar";
-            btnVoltar.Top = 75;
-            btnVoltar.Left = 100;
-            btnVoltar.Size = new System.Drawing.Size(100, 25);
-            btnVoltar.Click += (sender, e) => {
-                adicionar.Close();
-            };
-
-            adicionar.Controls.Add(lblNome);
-            adicionar.Controls.Add(txtNome);
-            adicionar.Controls.Add(btnSalvar);
-            adicionar.Controls.Add(btnVoltar);
-            adicionar.ShowDialog();
-        }
-
-        public static void Editar(int id) {
-            Models.Almoxerifado almoxerifado = Controllers.Almoxerifado.BuscaAlmoxerifado(id);
-            Form editar = new Form();
-            editar.Text = "Editar Almoxerifado";
-            editar.Size = new System.Drawing.Size(418, 366);
-            editar.StartPosition = FormStartPosition.CenterScreen;
-            editar.FormBorderStyle = FormBorderStyle.FixedSingle;
-            editar.MaximizeBox = false;
-            editar.MinimizeBox = false;
-
-            Label lblNome = new Label();
-            lblNome.Text = "Nome";
-            lblNome.Top = 25;
-            lblNome.Left = 0;
-            lblNome.Size = new System.Drawing.Size(100, 25);
-
-            TextBox txtNome = new TextBox();
-            txtNome.Top = 25;
-            txtNome.Left = 100;
-            txtNome.Size = new System.Drawing.Size(100, 25);
-            txtNome.Text = almoxerifado.nome;
-
-            Button btnSalvar = new Button();
-            btnSalvar.Text = "Salvar";
-            btnSalvar.Top = 75;
-            btnSalvar.Left = 0;
-            btnSalvar.Size = new System.Drawing.Size(100, 25);
-            btnSalvar.Click += (sender, e) => {
-                    Controllers.Almoxerifado.AlteraAlmoxerifado(id, txtNome.Text);
-                    editar.Hide();
-                    editar.Close();
-                    editar.Dispose();
-                    Listar();   
-            };
-
-            Button btnVoltar = new Button();
-            btnVoltar.Text = "Cancelar";
-            btnVoltar.Top = 75;
-            btnVoltar.Left = 100;
-            btnVoltar.Size = new System.Drawing.Size(100, 25);
-            btnVoltar.Click += (sender, e) => {
-                editar.Close();
-            };
-
-            editar.Controls.Add(lblNome);
-            editar.Controls.Add(txtNome);
-            editar.Controls.Add(btnSalvar);
-            editar.Controls.Add(btnVoltar);
-            editar.ShowDialog();
-        }
+       
+        
 
         public static void Remover(int id) {
             Form remover = new Form();
@@ -307,4 +312,4 @@ namespace views{
             remover.ShowDialog();*/
         }
     }
-}
+

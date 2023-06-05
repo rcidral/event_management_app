@@ -6826,11 +6826,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rafael\\Documents\\event_management_app\\..csproj",
+      "projectUniqueName": "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\..csproj",
       "projectName": ".",
-      "projectPath": "C:\\Users\\Rafael\\Documents\\event_management_app\\..csproj",
+      "projectPath": "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\..csproj",
       "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rafael\\Documents\\event_management_app\\obj\\",
+      "outputPath": "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config"

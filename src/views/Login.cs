@@ -58,17 +58,15 @@ namespace Views {
             button.Text = "Entrar";
             button.Location = new Point(200, 300);
             button.Click += (sender, e) =>
-            { /*
-                if (Controllers.UserController.store(EmailTextBox.Text, PasswordTextBox.Text);
-                {
-                    MessageBox.Show("Login realizado com sucesso!");
-
+            { 
+                if(Controllers.UserController.login(EmailTextBox.Text, PasswordTextBox.Text)){
+                    form.Hide();
+                    Menu.MenuPage();
                 }
                 else
                 {
                     MessageBox.Show("Email ou senha incorretos!");
-                }*/
-                Menu.MenuPage();
+                }
             };
 
             // Adicionar sombra ao botão

@@ -56,9 +56,10 @@ namespace Controllers
             }
             if(String.IsNullOrEmpty(user.Login))
             {
+                throw new Exception ("Is not Login or empty");
                 
             }
-
+            User.update(user.Id, user);
         }
 
 
@@ -70,10 +71,19 @@ namespace Controllers
             {
                 Models.User.delete(Id);
             }
+        }
 
-
-
-           
+        public static Boolean login(string login, string password)
+        {
+            if (String.IsNullOrEmpty(login))
+            {
+                throw new Exception("Login cannot be empty");
+            }
+            if (String.IsNullOrEmpty(password))
+            {
+                throw new Exception("Password cannot be empty");
+            }
+            return Models.User.login(login, password);
         }
     }
 }

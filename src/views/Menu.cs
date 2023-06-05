@@ -153,7 +153,10 @@ namespace Views {
             button7.ForeColor = Color.White;
             button7.Text = "SAIR";
             button7.Click += (sender, e) => { 
-                menu.Close();};
+                menu.Close();
+                menu.Hide();
+                Login.Show();
+                };
 
      
 
@@ -174,8 +177,6 @@ namespace Views {
             panel1.Controls.Add(button7);
             panel1.Controls.Add(lineLabel);
             panel1.Controls.Add(pictureBox1);
-
-
 
 
             menu.Controls.Add(panel1);
