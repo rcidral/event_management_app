@@ -16,7 +16,7 @@ namespace Controllers
         }
 
 
-        public static IEnumerable<Models.Event> index()
+        public static List<Models.Event> index()
         {
             return Models.Event.index();
         }

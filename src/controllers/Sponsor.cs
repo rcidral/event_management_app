@@ -20,7 +20,7 @@ namespace Controllers
             Models.Sponsor.store(sponsor);
         }
 
-        public static IEnumerable<Models.Sponsor> index()
+        public static List<Models.Sponsor> index()
         {
             return Models.Sponsor.index();
         }

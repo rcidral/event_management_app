@@ -15,7 +15,7 @@ using Models;
                 
             }
 
-            public static IEnumerable<Models.Type> index()
+            public static List<Models.Type> index()
             {
                 return Models.Type.index();
             }
