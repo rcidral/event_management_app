@@ -35,11 +35,10 @@ namespace Controllers
 
 
 
-        public static User show(string Id)
+        public static User show(int id)
         {
             try
             {
-                int id = Int32.Parse(Id);
                 return Models.User.show(id);
             }
             catch (System.Exception e)
@@ -49,19 +48,17 @@ namespace Controllers
         }
 
 
-        public static void Update(User user)
+        public static void Update(int id, User user)
         {
             if(String.IsNullOrEmpty(user.Name)){
                 throw new Exception ("Is not Name or empty");
             }
             if(String.IsNullOrEmpty(user.Login))
             {
-                throw new Exception ("Is not Login or empty");
-                
+                throw new Exception ("Is not Login or empty");                
             }
-            User.update(user.Id, user);
+            User.update(id, user);
         }
-
 
 
         public static void Delete(string id)
