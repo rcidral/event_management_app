@@ -24,7 +24,7 @@ using Models;
                 {
                     if (values.Date != null || values.Value != null || values.SponsorId != null || values.EventId != null)
                     {
-                        Models.Values.update(id, values);
+                        Models.Values.update(values.Id, values);
                     }
                     
                 }

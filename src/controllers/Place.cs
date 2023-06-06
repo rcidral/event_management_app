@@ -15,7 +15,7 @@ using Models;
                 
             }
 
-            public static IEnumerable<Models.Place> index()
+            public static List<Models.Place> index()
             {
                 return Models.Place.index();
             }

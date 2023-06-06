@@ -18,7 +18,7 @@ namespace Controllers
         }
        
 
-        public static IEnumerable<Models.Artist> index()
+        public static List<Models.Artist> index()
         {
             return Models.Artist.index();
         }

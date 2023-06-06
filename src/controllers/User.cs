@@ -28,7 +28,7 @@ namespace Controllers
 
 
 
-        public static IEnumerable<User> Index()
+        public static List<Models.User> Index()
         {
             return User.index();
         }
