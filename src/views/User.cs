@@ -5,6 +5,8 @@ namespace views{
 
     public class UserView {
 
+
+
         public static bool isOpen = false;
         public static Form user;
 
@@ -12,7 +14,7 @@ namespace views{
             
             Form user = new Form();
             user.Text = "Usuários";
-            user.Size = new System.Drawing.Size(418, 366);
+            user.Size = new System.Drawing.Size(315, 366);
             user.StartPosition = FormStartPosition.CenterScreen;
             user.FormBorderStyle = FormBorderStyle.FixedSingle;
             user.MaximizeBox = false;
@@ -46,7 +48,7 @@ namespace views{
             btnAdd.Text = "Adicionar";
             btnAdd.Top = 300;
             btnAdd.Left = 0;
-            btnAdd.Size = new System.Drawing.Size(100, 25);
+            btnAdd.Size = new System.Drawing.Size(103, 25);
             btnAdd.BackColor = Color.Transparent;
             btnAdd.ForeColor = Color.Black;
             btnAdd.FlatStyle = FlatStyle.Flat;
@@ -56,6 +58,13 @@ namespace views{
             btnAdd.MouseLeave += (sender, e) => {
                 btnAdd.BackColor = Color.Transparent;
             };
+            btnAdd.Click += (sender, e) => {
+                user.Close();
+                user.Dispose();
+                Adicionar();
+                user.Close();
+            };
+            
 
             Button btnEdit = new Button();
             btnEdit.Text = "Editar";
@@ -87,9 +96,60 @@ namespace views{
                 
             };
 
+            Button BtnRemove = new Button();
+            BtnRemove.Text = "Remove";
+            BtnRemove.Top = 300;
+            BtnRemove.Left = 200;
+            BtnRemove.Size = new System.Drawing.Size(100, 25);
+            BtnRemove.BackColor = Color.Transparent;
+            BtnRemove.ForeColor = Color.Black;
+            BtnRemove.FlatStyle = FlatStyle.Flat;
+            BtnRemove.MouseHover += (sender, e) => {
+                BtnRemove.BackColor = Color.SkyBlue;
+            };
+            BtnRemove.MouseLeave += (sender, e) => {
+                BtnRemove.BackColor = Color.Transparent;
+            };
+            BtnRemove.Click += (sender, e) => {
+                try
+                {
+                    string id = lista.SelectedItems[0].Text;
+                    user.Close();
+                    user.Dispose();
+                    Remover(Int32.Parse(id));
+                    user.Close();  
+                }
+                catch
+                {
+                    MessageBox.Show("Selecione um Almoxerifado para remover");
+                }
+                      
+            };
+
+            Button BtnVoltar = new Button();
+            BtnVoltar.Text = "Voltar";
+            BtnVoltar.Top = 300;
+            BtnVoltar.Left = 300;
+            BtnVoltar.Size = new System.Drawing.Size(100, 25);
+            BtnVoltar.BackColor = Color.Transparent;
+            BtnVoltar.ForeColor = Color.Black;
+            BtnVoltar.FlatStyle = FlatStyle.Flat;
+            BtnVoltar.MouseHover += (sender, e) => {
+                BtnVoltar.BackColor = Color.SkyBlue;
+            };
+            BtnVoltar.MouseLeave += (sender, e) => {
+                BtnVoltar.BackColor = Color.Transparent;
+            };
+            BtnVoltar.Click += (sender, e) => {
+                user.Hide();
+                user.Close();
+                user.Dispose();
+            };
+
             user.Controls.Add(lista);
             user.Controls.Add(btnAdd);
             user.Controls.Add(btnEdit);
+            user.Controls.Add(BtnRemove);
             user.ShowDialog();
 
         }
@@ -158,8 +218,7 @@ namespace views{
             };
             btnSalvar.Click += (sender, e) => {
                 Controllers.UserController.Update(id, new Models.User(txtNome.Text, txtLogin.Text, txtSenha.Text));
-                //editar.Close();
-                //editar.Dispose();
+
                 List();
             };
 
@@ -173,123 +232,113 @@ namespace views{
             editar.Controls.Add(btnSalvar);
             editar.ShowDialog();
         }
-         /*   public static void Adicionar() {
+            public static void Adicionar() {
+            int NextId = Controllers.UserController.nextId();
+
             Form adicionar = new Form();
-            adicionar.Text = "Adicionar Almoxerifado";
-            adicionar.Size = new System.Drawing.Size(418, 366);
+            adicionar.Text = "Adicionar Usuario";
+            adicionar.Size = new System.Drawing.Size(325, 175);
             adicionar.StartPosition = FormStartPosition.CenterScreen;
             adicionar.FormBorderStyle = FormBorderStyle.FixedSingle;
             adicionar.MaximizeBox = false;
             adicionar.MinimizeBox = false;
+
+            Label lblId = new Label();
+            lblId.Text = "Id";
+            lblId.Top = 0;
+            lblId.Left = 0;
+            lblId.Size = new System.Drawing.Size(100, 25);
+
+            TextBox txtId = new TextBox();
+            txtId.Top = 0;
+            txtId.Left = 100;
+            txtId.Size = new System.Drawing.Size(50, 25);
+            txtId.Enabled = false;
+            txtId.Text = NextId.ToString();
+
 
             Label lblNome = new Label();
             lblNome.Text = "Nome";
             lblNome.Top = 25;
             lblNome.Left = 0;
             lblNome.Size = new System.Drawing.Size(100, 25);
+            
 
             TextBox txtNome = new TextBox();
             txtNome.Top = 25;
             txtNome.Left = 100;
-            txtNome.Size = new System.Drawing.Size(100, 25);
+            txtNome.Size = new System.Drawing.Size(200, 25);
+
+            Label lblLogin = new Label();
+            lblLogin.Text = "Login";
+            lblLogin.Top = 50;
+            lblLogin.Left = 0;
+            lblLogin.Size = new System.Drawing.Size(100, 25);
+
+            TextBox txtLogin = new TextBox();
+            txtLogin.Top = 50;
+            txtLogin.Left = 100;
+            txtLogin.Size = new System.Drawing.Size(200, 25);
+
+            Label lblSenha = new Label();
+            lblSenha.Text = "Senha";
+            lblSenha.Top = 75;
+            lblSenha.Left = 0;
+            lblSenha.Size = new System.Drawing.Size(100, 25);
+
+            TextBox txtSenha = new TextBox();
+            txtSenha.Top = 75;
+            txtSenha.Left = 100;
+            txtSenha.Size = new System.Drawing.Size(200, 25);
 
             Button btnSalvar = new Button();
             btnSalvar.Text = "Salvar";
-            btnSalvar.Top = 75;
-            btnSalvar.Left = 0;
+            btnSalvar.Top = 105;
+            btnSalvar.Left = 50;
             btnSalvar.Size = new System.Drawing.Size(100, 25);
+            btnSalvar.BackColor = Color.Transparent;
+            btnSalvar.ForeColor = Color.Black;
+            btnSalvar.FlatStyle = FlatStyle.Flat;
+            btnSalvar.MouseLeave += (sender, e) => {
+                btnSalvar.BackColor = Color.Transparent;
+            };
             btnSalvar.Click += (sender, e) => {
-                    Controllers.Almoxerifado.AdicionaAlmoxerifado(txtNome.Text);
-                    adicionar.Hide();
-                    adicionar.Close();
-                    adicionar.Dispose();
-                    Listar();   
+                Controllers.UserController.store(new Models.User(txtNome.Text, txtLogin.Text, txtSenha.Text));
+                List();
             };
 
             Button btnVoltar = new Button();
             btnVoltar.Text = "Cancelar";
-            btnVoltar.Top = 75;
-            btnVoltar.Left = 100;
+            btnVoltar.Top = 105;
+            btnVoltar.Left = 152;
             btnVoltar.Size = new System.Drawing.Size(100, 25);
+            btnVoltar.BackColor = Color.Transparent;
+            btnVoltar.ForeColor = Color.Black;
+            btnVoltar.FlatStyle = FlatStyle.Flat;
+            btnSalvar.Font = new Font("Arial", 12, FontStyle.Bold);
+            btnVoltar.MouseLeave += (sender, e) => {
+                btnVoltar.BackColor = Color.Transparent;
+            };
             btnVoltar.Click += (sender, e) => {
                 adicionar.Close();
             };
 
+            adicionar.Controls.Add(lblId);
+            adicionar.Controls.Add(txtId);
             adicionar.Controls.Add(lblNome);
             adicionar.Controls.Add(txtNome);
+            adicionar.Controls.Add(lblLogin);
+            adicionar.Controls.Add(txtLogin);
+            adicionar.Controls.Add(lblSenha);
+            adicionar.Controls.Add(txtSenha);
             adicionar.Controls.Add(btnSalvar);
             adicionar.Controls.Add(btnVoltar);
             adicionar.ShowDialog();
-        }*/
-
-           /*
-
-
-            Button BtnRemove = new Button();
-            BtnRemove.Text = "Remove";
-            BtnRemove.Top = 300;
-            BtnRemove.Left = 200;
-            BtnRemove.Size = new System.Drawing.Size(100, 25);
-            BtnRemove.BackColor = Color.Transparent;
-            BtnRemove.ForeColor = Color.Black;
-            BtnRemove.FlatStyle = FlatStyle.Flat;
-            BtnRemove.MouseHover += (sender, e) => {
-                BtnRemove.BackColor = Color.SkyBlue;
-            };
-            BtnRemove.MouseLeave += (sender, e) => {
-                BtnRemove.BackColor = Color.Transparent;
-            };
-            BtnRemove.Click += (sender, e) => {
-                try
-                {
-                    string id = lista.SelectedItems[0].Text;
-                    produtos.Close();
-                    produtos.Dispose();
-                    Remover(Int32.Parse(id));
-                    produtos.Close();  
-                }
-                catch
-                {
-                    MessageBox.Show("Selecione um Almoxerifado para remover");
-                }
-                      
-            };
-
-            Button BtnVoltar = new Button();
-            BtnVoltar.Text = "Voltar";
-            BtnVoltar.Top = 300;
-            BtnVoltar.Left = 300;
-            BtnVoltar.Size = new System.Drawing.Size(100, 25);
-            BtnVoltar.BackColor = Color.Transparent;
-            BtnVoltar.ForeColor = Color.Black;
-            BtnVoltar.FlatStyle = FlatStyle.Flat;
-            BtnVoltar.MouseHover += (sender, e) => {
-                BtnVoltar.BackColor = Color.SkyBlue;
-            };
-            BtnVoltar.MouseLeave += (sender, e) => {
-                BtnVoltar.BackColor = Color.Transparent;
-            };
-            BtnVoltar.Click += (sender, e) => {
-                produtos.Hide();
-                produtos.Close();
-                produtos.Dispose();
-            };
-
-            produtos.Controls.Add(lista);
-            produtos.Controls.Add(btnAdd);
-            produtos.Controls.Add(btnEdit);
-            produtos.Controls.Add(BtnRemove);
-            produtos.Controls.Add(BtnVoltar);
-            produtos.ShowDialog();
-        } 
-
-
-       
-        
+        }
 
         public static void Remover(int id) {
             Form remover = new Form();
-            remover.Text = "Remover Almoxerifado";
+            remover.Text = "Remover";
             remover.Size = new System.Drawing.Size(418, 366);
             remover.StartPosition = FormStartPosition.CenterScreen;
             remover.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -306,7 +355,7 @@ namespace views{
             txtNome.Top = 25;
             txtNome.Left = 100;
             txtNome.Size = new System.Drawing.Size(100, 25);
-            txtNome.Text = Controllers.Almoxerifado.BuscaAlmoxerifado(id).nome;
+            txtNome.Text = Controllers.UserController.show(id).Name;
             txtNome.Enabled = false;
 
             Button btnRemover = new Button();
@@ -315,11 +364,11 @@ namespace views{
             btnRemover.Left = 0;
             btnRemover.Size = new System.Drawing.Size(100, 25);
             btnRemover.Click += (sender, e) => {
-                    Controllers.Almoxerifado.DeletaAlmoxerifado(id);
-                    remover.Hide();
-                    remover.Close();
-                    remover.Dispose();
-                    Listar();   
+                Controllers.UserController.Delete(id);
+                remover.Hide();
+                remover.Close();
+                remover.Dispose();
+                List();   
             };
 
             Button btnVoltar = new Button();
@@ -330,16 +379,17 @@ namespace views{
             btnVoltar.Click += (sender, e) => {
                 if(isOpen){
                     remover.Close();
-                    produtos.Close();
-                    produtos.Dispose();
+                    user.Close();
+                    user.Dispose();
                 }    
-                Listar();
+                List();
             };
             remover.Controls.Add(lblNome);
             remover.Controls.Add(txtNome);
             remover.Controls.Add(btnRemover);
             remover.Controls.Add(btnVoltar);
-            remover.ShowDialog();*/
+            remover.ShowDialog();
         }
     }
+}
 

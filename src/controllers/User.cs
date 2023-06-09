@@ -24,8 +24,7 @@ namespace Controllers
                 throw new Exception("Password cannot be empty");
             }
             Models.User.store(user);
-        }
-
+        }       
 
 
         public static List<Models.User> Index()
@@ -61,12 +60,15 @@ namespace Controllers
         }
 
 
-        public static void Delete(string id)
+        public static void Delete(int id)
         {
-            int Id = Int32.Parse(id);
-            if (Id != null)
+            try
             {
-                Models.User.delete(Id);
+                Models.User.delete(id);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
             }
         }
 
@@ -81,6 +83,18 @@ namespace Controllers
                 throw new Exception("Password cannot be empty");
             }
             return Models.User.login(login, password);
+        }
+
+        public static int nextId()
+        {
+            try
+            {
+                return Models.User.nextId();
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

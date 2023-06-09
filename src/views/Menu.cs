@@ -81,7 +81,6 @@ namespace Views {
             button3.ForeColor = Color.White;
             button3.Text = "ARTISTA";
             button3.TextAlign = ContentAlignment.MiddleCenter;
-            
 
 
             string imagePath3 = "src/assets/artist.png";
@@ -157,7 +156,6 @@ namespace Views {
                 menu.Hide();
                 Login.Show();
                 };
-
      
 
             string imagePath7 = "src/assets/sair.png";
@@ -182,10 +180,8 @@ namespace Views {
             menu.Controls.Add(panel1);
             menu.Controls.Add(panel2); 
             menu.Controls.Add(panel3); 
-
-            menu.ShowDialog();
             
-
+            menu.ShowDialog();
         }
     }
 }

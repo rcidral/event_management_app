@@ -186,3 +186,5 @@ C:\Users\Rafael\Documents\Senac\event_management_app\obj\Debug\net7.0-windows\re
 C:\Users\Rafael\Documents\Senac\event_management_app\obj\Debug\net7.0-windows\..pdb
 C:\Users\Rafael\Documents\Senac\event_management_app\obj\Debug\net7.0-windows\..genruntimeconfig.cache
 C:\Users\Rafael\Documents\Senac\event_management_app\obj\Debug\net7.0-windows\ref\..dll
+C:\Users\Rafael\Documents\Senac\event_management_app\bin\Debug\net7.0-windows\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\Rafael\Documents\Senac\event_management_app\bin\Debug\net7.0-windows\Pomelo.EntityFrameworkCore.MySql.Design.dll

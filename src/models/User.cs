@@ -115,7 +115,19 @@ namespace Models
             }
         }
 
-        
-    }
-            
+        public static int nextId ()
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Users.Count() + 1;
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+    }        
 }
