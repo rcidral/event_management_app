@@ -3,7 +3,7 @@ namespace Views {
         public static void Show() {
             Form form = new Form();
             form.Width = 500;
-            form.Height = 500;
+            form.Height = 380;
             form.BackColor = Color.White;
             form.StartPosition = FormStartPosition.CenterScreen;
             form.MaximizeBox = false;
@@ -13,8 +13,8 @@ namespace Views {
             PictureBox pictureBox = new PictureBox();
             pictureBox.Load("src/assets/user2.png");
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox.Size = new Size(100, 100);
-            pictureBox.Location = new Point(190, 0);
+            pictureBox.Size = new Size(80, 80);
+            pictureBox.Location = new Point(200, 0);
             
             Label EmailLabel = new Label();
             EmailLabel.Text = "Email";
@@ -69,7 +69,6 @@ namespace Views {
                 }
             };
 
-            // Adicionar sombra ao botão
             button.Paint += (sender, e) =>
             {
                 ControlPaint.DrawBorder(e.Graphics, button.ClientRectangle,

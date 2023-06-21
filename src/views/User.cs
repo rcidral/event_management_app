@@ -2,28 +2,14 @@ using System;
 using System.Windows.Forms;
 
 namespace views{
-
     public class UserView {
-
-
-
         public static bool isOpen = false;
         public static Form user;
 
-        public static void List() {
-            
-            Form user = new Form();
-            user.Text = "Usuários";
-            user.Size = new System.Drawing.Size(315, 366);
-            user.StartPosition = FormStartPosition.CenterScreen;
-            user.FormBorderStyle = FormBorderStyle.FixedSingle;
-            user.MaximizeBox = false;
-            user.MinimizeBox = false;
-    
-
+        public static ListView List() {      
             ListView lista = new ListView();
-            lista.Size = new System.Drawing.Size(400, 300);
-            lista.Location = new System.Drawing.Point(0, 0);
+            lista.Size = new System.Drawing.Size(600, 500);
+            lista.Location = new System.Drawing.Point(220, 0);
             lista.View = View.Details;
             lista.Columns.Add("ID", 30);
             lista.Columns.Add("Nome", 60);
@@ -146,12 +132,7 @@ namespace views{
                 user.Dispose();
             };
 
-            user.Controls.Add(lista);
-            user.Controls.Add(btnAdd);
-            user.Controls.Add(btnEdit);
-            user.Controls.Add(BtnRemove);
-            user.ShowDialog();
-
+            return lista;
         }
 
 
@@ -218,7 +199,6 @@ namespace views{
             };
             btnSalvar.Click += (sender, e) => {
                 Controllers.UserController.Update(id, new Models.User(txtNome.Text, txtLogin.Text, txtSenha.Text));
-
                 List();
             };
 
@@ -256,13 +236,11 @@ namespace views{
             txtId.Enabled = false;
             txtId.Text = NextId.ToString();
 
-
             Label lblNome = new Label();
             lblNome.Text = "Nome";
             lblNome.Top = 25;
             lblNome.Left = 0;
-            lblNome.Size = new System.Drawing.Size(100, 25);
-            
+            lblNome.Size = new System.Drawing.Size(100, 25); 
 
             TextBox txtNome = new TextBox();
             txtNome.Top = 25;

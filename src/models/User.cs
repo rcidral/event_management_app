@@ -115,13 +115,13 @@ namespace Models
             }
         }
 
-        public static int nextId ()
+        public static int LastId ()
         {
             try
             {
                 using (Context context = new Context())
                 {
-                    return context.Users.Count() + 1;
+                    return context.Users.Max(user => user.Id);
                 }
             }
             catch (System.Exception e)

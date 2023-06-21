@@ -89,7 +89,7 @@ namespace Controllers
         {
             try
             {
-                return Models.User.nextId();
+                return Models.User.LastId();
             }
             catch (System.Exception e)
             {
