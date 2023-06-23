@@ -28,15 +28,15 @@ namespace Views
             Panel panel2 = new Panel();
             panel2.Size = new System.Drawing.Size(menu.Width, menu.Height - 40);
             panel2.Location = new System.Drawing.Point(menu.Width - panel2.Width, 40);
-            /*Color color1 = System.Drawing.ColorTranslator.FromHtml("#EFF5F5");
-            panel2.BackColor = color1;*/
-            panel2.BackgroundImage = Image.FromFile("src/assets/gerais.png");
-            panel2.BackgroundImageLayout = ImageLayout.Stretch;
+            Color color1 = System.Drawing.ColorTranslator.FromHtml("#EFF5F5");
+            panel2.BackColor = color1;
+            /*panel2.BackgroundImage = Image.FromFile("src/assets/gerais.png");
+            panel2.BackgroundImageLayout = ImageLayout.Stretch;*/
 
             Panel panel3 = new Panel();
             panel3.Size = new System.Drawing.Size(menu.Width, 40);
             panel3.Location = new System.Drawing.Point(0, 0);
-            Color color2 = System.Drawing.ColorTranslator.FromHtml("#3C4046");
+            Color color2 = System.Drawing.ColorTranslator.FromHtml("#3C4048");
             panel3.BackColor = color2;
 
             Button button1 = new Button();
@@ -136,7 +136,76 @@ namespace Views
             button6.Click += (sender, e) =>
             {
                 panel2.Controls.Add(views.UserView.List());
-                
+
+                Button buttonAdd = new Button();
+                buttonAdd.Location = new System.Drawing.Point(325, 490);
+                buttonAdd.Size = new System.Drawing.Size(180, 40);
+                buttonAdd.FlatStyle = FlatStyle.Flat;
+                buttonAdd.FlatAppearance.BorderSize = 0;
+                buttonAdd.ForeColor = System.Drawing.ColorTranslator.FromHtml("#3C4048");
+                buttonAdd.BackColor = System.Drawing.ColorTranslator.FromHtml("#EFF5F5");
+                buttonAdd.Text = "ADICIONAR";
+                buttonAdd.Font = new Font("Arial", 13, FontStyle.Bold);
+                buttonAdd.Click += (sender, e) =>
+                {
+                    menu.Close();
+                    menu.Hide();
+                };
+
+
+                string imagePath7 = "src/assets/adicionar.png";
+                Image image7 = Image.FromFile(imagePath7);
+                image7 = new Bitmap(image7, new Size(26, 26));
+                buttonAdd.Image = image7;
+                buttonAdd.ImageAlign = ContentAlignment.MiddleLeft;
+
+                Button buttonEdit = new Button();
+                buttonEdit.Location = new System.Drawing.Point(565, 490);
+                buttonEdit.Size = new System.Drawing.Size(180, 40);
+                buttonEdit.FlatStyle = FlatStyle.Flat;
+                buttonEdit.FlatAppearance.BorderSize = 0;
+                buttonEdit.ForeColor = System.Drawing.ColorTranslator.FromHtml("#3C4048");
+                buttonEdit.BackColor = System.Drawing.ColorTranslator.FromHtml("#EFF5F5");
+                buttonEdit.Text = "EDITAR";
+                buttonEdit.Font = new Font("Arial", 13, FontStyle.Bold);
+                buttonEdit.Click += (sender, e) =>
+                {
+                    menu.Close();
+                    menu.Hide();
+                };
+
+
+                string imagePath8 = "src/assets/editar.png";
+                Image image8 = Image.FromFile(imagePath8);
+                image8 = new Bitmap(image8, new Size(26, 26));
+                buttonEdit.Image = image8;
+                buttonEdit.ImageAlign = ContentAlignment.MiddleLeft;
+
+                Button buttonRemove = new Button();
+                buttonRemove.Location = new System.Drawing.Point(805, 490);
+                buttonRemove.Size = new System.Drawing.Size(180, 40);
+                buttonRemove.FlatStyle = FlatStyle.Flat;
+                buttonRemove.FlatAppearance.BorderSize = 0;
+                buttonRemove.ForeColor = System.Drawing.ColorTranslator.FromHtml("#3C4048");
+                buttonRemove.BackColor = System.Drawing.ColorTranslator.FromHtml("#EFF5F5");
+                buttonRemove.Text = "REMOVER";
+                buttonRemove.Font = new Font("Arial", 13, FontStyle.Bold);
+                buttonRemove.Click += (sender, e) =>
+                {
+                    menu.Close();
+                    menu.Hide();
+                };
+
+
+                string imagePath9 = "src/assets/remove.png";
+                Image image9 = Image.FromFile(imagePath9);
+                image9 = new Bitmap(image9, new Size(26, 26));
+                buttonRemove.Image = image9;
+                buttonRemove.ImageAlign = ContentAlignment.MiddleLeft;
+
+                panel2.Controls.Add(buttonAdd);
+                panel2.Controls.Add(buttonEdit);
+                panel2.Controls.Add(buttonRemove);
             };
 
 

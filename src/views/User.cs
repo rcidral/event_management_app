@@ -8,14 +8,16 @@ namespace views{
 
         public static ListView List() {      
             ListView lista = new ListView();
-            lista.Size = new System.Drawing.Size(600, 500);
+            lista.Size = new System.Drawing.Size(900, 450);
             lista.Location = new System.Drawing.Point(220, 0);
             lista.View = View.Details;
-            lista.Columns.Add("ID", 30);
-            lista.Columns.Add("Nome", 60);
-            lista.Columns.Add("Login", 100);
-            lista.Columns.Add("Senha", 110);
-
+            lista.BackColor = System.Drawing.Color.White;
+            lista.BorderStyle = BorderStyle.None;
+            lista.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            lista.Columns.Add("ID", 225);
+            lista.Columns.Add("Nome", 225);
+            lista.Columns.Add("Login", 225);
+            lista.Columns.Add("Senha", 225);
             lista.FullRowSelect = true;
             lista.GridLines = true;
             lista.MultiSelect = false;
@@ -29,88 +31,6 @@ namespace views{
                 item.SubItems.Add(usuario.Password);
                 lista.Items.Add(item);
             }
-
-            Button btnAdd = new Button();
-            btnAdd.Text = "Adicionar";
-            btnAdd.Top = 300;
-            btnAdd.Left = 0;
-            btnAdd.Size = new System.Drawing.Size(103, 25);
-            btnAdd.BackColor = Color.Transparent;
-            btnAdd.ForeColor = Color.Black;
-            btnAdd.FlatStyle = FlatStyle.Flat;
-            btnAdd.MouseHover += (sender, e) => {
-                btnAdd.BackColor = Color.SkyBlue;
-            };
-            btnAdd.MouseLeave += (sender, e) => {
-                btnAdd.BackColor = Color.Transparent;
-            };
-            btnAdd.Click += (sender, e) => {
-                user.Close();
-                user.Dispose();
-                Adicionar();
-                user.Close();
-            };
-            
-
-            Button btnEdit = new Button();
-            btnEdit.Text = "Editar";
-            btnEdit.Top = 300;
-            btnEdit.Left = 100;
-            btnEdit.Size = new System.Drawing.Size(100, 25);
-            btnEdit.BackColor = Color.Transparent;
-            btnEdit.ForeColor = Color.Black;
-            btnEdit.FlatStyle = FlatStyle.Flat;
-            btnEdit.MouseHover += (sender, e) => {
-                btnEdit.BackColor = Color.LimeGreen;
-            };
-            btnEdit.MouseLeave += (sender, e) => {
-                btnEdit.BackColor = Color.Transparent;
-            };
-            btnEdit.Click += (sender, e) => {
-                try
-                {
-                    string id = lista.SelectedItems[0].Text;
-                    user.Close();
-                    user.Dispose();
-                    Editar(Int32.Parse(id));
-                    user.Close(); 
-                }
-                catch
-                {
-                    MessageBox.Show("Selecione um Usuario para editar");
-                }
-                
-            };
-
-            Button BtnRemove = new Button();
-            BtnRemove.Text = "Remove";
-            BtnRemove.Top = 300;
-            BtnRemove.Left = 200;
-            BtnRemove.Size = new System.Drawing.Size(100, 25);
-            BtnRemove.BackColor = Color.Transparent;
-            BtnRemove.ForeColor = Color.Black;
-            BtnRemove.FlatStyle = FlatStyle.Flat;
-            BtnRemove.MouseHover += (sender, e) => {
-                BtnRemove.BackColor = Color.SkyBlue;
-            };
-            BtnRemove.MouseLeave += (sender, e) => {
-                BtnRemove.BackColor = Color.Transparent;
-            };
-            BtnRemove.Click += (sender, e) => {
-                try
-                {
-                    string id = lista.SelectedItems[0].Text;
-                    user.Close();
-                    user.Dispose();
-                    Remover(Int32.Parse(id));
-                    user.Close();  
-                }
-                catch
-                {
-                    MessageBox.Show("Selecione um Almoxerifado para remover");
-                }
-                      
-            };
 
             Button BtnVoltar = new Button();
             BtnVoltar.Text = "Voltar";
