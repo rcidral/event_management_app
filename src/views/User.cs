@@ -11,17 +11,17 @@ namespace views{
             lista.Size = new System.Drawing.Size(900, 450);
             lista.Location = new System.Drawing.Point(220, 0);
             lista.View = View.Details;
-            lista.BackColor = System.Drawing.Color.White;
-            lista.BorderStyle = BorderStyle.None;
+            lista.BorderStyle = BorderStyle.FixedSingle;
             lista.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lista.Columns.Add("ID", 225);
             lista.Columns.Add("Nome", 225);
             lista.Columns.Add("Login", 225);
             lista.Columns.Add("Senha", 225);
             lista.FullRowSelect = true;
-            lista.GridLines = true;
+            lista.GridLines = false;
             lista.MultiSelect = false;
             lista.HideSelection = false;
+            SetAlternateRowColors(lista);
 
             IEnumerable<Models.User> usuarioList = Controllers.UserController.Index();
             foreach (Models.User usuario in usuarioList) {
@@ -54,6 +54,31 @@ namespace views{
 
             return lista;
         }
+
+        public static void SetAlternateRowColors(ListView listView)
+        {
+            listView.OwnerDraw = true;
+            listView.DrawSubItem += Lista_DrawSubItem;
+        }
+
+        private static void Lista_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            if (e.ItemIndex > 0) 
+            {
+                if (e.ItemIndex % 2 == 1)
+                {
+                    e.SubItem.BackColor = Color.LightGray;
+                }
+                else
+                {
+                    e.SubItem.BackColor = Color.White;
+                }
+            }
+
+            e.DrawBackground();
+            e.DrawText();
+        }
+
 
 
         public static void Editar(int id) {

@@ -150,6 +150,7 @@ namespace Views
                 {
                     menu.Close();
                     menu.Hide();
+                    views.UserView.Adicionar();
                 };
 
 
