@@ -96,6 +96,17 @@ namespace Views
             button4.FlatAppearance.BorderSize = 0;
             button4.ForeColor = Color.White;
             button4.Text = "LOCAL";
+            button4.Click += (sender, e) =>
+            {
+                panel2.Controls.Clear();
+                panel2.Controls.Add(Views.Place.List(panel2));
+
+                Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Place.Add(panel2), panel2);
+                Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Place.Add(panel2), panel2);
+
+                panel2.Controls.Add(buttonAdd);
+                panel2.Controls.Add(buttonRemove);
+            };
 
 
             string imagePath4 = "src/assets/local.png";
@@ -135,6 +146,7 @@ namespace Views
             button6.ImageAlign = ContentAlignment.MiddleLeft;
             button6.Click += (sender, e) =>
             {
+                panel2.Controls.Clear();
                 panel2.Controls.Add(views.UserView.List());
 
                 Button buttonAdd = new Button();

@@ -190,3 +190,5 @@ C:\Users\Rafael\Documents\Senac\event_management_app\bin\Debug\net7.0-windows\Mi
 C:\Users\Rafael\Documents\Senac\event_management_app\bin\Debug\net7.0-windows\Pomelo.EntityFrameworkCore.MySql.Design.dll
 C:\Users\ricid\www\senac\event_management_app\bin\Debug\net7.0-windows\Microsoft.EntityFrameworkCore.Relational.Design.dll
 C:\Users\ricid\www\senac\event_management_app\bin\Debug\net7.0-windows\Pomelo.EntityFrameworkCore.MySql.Design.dll
+C:\Users\ricid\www\event_management_app\bin\Debug\net7.0-windows\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\ricid\www\event_management_app\bin\Debug\net7.0-windows\Pomelo.EntityFrameworkCore.MySql.Design.dll

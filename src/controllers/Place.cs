@@ -20,7 +20,7 @@ using Models;
                 return Models.Place.index();
             }
 
-            public static Models.Place show(string PlaceId)
+            public static List<Models.Place> show(string PlaceId)
             {
                 try
                 {
