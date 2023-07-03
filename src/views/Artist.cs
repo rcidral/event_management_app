@@ -2,7 +2,7 @@ using Controllers;
 
 namespace Views
 {
-    public class Type
+    public class Artist
     {
 
         public static ListView List(Panel panel2)
@@ -21,11 +21,11 @@ namespace Views
             lista.MultiSelect = false;
             lista.HideSelection = false;
 
-            List<Models.Type> typelist = Controllers.TypeControllers.index();
-            foreach (Models.Type type in typelist)
+            List<Models.Artist> artistlist = Controllers.Artist.index();
+            foreach (Models.Artist artist in artistlist)
             {
-                ListViewItem item = new ListViewItem(type.Id.ToString());
-                item.SubItems.Add(type.Description);
+                ListViewItem item = new ListViewItem(artist.Id.ToString());
+                item.SubItems.Add(artist.Name);
                 lista.Items.Add(item);
             }
 
@@ -42,7 +42,7 @@ namespace Views
             {
                 panel2.Controls.Clear();
                 string id = lista.SelectedItems[0].Text;
-                panel2.Controls.Add(Type.Edit(id, panel2));
+                panel2.Controls.Add(Artist.Edit(id, panel2));
             };
 
 
@@ -68,12 +68,13 @@ namespace Views
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show("Deseja realmente excluir?", "Confirmação", buttons);
                 if (result == DialogResult.Yes){
-                Controllers.TypeControllers.delete(id);
+
+                Controllers.Artist.delete(id);
                 panel2.Controls.Clear();
-                panel2.Controls.Add(Views.Type.List(panel2));
+                panel2.Controls.Add(Views.Artist.List(panel2));
                 } else {
                     panel2.Controls.Clear();
-                    panel2.Controls.Add(Views.Type.List(panel2));
+                    panel2.Controls.Add(Views.Artist.List(panel2));
                 }
 
             };
@@ -85,7 +86,7 @@ namespace Views
             buttonRemove.ImageAlign = ContentAlignment.MiddleLeft;
 
             panel2.Controls.Add(buttonRemove);
-            Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Type.Add(panel2), panel2);
+            Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Artist.Add(panel2), panel2);
 
             panel2.Controls.Add(buttonAdd);
             return lista;
@@ -98,16 +99,16 @@ namespace Views
             form.Location = new System.Drawing.Point(220, 0);
             form.BackColor = System.Drawing.Color.White;
 
-            Label lblDescription = new Label();
-            lblDescription.Text = "Descrição";
-            lblDescription.Location = new System.Drawing.Point(190, 50);
-            lblDescription.Size = new System.Drawing.Size(100, 20);
-            form.Controls.Add(lblDescription);
+            Label lblName = new Label();
+            lblName.Text = "Nome";
+            lblName.Location = new System.Drawing.Point(190, 50);
+            lblName.Size = new System.Drawing.Size(100, 20);
+            form.Controls.Add(lblName);
 
-            TextBox txtDescription = new TextBox();
-            txtDescription.Location = new System.Drawing.Point(190, 80);
-            txtDescription.Size = new System.Drawing.Size(500, 20);
-            form.Controls.Add(txtDescription);
+            TextBox txtName = new TextBox();
+            txtName.Location = new System.Drawing.Point(190, 70);
+            txtName.Size = new System.Drawing.Size(500, 40);
+            form.Controls.Add(txtName);
 
             Button btnAdd = new Button();
             btnAdd.Text = "Adicionar";
@@ -115,12 +116,12 @@ namespace Views
             btnAdd.Size = new System.Drawing.Size(100, 20);
             btnAdd.Click += (sender, e) =>
             {
-                Controllers.TypeControllers.store(new Models.Type(txtDescription.Text));
+                Controllers.Artist.store(new Models.Artist(txtName.Text));
                 panel.Controls.Clear();
-                panel.Controls.Add(Views.Type.List(panel));
+                panel.Controls.Add(Views.Artist.List(panel));
 
-                Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Type.Add(panel), panel);
-                Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Type.Add(panel), panel);
+                Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Artist.Add(panel), panel);
+                Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Artist.Add(panel), panel);
 
 
                 panel.Controls.Add(buttonAdd);
@@ -133,35 +134,35 @@ namespace Views
 
         public static Panel Edit(string id, Panel panel2)
         {
-            List<Models.Type> typelist = Controllers.TypeControllers.show(Int32.Parse(id));
+            List<Models.Artist> artistlist = Controllers.Artist.show(Int32.Parse(id));
             Panel form = new Panel();
             form.Size = new System.Drawing.Size(900, 450);
             form.Location = new System.Drawing.Point(220, 0);
             form.BackColor = System.Drawing.Color.White;
 
-            Label lbldescription = new Label();
-            lbldescription.Text = "Descrição";
-            lbldescription.Location = new System.Drawing.Point(190, 50);
-            lbldescription.Size = new System.Drawing.Size(100, 20);
-            form.Controls.Add(lbldescription);
+            Label lblName = new Label();
+            lblName.Text = "Nome";
+            lblName.Location = new System.Drawing.Point(190, 50);
+            lblName.Size = new System.Drawing.Size(100, 20);
+            form.Controls.Add(lblName);
 
             TextBox txtName = new TextBox();
-            txtName.Location = new System.Drawing.Point(190, 80);
-            txtName.Size = new System.Drawing.Size(500, 20);
-            txtName.Text = typelist[0].Description;
+            txtName.Location = new System.Drawing.Point(190, 70);
+            txtName.Size = new System.Drawing.Size(500, 40);
+            txtName.Text = artistlist[0].Name;
             form.Controls.Add(txtName);
 
             Button btnAdd = new Button();
-            btnAdd.Text = "Editar";
+            btnAdd.Text = "Alterar";
             btnAdd.Location = new System.Drawing.Point(400, 150);
-            btnAdd.Size = new System.Drawing.Size(100, 20);
+            btnAdd.Size     = new System.Drawing.Size(100, 20);
             btnAdd.Click += (sender, e) =>
             {
-                Controllers.TypeControllers.update(id, new Models.Type(txtName.Text));
+                Controllers.Artist.update(id, new Models.Artist(txtName.Text));
                 panel2.Controls.Clear();
-                panel2.Controls.Add(Views.Type.List(panel2));
-                Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Type.Add(panel2), panel2);
-                Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Type.Add(panel2), panel2);
+                panel2.Controls.Add(Views.Artist.List(panel2));
+                Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Artist.Add(panel2), panel2);
+                Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Artist.Add(panel2), panel2);
                 panel2.Controls.Add(buttonAdd);
                 panel2.Controls.Add(buttonRemove);
             };

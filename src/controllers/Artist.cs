@@ -23,29 +23,25 @@ namespace Controllers
             return Models.Artist.index();
         }
 
-        public static Models.Artist show(int id)
+        public static List<Models.Artist> show(int id)
         {
-            
-            if(id != null)
+            if (id != null)
             {
-               return Models.Artist.show(id);
-            }else{
+                return Models.Artist.show(id);
+            }
+            else
+            {
                 return null;
             }
-
-            
         }
 
-        public static void update(Models.Artist artist)
+        public static void update(string id, Models.Artist artist)
         {
             
             if (artist.Id != null || String.IsNullOrEmpty(artist.Name) )
             {
-               Models.Artist.update(artist.Id , artist);
-            }
-            
-
-            
+               Models.Artist.update(Int32.Parse(id), artist);
+            }  
         }
 
         public static void delete(string id)
@@ -56,10 +52,6 @@ namespace Controllers
             {
                 Models.Artist.delete(Id);
             }
-
-            
-
-
         }
     }
 }

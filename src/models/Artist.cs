@@ -39,13 +39,13 @@ namespace Models
                 throw e;
             }
         }
-        public static Artist show(int id)
+        public static List<Artist> show(int id)
         {
             try
             {
                 using (Context context = new Context())
                 {
-                    return context.Artists.Find(id);
+                    return context.Artists.Where(artist => artist.Id == id).ToList();
                 }
             }
             catch (System.Exception e)

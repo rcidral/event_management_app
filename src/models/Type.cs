@@ -5,7 +5,6 @@ namespace Models
     public class Type{
         public int Id { get; set; }
         public string Description { get; set; }
-
         public Type(string description){
             Description = description;
         }
@@ -31,10 +30,11 @@ namespace Models
             }
         }
 
-        public static Type show(int id){
+        public static List<Type> show(int id){
             try{
-                using(Context context = new Context()){
-                    return context.Types.Find(id);
+                using(Context context = new Context())
+                {
+                    return context.Types.Where(type => type.Id == id).ToList();
                 }
             }catch(System.Exception e){
                 throw e;
@@ -53,14 +53,17 @@ namespace Models
             }
         }
 
-        public static void delete(int id){
+        public static void delete(int id)
+        {
             try{
-                using(Context context = new Context()){
+                using(Context context = new Context())
+                {
                     Type type = context.Types.Find(id);
                     context.Types.Remove(type);
                     context.SaveChanges();
                 }
-            }catch(System.Exception e){
+            }catch(System.Exception e)
+            {
                 throw e;
             }
         }

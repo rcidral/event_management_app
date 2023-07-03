@@ -45,13 +45,13 @@ namespace Models
                 throw e;
             }
         }
-        public static User show(int id)
+        public static List<User> show(int id)
         {
             try
             {
                 using (Context context = new Context())
                 {
-                    return context.Users.Find(id);
+                    return context.Users.Where(user => user.Id == id).ToList();
                 }
             }
             catch (System.Exception e)

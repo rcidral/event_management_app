@@ -34,11 +34,12 @@ namespace Controllers
 
 
 
-        public static User show(int id)
+        public static List<User> show(string UserId)
         {
             try
             {
-                return Models.User.show(id);
+                int Id = Int32.Parse(UserId);
+                return Models.User.show(Id);
             }
             catch (System.Exception e)
             {
@@ -96,5 +97,6 @@ namespace Controllers
                 throw e;
             }
         }
+
     }
 }

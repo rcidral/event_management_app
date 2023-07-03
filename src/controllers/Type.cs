@@ -20,11 +20,10 @@ using Models;
                 return Models.Type.index();
             }
 
-            public static Models.Type show(string Id)
+            public static List<Models.Type> show(int id)
             {
                 try
                 {
-                    int id = Int32.Parse(Id);
                     return Models.Type.show(id);
                 }
                 catch (System.Exception e)
@@ -33,29 +32,22 @@ using Models;
                 }
             }
 
-            public static void update(string IdType,Models.Type type)
+            public static void update(string id,Models.Type type)
             {
-                try
+                if (type.Id != null || String.IsNullOrEmpty(type.Description) )
                 {
-                    int id = Int32.Parse(IdType);
-                    if (!String.IsNullOrEmpty(type.Description))
-                    {
-                        Models.Type.update(id, type);
-                    }
-                }
-                catch (System.Exception e)
-                {
-                    throw e;
-                }
+                   Models.Type.update(Int32.Parse(id), type);
+                }  
             }
 
-            public static void delete(int id)
+            public static void delete(string id)
             {
-                if (id < 0 || id == null)
+                int Id = Convert.ToInt32(id);
+
+                if (Id != null)
                 {
-                    throw new Exception("Id cannot be empty");
+                    Models.Type.delete(Id);
                 }
-                Models.Type.delete(id);
             }
         }
    }
