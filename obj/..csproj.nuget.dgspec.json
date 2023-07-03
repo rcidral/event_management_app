@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\vitor\\OneDrive\\Documentos\\event_management_app\\..csproj": {}
   },
   "projects": {
@@ -15,6 +16,22 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vitor\\AppData\\Roaming\\NuGet\\NuGet.Config"
+=======
+    "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\..csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\..csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\..csproj",
+        "projectName": ".",
+        "projectPath": "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\..csproj",
+        "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config"
+>>>>>>> 17a2477261f7f1f765704c69f5ec6ac0d509b3de
         ],
         "originalTargetFrameworks": [
           "net7.0-windows"
@@ -90,7 +107,11 @@
               "privateAssets": "none"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.107\\RuntimeIdentifierGraph.json"
+>>>>>>> 17a2477261f7f1f765704c69f5ec6ac0d509b3de
         }
       }
     }

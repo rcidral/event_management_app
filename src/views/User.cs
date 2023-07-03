@@ -1,30 +1,34 @@
-using System;
-using System.Windows.Forms;
+using System.Drawing;
 
-namespace views{
-    public class UserView {
+namespace Views
+{
+    public class UserView
+    {
         public static bool isOpen = false;
         public static Form user;
 
-        public static ListView List() {      
+        public static ListView List(Panel panel2)
+        {
             ListView lista = new ListView();
             lista.Size = new System.Drawing.Size(900, 450);
             lista.Location = new System.Drawing.Point(220, 0);
-            lista.View = View.Details;
-            lista.BorderStyle = BorderStyle.FixedSingle;
-            lista.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lista.Columns.Add("ID", 225);
             lista.Columns.Add("Nome", 225);
             lista.Columns.Add("Login", 225);
             lista.Columns.Add("Senha", 225);
+            lista.View = View.Details;
+            lista.BackColor = System.Drawing.Color.White;
+            lista.BorderStyle = BorderStyle.None;
+            lista.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lista.FullRowSelect = true;
-            lista.GridLines = false;
+            lista.GridLines = true;
             lista.MultiSelect = false;
             lista.HideSelection = false;
-            SetAlternateRowColors(lista);
+        
 
             IEnumerable<Models.User> usuarioList = Controllers.UserController.Index();
-            foreach (Models.User usuario in usuarioList) {
+            foreach (Models.User usuario in usuarioList)
+            {
                 ListViewItem item = new ListViewItem(usuario.Id.ToString());
                 item.SubItems.Add(usuario.Name);
                 item.SubItems.Add(usuario.Login);
@@ -32,287 +36,199 @@ namespace views{
                 lista.Items.Add(item);
             }
 
-            Button BtnVoltar = new Button();
-            BtnVoltar.Text = "Voltar";
-            BtnVoltar.Top = 300;
-            BtnVoltar.Left = 300;
-            BtnVoltar.Size = new System.Drawing.Size(100, 25);
-            BtnVoltar.BackColor = Color.Transparent;
-            BtnVoltar.ForeColor = Color.Black;
-            BtnVoltar.FlatStyle = FlatStyle.Flat;
-            BtnVoltar.MouseHover += (sender, e) => {
-                BtnVoltar.BackColor = Color.SkyBlue;
-            };
-            BtnVoltar.MouseLeave += (sender, e) => {
-                BtnVoltar.BackColor = Color.Transparent;
-            };
-            BtnVoltar.Click += (sender, e) => {
-                user.Hide();
-                user.Close();
-                user.Dispose();
-            };
-
-            return lista;
-        }
-
-        public static void SetAlternateRowColors(ListView listView)
-        {
-            listView.OwnerDraw = true;
-            listView.DrawSubItem += Lista_DrawSubItem;
-        }
-
-        private static void Lista_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
-        {
-            if (e.ItemIndex > 0) 
+            Button buttonEdit = new Button();
+            buttonEdit.Location = new System.Drawing.Point(565, 490);
+            buttonEdit.Size = new System.Drawing.Size(180, 40);
+            buttonEdit.FlatStyle = FlatStyle.Flat;
+            buttonEdit.FlatAppearance.BorderSize = 0;
+            buttonEdit.ForeColor = System.Drawing.ColorTranslator.FromHtml("#3C4048");
+            buttonEdit.BackColor = System.Drawing.ColorTranslator.FromHtml("#EFF5F5");
+            buttonEdit.Text = "EDITAR";
+            buttonEdit.Font = new Font("Arial", 13, FontStyle.Bold);
+            buttonEdit.Click += (sender, e) =>
             {
-                if (e.ItemIndex % 2 == 1)
+                panel2.Controls.Clear();
+                string id = lista.SelectedItems[0].Text;
+                panel2.Controls.Add(UserView.Editar(id, panel2));
+            };
+            string imagePath8 = "src/assets/editar.png";
+            Image image8 = Image.FromFile(imagePath8);
+            image8 = new Bitmap(image8, new Size(26, 26));
+            buttonEdit.Image = image8;
+            buttonEdit.ImageAlign = ContentAlignment.MiddleLeft;
+            panel2.Controls.Add(buttonEdit);
+
+
+            Button buttonRemove = new Button();
+            buttonRemove.Location = new System.Drawing.Point(805, 490);
+            buttonRemove.Size = new System.Drawing.Size(180, 40);
+            buttonRemove.FlatStyle = FlatStyle.Flat;
+            buttonRemove.FlatAppearance.BorderSize = 0;
+            buttonRemove.ForeColor = System.Drawing.ColorTranslator.FromHtml("#3C4048");
+            buttonRemove.BackColor = System.Drawing.ColorTranslator.FromHtml("#EFF5F5");
+            buttonRemove.Text = "REMOVER";
+            buttonRemove.Font = new Font("Arial", 13, FontStyle.Bold);
+            buttonRemove.Click += (sender, e) =>
+            {
+                string id = lista.SelectedItems[0].Text;
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show("Deseja realmente excluir?", "Confirmação", buttons);
+                if (result == DialogResult.Yes)
                 {
-                    e.SubItem.BackColor = Color.LightGray;
+
+                    Controllers.UserController.Delete(Int32.Parse(id));
+                    panel2.Controls.Clear();
+                    panel2.Controls.Add(UserView.List(panel2));
                 }
                 else
                 {
-                    e.SubItem.BackColor = Color.White;
+                    panel2.Controls.Clear();
+                    panel2.Controls.Add(UserView.List(panel2));
                 }
-            }
 
-            e.DrawBackground();
-            e.DrawText();
+            };
+
+            string imagePath9 = "src/assets/remove.png";
+            Image image9 = Image.FromFile(imagePath9);
+            image9 = new Bitmap(image9, new Size(26, 26));
+            buttonRemove.Image = image9;
+            buttonRemove.ImageAlign = ContentAlignment.MiddleLeft;
+
+            panel2.Controls.Add(buttonRemove);
+            Button buttonAdd = Views.ButtonAED.btnAdicionar(UserView.Adicionar(panel2), panel2);
+
+            panel2.Controls.Add(buttonAdd);
+            return lista;
+
         }
 
+        public static Panel Editar(string id, Panel panel2)
+        {
+            List<Models.User> users = Controllers.UserController.show(id);
 
 
-        public static void Editar(int id) {
-            Models.User users = Controllers.UserController.show(id);
+            Panel editar = new Panel();
+            editar.Size = new System.Drawing.Size(900, 450);
+            editar.Location = new System.Drawing.Point(220, 0);
+            editar.BackColor = Color.White;
 
-            Form editar = new Form();
-            editar.Text = "Editar Produto";
-            editar.Size = new System.Drawing.Size(418, 366);
-            editar.StartPosition = FormStartPosition.CenterScreen;
-            editar.FormBorderStyle = FormBorderStyle.FixedSingle;
-            editar.MaximizeBox = false;
-            editar.MinimizeBox = false;
+             Label lblName = new Label();
+            lblName.Text = "Nome";
+            lblName.Location = new System.Drawing.Point(190, 50);
+            lblName.Size = new System.Drawing.Size(100, 20);
+            editar.Controls.Add(lblName);
 
-            Label lblNome = new Label();
-            lblNome.Text = "Nome";
-            lblNome.Top = 25;
-            lblNome.Left = 0;
-            lblNome.Size = new System.Drawing.Size(100, 25);
-
-            TextBox txtNome = new TextBox();
-            txtNome.Top = 25;
-            txtNome.Left = 100;
-            txtNome.Size = new System.Drawing.Size(100, 25);
-            txtNome.Text = users.Name;
-
+            TextBox txtName = new TextBox();
+            txtName.Location = new System.Drawing.Point(190, 70);
+            txtName.Size = new System.Drawing.Size(500, 40);
+            txtName.Text = users[0].Name;
+            editar.Controls.Add(txtName);
+            
             Label lblLogin = new Label();
             lblLogin.Text = "Login";
-            lblLogin.Top = 50;
-            lblLogin.Left = 0;
-            lblLogin.Size = new System.Drawing.Size(100, 25);
-
-            TextBox txtLogin = new TextBox();
-            txtLogin.Top = 50;
-            txtLogin.Left = 100;
-            txtLogin.Size = new System.Drawing.Size(100, 25);
-            txtLogin.Text = users.Login;
-
-            Label lblSenha = new Label();
-            lblSenha.Text = "Senha";
-            lblSenha.Top = 75;
-            lblSenha.Left = 0;
-            lblSenha.Size = new System.Drawing.Size(100, 25);
-
-            TextBox txtSenha = new TextBox();
-            txtSenha.Top = 75;
-            txtSenha.Left = 100;
-            txtSenha.Size = new System.Drawing.Size(100, 25);
-            txtSenha.Text = users.Password;
-
-            Button btnSalvar = new Button();
-            btnSalvar.Text = "Salvar";  
-            btnSalvar.Top = 100;
-            btnSalvar.Left = 0;
-            btnSalvar.Size = new System.Drawing.Size(100, 25);
-            btnSalvar.BackColor = Color.Transparent;
-            btnSalvar.ForeColor = Color.Black;
-            btnSalvar.FlatStyle = FlatStyle.Flat;
-            btnSalvar.MouseHover += (sender, e) => {
-                btnSalvar.BackColor = Color.LimeGreen;
-            };
-            btnSalvar.MouseLeave += (sender, e) => {
-                btnSalvar.BackColor = Color.Transparent;
-            };
-            btnSalvar.Click += (sender, e) => {
-                Controllers.UserController.Update(id, new Models.User(txtNome.Text, txtLogin.Text, txtSenha.Text));
-                List();
-            };
-
-
-            editar.Controls.Add(lblNome);
-            editar.Controls.Add(txtNome);
+            lblLogin.Location = new System.Drawing.Point(190, 120);
+            lblLogin.Size = new System.Drawing.Size(100, 20);
             editar.Controls.Add(lblLogin);
-            editar.Controls.Add(txtLogin);
-            editar.Controls.Add(lblSenha);
-            editar.Controls.Add(txtSenha);
-            editar.Controls.Add(btnSalvar);
-            editar.ShowDialog();
-        }
-            public static void Adicionar() {
-            int NextId = Controllers.UserController.nextId();
-
-            Form adicionar = new Form();
-            adicionar.Text = "Adicionar Usuario";
-            adicionar.Size = new System.Drawing.Size(325, 175);
-            adicionar.StartPosition = FormStartPosition.CenterScreen;
-            adicionar.FormBorderStyle = FormBorderStyle.FixedSingle;
-            adicionar.MaximizeBox = false;
-            adicionar.MinimizeBox = false;
-
-            Label lblId = new Label();
-            lblId.Text = "Id";
-            lblId.Top = 0;
-            lblId.Left = 0;
-            lblId.Size = new System.Drawing.Size(100, 25);
-
-            TextBox txtId = new TextBox();
-            txtId.Top = 0;
-            txtId.Left = 100;
-            txtId.Size = new System.Drawing.Size(50, 25);
-            txtId.Enabled = false;
-            txtId.Text = NextId.ToString();
-
-            Label lblNome = new Label();
-            lblNome.Text = "Nome";
-            lblNome.Top = 25;
-            lblNome.Left = 0;
-            lblNome.Size = new System.Drawing.Size(100, 25); 
-
-            TextBox txtNome = new TextBox();
-            txtNome.Top = 25;
-            txtNome.Left = 100;
-            txtNome.Size = new System.Drawing.Size(200, 25);
-
-            Label lblLogin = new Label();
-            lblLogin.Text = "Login";
-            lblLogin.Top = 50;
-            lblLogin.Left = 0;
-            lblLogin.Size = new System.Drawing.Size(100, 25);
 
             TextBox txtLogin = new TextBox();
-            txtLogin.Top = 50;
-            txtLogin.Left = 100;
-            txtLogin.Size = new System.Drawing.Size(200, 25);
+            txtLogin.Location = new System.Drawing.Point(190, 140);
+            txtLogin.Size = new System.Drawing.Size(500, 40);
+            txtLogin.Text = users[0].Login;
+            editar.Controls.Add(txtLogin);
 
             Label lblSenha = new Label();
             lblSenha.Text = "Senha";
-            lblSenha.Top = 75;
-            lblSenha.Left = 0;
-            lblSenha.Size = new System.Drawing.Size(100, 25);
+            lblSenha.Location = new System.Drawing.Point(190, 190);
+            lblSenha.Size = new System.Drawing.Size(100, 20);
+            editar.Controls.Add(lblSenha);
 
             TextBox txtSenha = new TextBox();
-            txtSenha.Top = 75;
-            txtSenha.Left = 100;
-            txtSenha.Size = new System.Drawing.Size(200, 25);
+            txtSenha.Location = new System.Drawing.Point(190, 210);
+            txtSenha.Size = new System.Drawing.Size(500, 40);
+            txtSenha.Text = users[0].Password;
+            editar.Controls.Add(txtSenha);
 
             Button btnSalvar = new Button();
-            btnSalvar.Text = "Salvar";
-            btnSalvar.Top = 105;
-            btnSalvar.Left = 50;
-            btnSalvar.Size = new System.Drawing.Size(100, 25);
-            btnSalvar.BackColor = Color.Transparent;
-            btnSalvar.ForeColor = Color.Black;
-            btnSalvar.FlatStyle = FlatStyle.Flat;
-            btnSalvar.MouseLeave += (sender, e) => {
-                btnSalvar.BackColor = Color.Transparent;
-            };
-            btnSalvar.Click += (sender, e) => {
-                Controllers.UserController.store(new Models.User(txtNome.Text, txtLogin.Text, txtSenha.Text));
-                List();
-            };
+            btnSalvar.Text = "Alterar";
+            btnSalvar.Location = new System.Drawing.Point(370, 270);
+            btnSalvar.Size = new System.Drawing.Size(100, 20);
 
-            Button btnVoltar = new Button();
-            btnVoltar.Text = "Cancelar";
-            btnVoltar.Top = 105;
-            btnVoltar.Left = 152;
-            btnVoltar.Size = new System.Drawing.Size(100, 25);
-            btnVoltar.BackColor = Color.Transparent;
-            btnVoltar.ForeColor = Color.Black;
-            btnVoltar.FlatStyle = FlatStyle.Flat;
-            btnSalvar.Font = new Font("Arial", 12, FontStyle.Bold);
-            btnVoltar.MouseLeave += (sender, e) => {
-                btnVoltar.BackColor = Color.Transparent;
+            btnSalvar.Click += (sender, e) =>
+            {
+                Controllers.UserController.Update(Int32.Parse(id), new Models.User(txtName.Text, txtLogin.Text, txtSenha.Text));
+                panel2.Controls.Clear();
+                panel2.Controls.Add(UserView.List(panel2));
+                Button buttonAdd = Views.ButtonAED.btnAdicionar(UserView.Adicionar(panel2), panel2);
+                Button buttonRemove = Views.ButtonAED.btnDeletar(UserView.Adicionar(panel2), panel2);
+                panel2.Controls.Add(buttonAdd);
+                panel2.Controls.Add(buttonRemove);
             };
-            btnVoltar.Click += (sender, e) => {
-                adicionar.Close();
-            };
+            editar.Controls.Add(btnSalvar);
+            
+            return editar;
+        }
+        public static Panel Adicionar(Panel panel)
+        {
+            Panel form = new Panel();
+            form.Size = new System.Drawing.Size(900, 450);
+            form.Location = new System.Drawing.Point(220, 0);
+            form.BackColor = System.Drawing.Color.White;
 
-            adicionar.Controls.Add(lblId);
-            adicionar.Controls.Add(txtId);
-            adicionar.Controls.Add(lblNome);
-            adicionar.Controls.Add(txtNome);
-            adicionar.Controls.Add(lblLogin);
-            adicionar.Controls.Add(txtLogin);
-            adicionar.Controls.Add(lblSenha);
-            adicionar.Controls.Add(txtSenha);
-            adicionar.Controls.Add(btnSalvar);
-            adicionar.Controls.Add(btnVoltar);
-            adicionar.ShowDialog();
+            Label lblName = new Label();
+            lblName.Text = "Nome";
+            lblName.Location = new System.Drawing.Point(190, 50);
+            lblName.Size = new System.Drawing.Size(100, 20);
+            form.Controls.Add(lblName);
+
+            TextBox txtName = new TextBox();
+            txtName.Location = new System.Drawing.Point(190, 70);
+            txtName.Size = new System.Drawing.Size(500, 40);
+            form.Controls.Add(txtName);
+
+
+            Label lblLogin = new Label();
+            lblLogin.Text = "Login";
+            lblLogin.Location = new System.Drawing.Point(190, 120);
+            lblLogin.Size = new System.Drawing.Size(100, 20);
+            form.Controls.Add(lblLogin);
+
+            TextBox txtLogin = new TextBox();
+            txtLogin.Location = new System.Drawing.Point(190, 140);
+            txtLogin.Size = new System.Drawing.Size(500, 40);
+            form.Controls.Add(txtLogin);
+
+            Label lblSenha = new Label();
+            lblSenha.Text = "Senha";
+            lblSenha.Location = new System.Drawing.Point(190, 190);
+            lblSenha.Size = new System.Drawing.Size(100, 20);
+            form.Controls.Add(lblSenha);
+
+            TextBox txtSenha = new TextBox();
+            txtSenha.Location = new System.Drawing.Point(190, 210);
+            txtSenha.Size = new System.Drawing.Size(500, 40);
+            form.Controls.Add(txtSenha);
+
+
+            Button btnSalvar = new Button();
+            btnSalvar.Text = "Adicionar";
+            btnSalvar.Location = new System.Drawing.Point(370, 270);
+            btnSalvar.Size = new System.Drawing.Size(100, 20);
+            btnSalvar.Click += (sender, e) =>
+            {
+                Controllers.UserController.store(new Models.User(txtName.Text, txtLogin.Text, txtSenha.Text));
+                panel.Controls.Clear();
+                panel.Controls.Add(UserView.List(panel));
+                Button buttonAdd = Views.ButtonAED.btnAdicionar(UserView.Adicionar(panel), panel);
+                Button buttonRemove = Views.ButtonAED.btnDeletar(UserView.Adicionar(panel), panel);
+
+                panel.Controls.Add(buttonAdd);
+                panel.Controls.Add(buttonRemove);
+            };
+            form.Controls.Add(btnSalvar);
+
+            return form;
         }
 
-        public static void Remover(int id) {
-            Form remover = new Form();
-            remover.Text = "Remover";
-            remover.Size = new System.Drawing.Size(418, 366);
-            remover.StartPosition = FormStartPosition.CenterScreen;
-            remover.FormBorderStyle = FormBorderStyle.FixedSingle;
-            remover.MaximizeBox = false;
-            remover.MinimizeBox = false;
-
-            Label lblNome = new Label();
-            lblNome.Text = "Nome";
-            lblNome.Top = 25;
-            lblNome.Left = 0;
-            lblNome.Size = new System.Drawing.Size(100, 25);
-
-            TextBox txtNome = new TextBox();
-            txtNome.Top = 25;
-            txtNome.Left = 100;
-            txtNome.Size = new System.Drawing.Size(100, 25);
-            txtNome.Text = Controllers.UserController.show(id).Name;
-            txtNome.Enabled = false;
-
-            Button btnRemover = new Button();
-            btnRemover.Text = "Remover";
-            btnRemover.Top = 75;
-            btnRemover.Left = 0;
-            btnRemover.Size = new System.Drawing.Size(100, 25);
-            btnRemover.Click += (sender, e) => {
-                Controllers.UserController.Delete(id);
-                remover.Hide();
-                remover.Close();
-                remover.Dispose();
-                List();   
-            };
-
-            Button btnVoltar = new Button();
-            btnVoltar.Text = "Cancelar";
-            btnVoltar.Top = 75;
-            btnVoltar.Left = 100;
-            btnVoltar.Size = new System.Drawing.Size(100, 25);
-            btnVoltar.Click += (sender, e) => {
-                if(isOpen){
-                    remover.Close();
-                    user.Close();
-                    user.Dispose();
-                }    
-                List();
-            };
-            remover.Controls.Add(lblNome);
-            remover.Controls.Add(txtNome);
-            remover.Controls.Add(btnRemover);
-            remover.Controls.Add(btnVoltar);
-            remover.ShowDialog();
-        }
     }
 }
 

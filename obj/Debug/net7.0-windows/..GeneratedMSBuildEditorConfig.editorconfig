@@ -15,9 +15,17 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = .
 build_property.RootNamespace = .
+<<<<<<< HEAD
 build_property.ProjectDir = c:\Users\vitor\OneDrive\Documentos\event_management_app\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = c:\Users\vitor\OneDrive\Documentos\event_management_app
+=======
+build_property.ProjectDir = C:\Users\Rafael\Documents\Senac\event_management_app\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Rafael\Documents\Senac\event_management_app
+>>>>>>> 17a2477261f7f1f765704c69f5ec6ac0d509b3de
 build_property._RazorSourceGeneratorDebug = 
