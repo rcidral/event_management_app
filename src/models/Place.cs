@@ -94,5 +94,20 @@ namespace Models
                 throw e;
             }
         }
+
+        public static Place getPlaceByName(string name)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Places.Where(place => place.Name == name).FirstOrDefault();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

@@ -49,5 +49,17 @@ using Models;
                     Models.Type.delete(Id);
                 }
             }
+
+            public static Models.Type getByDescription(string description)
+            {
+                if (!String.IsNullOrEmpty(description))
+                {
+                    return Models.Type.getByDescription(description);
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
    }

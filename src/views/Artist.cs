@@ -40,9 +40,24 @@ namespace Views
             buttonEdit.Font = new Font("Arial", 13, FontStyle.Bold);
             buttonEdit.Click += (sender, e) =>
             {
-                panel2.Controls.Clear();
-                string id = lista.SelectedItems[0].Text;
-                panel2.Controls.Add(Artist.Edit(id, panel2));
+                try
+                {
+                    panel2.Controls.Clear();
+                    string id = lista.SelectedItems[0].Text;
+                    panel2.Controls.Add(Artist.Edit(id, panel2));
+                }
+                catch (System.Exception)
+                {
+                    MessageBox.Show("Selecione um artista para Editar");
+                    panel2.Controls.Clear();
+                    panel2.Controls.Add(Views.Artist.List(panel2));
+
+                    Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Artist.Add(panel2), panel2);
+                    Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Artist.Add(panel2), panel2);
+
+                    panel2.Controls.Add(buttonAdd);
+                    panel2.Controls.Add(buttonRemove);
+                }
             };
 
 
@@ -64,19 +79,28 @@ namespace Views
             buttonRemove.Font = new Font("Arial", 13, FontStyle.Bold);
             buttonRemove.Click += (sender, e) =>
             {
-                string id = lista.SelectedItems[0].Text;
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Deseja realmente excluir?", "Confirmação", buttons);
-                if (result == DialogResult.Yes){
+                try
+                {
+                    string id = lista.SelectedItems[0].Text;
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result = MessageBox.Show("Deseja realmente excluir?", "Confirmação", buttons);
+                    if (result == DialogResult.Yes)
+                    {
 
-                Controllers.Artist.delete(id);
-                panel2.Controls.Clear();
-                panel2.Controls.Add(Views.Artist.List(panel2));
-                } else {
-                    panel2.Controls.Clear();
-                    panel2.Controls.Add(Views.Artist.List(panel2));
+                        Controllers.Artist.delete(id);
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(Views.Artist.List(panel2));
+                    }
+                    else
+                    {
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(Views.Artist.List(panel2));
+                    }
                 }
-
+                catch (Exception)
+                {
+                    MessageBox.Show("Selecione um item para excluir");
+                }
             };
 
             string imagePath9 = "src/assets/remove.png";
@@ -116,16 +140,23 @@ namespace Views
             btnAdd.Size = new System.Drawing.Size(100, 20);
             btnAdd.Click += (sender, e) =>
             {
-                Controllers.Artist.store(new Models.Artist(txtName.Text));
-                panel.Controls.Clear();
-                panel.Controls.Add(Views.Artist.List(panel));
+                if (txtName.Text != "")
+                {
+                    Controllers.Artist.store(new Models.Artist(txtName.Text));
+                    panel.Controls.Clear();
+                    panel.Controls.Add(Views.Artist.List(panel));
 
-                Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Artist.Add(panel), panel);
-                Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Artist.Add(panel), panel);
+                    Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Artist.Add(panel), panel);
+                    Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Artist.Add(panel), panel);
 
 
-                panel.Controls.Add(buttonAdd);
-                panel.Controls.Add(buttonRemove);
+                    panel.Controls.Add(buttonAdd);
+                    panel.Controls.Add(buttonRemove);
+                }
+                else
+                {
+                    MessageBox.Show("Preencha todos os campos");
+                }
             };
             form.Controls.Add(btnAdd);
 
@@ -155,7 +186,7 @@ namespace Views
             Button btnAdd = new Button();
             btnAdd.Text = "Alterar";
             btnAdd.Location = new System.Drawing.Point(400, 150);
-            btnAdd.Size     = new System.Drawing.Size(100, 20);
+            btnAdd.Size = new System.Drawing.Size(100, 20);
             btnAdd.Click += (sender, e) =>
             {
                 Controllers.Artist.update(id, new Models.Artist(txtName.Text));

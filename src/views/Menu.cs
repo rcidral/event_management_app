@@ -47,6 +47,17 @@ namespace Views
             button1.ForeColor = Color.White;
             button1.Text = "EVENTO";
             button1.TextAlign = ContentAlignment.MiddleCenter;
+            /* button1.Click += (sender, e) =>
+             {
+                 panel2.Controls.Clear();
+                 panel2.Controls.Add(Views.Event.List(panel2));
+
+                 Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Event.Add(panel2), panel2);
+                 Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Event.Add(panel2), panel2);
+
+                 panel2.Controls.Add(buttonAdd);
+                 panel2.Controls.Add(buttonRemove);
+             };*/
 
 
             string imagePath = "src/assets/icons8-evento-24.png";
@@ -62,6 +73,17 @@ namespace Views
             button2.ForeColor = Color.White;
             button2.Text = "PATRIOCINADOR";
             button2.TextAlign = ContentAlignment.MiddleCenter;
+            button2.Click += (sender, e) =>
+            {
+                panel2.Controls.Clear();
+                panel2.Controls.Add(Views.Sponsor.List(panel2));
+
+                Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Sponsor.Add(panel2), panel2);
+                Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Sponsor.Add(panel2), panel2);
+
+                panel2.Controls.Add(buttonAdd);
+                panel2.Controls.Add(buttonRemove);
+            };
 
             string imagePath2 = "src/assets/patri.png";
             Image image2 = Image.FromFile(imagePath2);
@@ -173,7 +195,7 @@ namespace Views
                 panel2.Controls.Add(buttonAdd);
                 panel2.Controls.Add(buttonRemove);
             };
-            
+
             Label lineLabel = new Label();
             lineLabel.BackColor = Color.Gray;
             lineLabel.Location = new System.Drawing.Point(15, 470);
@@ -191,6 +213,7 @@ namespace Views
             {
                 menu.Close();
                 menu.Hide();
+                Views.Login.Show();
             };
 
 

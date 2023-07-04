@@ -57,5 +57,10 @@ using Models;
                 }
                 Models.Place.delete(id);
             }
+
+            public static Place getPlaceByName(string name)
+            {
+                return Models.Place.getPlaceByName(name);
+            }
         }
     }

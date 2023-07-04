@@ -98,5 +98,14 @@ namespace Controllers
             }
         }
 
+        public static User getUserByName(string name)     
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new Exception("Name cannot be empty");
+            }
+            return Models.User.getUserByName(name);
+        }
+
     }
 }

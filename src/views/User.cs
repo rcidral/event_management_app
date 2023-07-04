@@ -24,7 +24,7 @@ namespace Views
             lista.GridLines = true;
             lista.MultiSelect = false;
             lista.HideSelection = false;
-        
+
 
             IEnumerable<Models.User> usuarioList = Controllers.UserController.Index();
             foreach (Models.User usuario in usuarioList)
@@ -47,10 +47,27 @@ namespace Views
             buttonEdit.Font = new Font("Arial", 13, FontStyle.Bold);
             buttonEdit.Click += (sender, e) =>
             {
-                panel2.Controls.Clear();
-                string id = lista.SelectedItems[0].Text;
-                panel2.Controls.Add(UserView.Editar(id, panel2));
+                try
+                {
+                    panel2.Controls.Clear();
+                    string id = lista.SelectedItems[0].Text;
+                    panel2.Controls.Add(UserView.Editar(id, panel2));
+                }
+                catch (System.Exception)
+                {
+
+                    MessageBox.Show("Selecione um Usuario para Editar");
+                    panel2.Controls.Clear();
+                    panel2.Controls.Add(Views.UserView.List(panel2));
+
+                    Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.UserView.Adicionar(panel2), panel2);
+                    Button buttonRemove = Views.ButtonAED.btnDeletar(Views.UserView.Adicionar(panel2), panel2);
+
+                    panel2.Controls.Add(buttonAdd);
+                    panel2.Controls.Add(buttonRemove);
+                }
             };
+
             string imagePath8 = "src/assets/editar.png";
             Image image8 = Image.FromFile(imagePath8);
             image8 = new Bitmap(image8, new Size(26, 26));
@@ -70,21 +87,31 @@ namespace Views
             buttonRemove.Font = new Font("Arial", 13, FontStyle.Bold);
             buttonRemove.Click += (sender, e) =>
             {
-                string id = lista.SelectedItems[0].Text;
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Deseja realmente excluir?", "Confirmação", buttons);
-                if (result == DialogResult.Yes)
+                try
+                {
+                    string id = lista.SelectedItems[0].Text;
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result = MessageBox.Show("Deseja realmente excluir?", "Confirmação", buttons);
+                    if (result == DialogResult.Yes)
+                    {
+
+                        Controllers.UserController.Delete(Int32.Parse(id));
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(UserView.List(panel2));
+                    }
+                    else
+                    {
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(UserView.List(panel2));
+                    }
+
+                }
+                catch (System.Exception)
                 {
 
-                    Controllers.UserController.Delete(Int32.Parse(id));
-                    panel2.Controls.Clear();
-                    panel2.Controls.Add(UserView.List(panel2));
+                    MessageBox.Show("Selecione um Usuario para Remover");
                 }
-                else
-                {
-                    panel2.Controls.Clear();
-                    panel2.Controls.Add(UserView.List(panel2));
-                }
+
 
             };
 
@@ -112,7 +139,7 @@ namespace Views
             editar.Location = new System.Drawing.Point(220, 0);
             editar.BackColor = Color.White;
 
-             Label lblName = new Label();
+            Label lblName = new Label();
             lblName.Text = "Nome";
             lblName.Location = new System.Drawing.Point(190, 50);
             lblName.Size = new System.Drawing.Size(100, 20);
@@ -123,7 +150,7 @@ namespace Views
             txtName.Size = new System.Drawing.Size(500, 40);
             txtName.Text = users[0].Name;
             editar.Controls.Add(txtName);
-            
+
             Label lblLogin = new Label();
             lblLogin.Text = "Login";
             lblLogin.Location = new System.Drawing.Point(190, 120);
@@ -164,7 +191,7 @@ namespace Views
                 panel2.Controls.Add(buttonRemove);
             };
             editar.Controls.Add(btnSalvar);
-            
+
             return editar;
         }
         public static Panel Adicionar(Panel panel)
@@ -215,20 +242,27 @@ namespace Views
             btnSalvar.Size = new System.Drawing.Size(100, 20);
             btnSalvar.Click += (sender, e) =>
             {
-                Controllers.UserController.store(new Models.User(txtName.Text, txtLogin.Text, txtSenha.Text));
-                panel.Controls.Clear();
-                panel.Controls.Add(UserView.List(panel));
-                Button buttonAdd = Views.ButtonAED.btnAdicionar(UserView.Adicionar(panel), panel);
-                Button buttonRemove = Views.ButtonAED.btnDeletar(UserView.Adicionar(panel), panel);
+                if (txtName.Text != "" && txtLogin.Text != "" && txtSenha.Text != "")
+                {
+                    Controllers.UserController.store(new Models.User(txtName.Text, txtLogin.Text, txtSenha.Text));
+                    panel.Controls.Clear();
+                    panel.Controls.Add(UserView.List(panel));
+                    Button buttonAdd = Views.ButtonAED.btnAdicionar(UserView.Adicionar(panel), panel);
+                    Button buttonRemove = Views.ButtonAED.btnDeletar(UserView.Adicionar(panel), panel);
 
-                panel.Controls.Add(buttonAdd);
-                panel.Controls.Add(buttonRemove);
+                    panel.Controls.Add(buttonAdd);
+                    panel.Controls.Add(buttonRemove);
+                }
+                else
+                {
+                    MessageBox.Show("Preencha todos os campos");
+                }
             };
             form.Controls.Add(btnSalvar);
 
             return form;
         }
-
     }
 }
+
 

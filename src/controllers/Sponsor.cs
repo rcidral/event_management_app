@@ -25,7 +25,7 @@ namespace Controllers
             return Models.Sponsor.index();
         }
 
-        public static Sponsor show(string Id)
+        public static List<Sponsor> show(string Id)
         {
             try
             {
@@ -61,6 +61,15 @@ namespace Controllers
                 throw new Exception("Id not found");
             }
             Models.Sponsor.delete(id);
+        }
+
+        public static Sponsor getByName(string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new Exception("Name cannot be empty");
+            }
+            return Models.Sponsor.getByName(name);
         }
     }
 }

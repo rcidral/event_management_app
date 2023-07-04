@@ -68,5 +68,18 @@ namespace Models
             }
         }
 
+        public static Models.Type getByDescription(string description)
+        {
+            try{
+                using(Context context = new Context())
+                {
+                    return context.Types.Where(type => type.Description == description).FirstOrDefault();
+                }
+            }catch(System.Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

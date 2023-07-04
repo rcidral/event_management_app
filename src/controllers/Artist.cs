@@ -53,5 +53,17 @@ namespace Controllers
                 Models.Artist.delete(Id);
             }
         }
+
+        public static Models.Artist getByName(string name)
+        {
+            if (!String.IsNullOrEmpty(name))
+            {
+                return Models.Artist.getByName(name);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

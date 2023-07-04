@@ -39,13 +39,13 @@ namespace Models
                 throw e;
             }
         }
-        public static Sponsor show(int id)
+        public static List<Sponsor> show(int id)
         {
             try
             {
                 using (Context context = new Context())
                 {
-                    return context.Sponsors.Find(id);
+                    return context.Sponsors.Where(sponsor => sponsor.Id == id).ToList();
                 }
             }
             catch (System.Exception e)
@@ -79,6 +79,20 @@ namespace Models
                     Sponsor sponsor = context.Sponsors.Find(id);
                     context.Sponsors.Remove(sponsor);
                     context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static Sponsor getByName(string name) {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Sponsors.Where(sponsor => sponsor.Name == name).FirstOrDefault();
                 }
             }
             catch (System.Exception e)

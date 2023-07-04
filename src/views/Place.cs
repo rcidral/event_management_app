@@ -42,11 +42,25 @@ namespace Views
             buttonEdit.Font = new Font("Arial", 13, FontStyle.Bold);
             buttonEdit.Click += (sender, e) =>
             {
-                panel2.Controls.Clear();
-                string id = lista.SelectedItems[0].Text;
-                panel2.Controls.Add(Place.Edit(id, panel2));
-            };
+                try
+                {
+                    panel2.Controls.Clear();
+                    string id = lista.SelectedItems[0].Text;
+                    panel2.Controls.Add(Place.Edit(id, panel2));
+                }
+                catch (System.Exception)
+                {
+                    MessageBox.Show("Selecione um local para Editar");
+                    panel2.Controls.Clear();
+                    panel2.Controls.Add(Views.Place.List(panel2));
 
+                    Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Place.Add(panel2), panel2);
+                    Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Place.Add(panel2), panel2);
+
+                    panel2.Controls.Add(buttonAdd);
+                    panel2.Controls.Add(buttonRemove);
+                }
+            };
 
             string imagePath8 = "src/assets/editar.png";
             Image image8 = Image.FromFile(imagePath8);
@@ -66,19 +80,28 @@ namespace Views
             buttonRemove.Font = new Font("Arial", 13, FontStyle.Bold);
             buttonRemove.Click += (sender, e) =>
             {
-                string id = lista.SelectedItems[0].Text;
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show("Deseja realmente excluir?", "Confirmação", buttons);
-                if (result == DialogResult.Yes){
+                try
+                {
+                    string id = lista.SelectedItems[0].Text;
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result = MessageBox.Show("Deseja realmente excluir?", "Confirmação", buttons);
+                    if (result == DialogResult.Yes)
+                    {
 
-                Controllers.PlaceControllers.delete(Int32.Parse(id));
-                panel2.Controls.Clear();
-                panel2.Controls.Add(Views.Place.List(panel2));
-                } else {
-                    panel2.Controls.Clear();
-                    panel2.Controls.Add(Views.Place.List(panel2));
+                        Controllers.PlaceControllers.delete(Int32.Parse(id));
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(Views.Place.List(panel2));
+                    }
+                    else
+                    {
+                        panel2.Controls.Clear();
+                        panel2.Controls.Add(Views.Place.List(panel2));
+                    }
                 }
-
+                catch (Exception)
+                {
+                    MessageBox.Show("Selecione um Local para excluir");
+                }
             };
 
             string imagePath9 = "src/assets/remove.png";
@@ -130,16 +153,21 @@ namespace Views
             btnAdd.Size = new System.Drawing.Size(100, 20);
             btnAdd.Click += (sender, e) =>
             {
-                Controllers.PlaceControllers.store(new Models.Place(txtName.Text, txtAdress.Text));
-                panel.Controls.Clear();
-                panel.Controls.Add(Views.Place.List(panel));
+                if (txtName.Text != "" && txtAdress.Text != "")
+                {
+                    Controllers.PlaceControllers.store(new Models.Place(txtName.Text, txtAdress.Text));
+                    panel.Controls.Clear();
+                    panel.Controls.Add(Views.Place.List(panel));
 
-                Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Place.Add(panel), panel);
-                Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Place.Add(panel), panel);
+                    Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Place.Add(panel), panel);
+                    Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Place.Add(panel), panel);
 
-
-                panel.Controls.Add(buttonAdd);
-                panel.Controls.Add(buttonRemove);
+                    panel.Controls.Add(buttonAdd);
+                }
+                else
+                {
+                    MessageBox.Show("Preencha todos os campos");
+                }
             };
             form.Controls.Add(btnAdd);
 

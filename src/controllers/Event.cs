@@ -7,12 +7,12 @@ namespace Controllers
     public class EventControllers
     {
 
-        public static void store(Event event_, int artistId, int sponsorId, Values values)
+        public static void store(DateOnly date, string description, string user, string place, string type, string artistId, string sponsorId, Double values)
         {
-            if (event_ != null || artistId != null || sponsorId != null || values != null)
-            {
-                Models.Event.store(event_, artistId, sponsorId, values);
-            }
+            Models.Event.store(new Models.Event(date, description, 
+                Controllers.UserController.getUserByName(user).Id, 
+                Controllers.PlaceControllers.getPlaceByName(place).Id, 
+                Controllers.TypeControllers.getByDescription(type).Id), artistId, sponsorId, values);
         }
 
 
@@ -21,34 +21,25 @@ namespace Controllers
             return Models.Event.index();
         }
 
-        public static Models.Event show(int id)
-        {
-            if (id != null)
-            {
-                return Models.Event.show(id);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public static void update(string Id, Models.Event event_, int artistId, int sponsorId, Models.Values values)
+        public static List<Models.Event> show(int id)
         {
             try
             {
-                int id = Int32.Parse(Id);
-                if (id != null || event_ != null || artistId != null || sponsorId != null || values != null)
-                {
-                    Models.Event.update(id, event_, artistId, sponsorId, values);
-                }
-
+                return Models.Event.show(id);
             }
             catch (System.Exception e)
             {
                 throw e;
             }
         }
+
+       /* public static void update(DateOnly date, string description, string user, string place, string type, string artistId, string sponsorId, Double values)
+        {
+            Models.Event.update(new Models.Event(date, description, 
+                Controllers.UserController.getUserByName(user).Id, 
+                Controllers.PlaceControllers.getPlaceByName(place).Id, 
+                Controllers.TypeControllers.getByDescription(type).Id), artistId, sponsorId, values);
+        }*/
 
         public static void delete(int id)
         {

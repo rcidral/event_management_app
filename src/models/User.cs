@@ -129,5 +129,20 @@ namespace Models
                 throw e;
             }
         }
+
+        public static User getUserByName(string name)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Users.Where(user => user.Name == name).FirstOrDefault();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }        
 }
