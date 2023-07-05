@@ -60,9 +60,13 @@ namespace Views
             btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.ColorTranslator.FromHtml("#EFF5F9");
             btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.ColorTranslator.FromHtml("#EFF5F9");
             btnLogin.Cursor = Cursors.Hand;
-
             btnLogin.Click += (sender, e) =>
             {
+                if (txtLogin.Text == "" || txtPassword.Text == "")
+                {
+                    MessageBox.Show("Preencha os campos para entrar");
+                }
+                else
                 if (Controllers.UserController.login(txtLogin.Text, txtPassword.Text))
                 {
                     form.Hide();
@@ -73,6 +77,7 @@ namespace Views
                 {
                     MessageBox.Show("Usuário ou senha incorretos");
                 }
+                
             };
 
             panel2.Controls.Add(lblLogin);

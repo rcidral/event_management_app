@@ -77,7 +77,7 @@ namespace Controllers
         {
             if (String.IsNullOrEmpty(login))
             {
-                throw new Exception("Login cannot be empty");
+                MessageBox.Show("Login cannot be empty");
             }
             if (String.IsNullOrEmpty(password))
             {
