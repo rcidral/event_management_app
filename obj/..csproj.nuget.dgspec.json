@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\..csproj": {}
+    "C:\\Users\\ricid\\www\\senac\\event_management_app\\..csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\..csproj": {
+    "C:\\Users\\ricid\\www\\senac\\event_management_app\\..csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\..csproj",
+        "projectUniqueName": "C:\\Users\\ricid\\www\\senac\\event_management_app\\..csproj",
         "projectName": ".",
-        "projectPath": "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\..csproj",
-        "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rafael\\Documents\\Senac\\event_management_app\\obj\\",
+        "projectPath": "C:\\Users\\ricid\\www\\senac\\event_management_app\\..csproj",
+        "packagesPath": "C:\\Users\\ricid\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ricid\\www\\senac\\event_management_app\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ricid\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0-windows"
         ],
         "sources": {
+          "C:\\Program Files\\dotnet\\sdk\\7.0.305\\Sdks\\Microsoft.NET.Sdk.WEB\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -65,6 +66,16 @@
             "Pomelo.EntityFrameworkCore.MySql.Design": {
               "target": "Package",
               "version": "[1.1.2, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.2, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.5, )"
             }
           },
           "imports": [
@@ -89,7 +100,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.107\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.305\\RuntimeIdentifierGraph.json"
         }
       }
     }
