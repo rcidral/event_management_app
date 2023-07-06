@@ -86,5 +86,19 @@ namespace Models
                 throw e;
             }
         }
+
+        public static Sponsor getByName(string name) {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Sponsors.Where(sponsor => sponsor.Name == name).FirstOrDefault();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

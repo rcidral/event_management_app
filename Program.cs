@@ -1,4 +1,4 @@
-using Test;
+using Views;
 
 namespace Program
 {
@@ -6,7 +6,7 @@ namespace Program
     {
         public static void Main(string[] args)
         {
-
+            Views.Login.Show();
         }
     }
 }

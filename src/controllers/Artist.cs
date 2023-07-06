@@ -7,66 +7,63 @@ namespace Controllers
     public class Artist
     {
 
-        public void store(string name)
+        public static void store(Models.Artist artist)
         {
-            if (String.IsNullOrEmpty(name))
+            if (!String.IsNullOrEmpty(artist.Name))
             {
-                throw new Exception("Name cannot be empty");
+                Models.Artist.store(artist);
             }
+           
+             
+        }
+       
 
-            return Models.Artist.store(name);
+        public static List<Models.Artist> index()
+        {
+            return Models.Artist.index();
         }
 
-        public List<Models.Artist> index()
+        public static List<Models.Artist> show(int id)
         {
-            try
+            if (id != null)
             {
-                return Models.Artist.index();
+                return Models.Artist.show(id);
             }
-            catch (System.Exception e)
+            else
             {
-                throw e;
-            }
-        }
-
-        public List<Models.Artist> show(int id)
-        {
-            Artist artist = (
-                from Artist in Artist.index()
-                where Artist.id == id
-                select Artist
-            ).First();
-
-            if (artist == null)
-            {
-                throw new Exception("Artist not found");
-            }
-
-            return artist;
-        }
-
-        public void update(int id, Models.Artist artist)
-        {
-            Artist artist = Models.Artist.show(id);
-
-            if (!String.IsNullOrEmpty(artist.name))
-            {
-                artist.name = artist.name;
+                return null;
             }
         }
 
-        public static delete(int id)
+        public static void update(string id, Models.Artist artist)
         {
-            Artist artist = Artist.show(id);
-
-            if (artist == null)
+            
+            if (artist.Id != null || String.IsNullOrEmpty(artist.Name) )
             {
-                throw new Exception("Artist not found");
+               Models.Artist.update(Int32.Parse(id), artist);
+            }  
+        }
+
+        public static void delete(string id)
+        {
+            int Id = Convert.ToInt32(id);
+
+            if (Id != null)
+            {
+                Models.Artist.delete(Id);
             }
+        }
 
-            Models.Artist.delete(id);
-
-            return artist;
+        public static Models.Artist getByName(string name)
+        {
+            if (!String.IsNullOrEmpty(name))
+            {
+                return Models.Artist.getByName(name);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -23,26 +23,26 @@ namespace Models
             TypeId = typeId;
         }
 
-        public static void store(Event event_, int artistId, int sponsorId, Values values)
+        public static void store(Event event_, string artistId, string sponsorId, double values)
         {
             try
             {
                 using (Context context = new Context())
                 {
-                    Artist artist = context.Artists.Find(artistId);
+                    Artist artist = Artist.getByName(artistId);
                     if (artist == null)
                     {
                         throw new System.Exception("Artist not found");
                     }
-                    Sponsor sponsor = context.Sponsors.Find(sponsorId);
+                    Sponsor sponsor = Sponsor.getByName(sponsorId);
                     if (sponsor == null)
                     {
                         throw new System.Exception("Sponsor not found");
                     }
                     context.Events.Add(event_);
                     context.SaveChanges();
-                    ArtistEvent.store(new ArtistEvent(event_.Id, artistId));
-                    Values.store(new Values(values.Date, values.Value, sponsorId, event_.Id));
+                    ArtistEvent.store(new ArtistEvent(event_.Id, artist.Id));
+                    Values.store(new Values(event_.Date, values, sponsor.Id, event_.Id));
                 }
             }
             catch (System.Exception e)
@@ -80,6 +80,7 @@ namespace Models
                 throw e;
             }
         }
+
 
         public static void update(int id, Event event_, int artistId, int sponsorId, Values values)
         {

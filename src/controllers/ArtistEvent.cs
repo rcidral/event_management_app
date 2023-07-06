@@ -2,76 +2,36 @@ using System;
 using System.Collections.Generic;
 using Models;
 
-namespace Controllers{
+ namespace Controllers
+ {
     
-    public class ArtistEvent
-    {
-        public void store(int artistId, int eventId)
-        {
-            if (artistId == null)
-            {
-                throw new Exception("Artist cannot be empty");
-            }
-            if (eventId == null)
-            {
-                throw new Exception("Event cannot be empty");
-            }
-            return new ArtistEvent(artistId, eventId);
-
-        }
-
-        public List<Models.ArtistEvent> index()
-        {
-            try
-            {
-                return Models.ArtistEvent.index();
-            }
-
-            catch (System.Exception e)
-            {
-                throw e;
-            }
-        }
-
-        public List<Models.ArtistEvent> show(int id)
-        {
-            ArtistEvent artistEvent = (
-                from ArtistEvent in ArtistEvent.index()
-                where ArtistEvent.id == id
-                select ArtistEvent
-            ).First();
-
-            if (artistEvent == null)
-            {
-                throw new Exception("Artist not found");
-            }
-
-            return artistEvent;
-        }
-
-        public static update(int id, Models.ArtistEvent artistEvent)
-        {
-            ArtistEvent artistEvent = Models.ArtistEvent.show(id);
-
-            if (!String.IsNullOrEmpty(artistEvent.artistId))
-            {
-                artistEvent.artistId = artistEvent.artistId;
-            }
-            if (!String.IsNullOrEmpty(artistEvent.eventId))
-            {
-                artistEvent.eventId = artistEvent.eventId;
-            }
-
-            return artistEvent;
-        }
-
-        public static delete(int id)
-        {
-            ArtistEvent artistEvent = ArtistEvent.show(id);
-
-            Models.ArtistEvent.delete(id);
+         public class ArtistEventController
+         {
+    
+             public static void store(Models.Artist artistId, ArtistEvent artistEvent)
+             {
+                 if (artistId != null || artistEvent != null)
+                 {
+                     Models.ArtistEvent.store(new Models.ArtistEvent(artistId.Id, artistEvent.Id));
+                 }
+             }
             
-            return artistEvent;
-        }          
-    }
-}
+            public static void update(int id, ArtistEvent artistEvent)
+             {
+                 if (id != null || artistEvent != null)
+                 {
+                     Models.ArtistEvent.update(id, artistEvent);
+                 }
+             }
+    
+             public static void delete(int id)
+             {
+                 if (id != null)
+                 {
+                     Models.ArtistEvent.delete(id);
+                 }
+             }
+
+
+        }
+ }        

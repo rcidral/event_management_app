@@ -16,7 +16,7 @@ namespace Models
             EventId = eventId;
         }
 
-        public static void store(ArtistEvent artistEvent)
+        public static void  store(ArtistEvent artistEvent)
         {
             try
             {
@@ -66,5 +66,7 @@ namespace Models
                 throw e;
             }
         }
+
+
     }
 }

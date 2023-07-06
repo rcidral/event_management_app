@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230519222032_MigrationAll")]
-    partial class MigrationAll
+    [Migration("20230606003521_create-user")]
+    partial class createuser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

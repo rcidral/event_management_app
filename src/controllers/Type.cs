@@ -2,65 +2,64 @@ using System;
 using System.Collections.Generic;
 using Models;
 
-namespace Controllers
-{
-
-    public class Type
-    {
-
-        public static store(string Description)
+   namespace Controllers
+   {
+        public class TypeControllers
         {
-            if (String.IsNullOrEmpty(Description))
+            public static void store(Models.Type type)
             {
-                throw new Exception("Description cannot be empty");
+                if (!String.IsNullOrEmpty(type.Description))
+                {
+                    Models.Type.store(type);
+                }
+                
             }
 
-            return new Type(Description);
-        }
-
-        public List<Models.Type> index()
-        {
-            try
+            public static List<Models.Type> index()
             {
                 return Models.Type.index();
             }
-            catch (System.Exception e)
+
+            public static List<Models.Type> show(int id)
             {
-                throw e;
+                try
+                {
+                    return Models.Type.show(id);
+                }
+                catch (System.Exception e)
+                {
+                    throw e;
+                }
+            }
+
+            public static void update(string id,Models.Type type)
+            {
+                if (type.Id != null || String.IsNullOrEmpty(type.Description) )
+                {
+                   Models.Type.update(Int32.Parse(id), type);
+                }  
+            }
+
+            public static void delete(string id)
+            {
+                int Id = Convert.ToInt32(id);
+
+                if (Id != null)
+                {
+                    Models.Type.delete(Id);
+                }
+            }
+
+            public static Models.Type getByDescription(string description)
+            {
+                if (!String.IsNullOrEmpty(description))
+                {
+                    return Models.Type.getByDescription(description);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
-
-        public static Type show(int id)
-        {
-            Type type = (
-                from Type in Type.index()
-                where Type.id == id
-                select Type
-            ).First();
-
-            if (type == null)
-            {
-                throw new Exception("Type not found");
-            }
-            return type;
-        }
-
-        public static update(int id, string Description)
-        {
-            Type type = Models.Type.show(id);
-            if (!String.IsNullOrEmpty(type.Description))
-            {
-                Description = Description;
-            }
-            return type;
-        }
-
-        public static delete(int id)
-        {
-            Type type = Models.Type.show(id);
-            Models.Type.delete(type);
-
-            return type;
-        }
-    }
-}
+   }

@@ -3,68 +3,109 @@ using System.Collections.Generic;
 using Models;
 using System.Text.RegularExpressions;
 
+
+
 namespace Controllers
 {
-
-    public class User
+    public class UserController
     {
-
-        public static store(string name, string email, string senha)
+        public static void store(User user)
         {
-            if (String.IsNullOrEmpty(name))
+           /* if (String.IsNullOrEmpty(user.Name))
             {
-                throw new Exception("Name cannot be empty ");
-            }
-            if (String.IsNullOrEmpty(email))
+                throw new Exception("Name cannot be empty");
+            }*/
+            if (String.IsNullOrEmpty(user.Login))
             {
-                throw new Exception("Email cannot be empty");
+                throw new Exception("Login cannot be empty");
             }
-            if (String.IsNullOrEmpty(senha))
+            if (String.IsNullOrEmpty(user.Password))
             {
                 throw new Exception("Password cannot be empty");
             }
-            return new User(name, email, senha);
-        }
+            Models.User.store(user);
+        }       
 
-        public static IEnumerable<Models.User> index()
+
+        public static List<Models.User> Index()
         {
-            return Models.User.index();
+            return User.index();
         }
 
-        public static Models.User show(int id)
+
+
+        public static List<User> show(string UserId)
         {
-            Model.User LastUser = Models.User.Last();
-            if (id < 0 || LastUser.id != id)
+            try
             {
-                throw new Exception("Id not found");
+                int Id = Int32.Parse(UserId);
+                return Models.User.show(Id);
             }
-            return Models.User.show(id);
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
 
-        public static update(int id, string name, string email, string senha)
+
+        public static void Update(int id, User user)
         {
-            User user = Models.User.show(id);
-
-            if (!String.IsNullOrEmpty(name))
-            {
-                user.name = name;
+            if(String.IsNullOrEmpty(user.Name)){
+                throw new Exception ("Is not Name or empty");
             }
-            if (!String.IsNullOrEmpty(email))
+            if(String.IsNullOrEmpty(user.Login))
             {
-                user.email = email;
+                throw new Exception ("Is not Login or empty");                
             }
-            if (!String.IsNullOrEmpty(senha))
-            {
-                user.senha = senha;
-            }
-
-            return user;
+            User.update(id, user);
         }
-        public static delete(int id)
+
+
+        public static void Delete(int id)
         {
-            User user = Models.User.show(id);
-            Models.User.delete(user);
-            return user;
+            try
+            {
+                Models.User.delete(id);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
+
+        public static Boolean login(string login, string password)
+        {
+            if (String.IsNullOrEmpty(login))
+            {
+                MessageBox.Show("Login cannot be empty");
+            }
+            if (String.IsNullOrEmpty(password))
+            {
+                throw new Exception("Password cannot be empty");
+            }
+            return Models.User.login(login, password);
+        }
+
+        public static int nextId()
+        {
+            try
+            {
+                return Models.User.LastId();
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static User getUserByName(string name)     
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new Exception("Name cannot be empty");
+            }
+            return Models.User.getUserByName(name);
+        }
+
     }
 }

@@ -2,86 +2,65 @@ using System;
 using System.Collections.Generic;
 using Models;
 
-namespace Controllers
-{
-
-    public class Place
+    namespace Controllers
     {
-
-        public void store(string name, string address)
+        public class PlaceControllers
         {
-            if (String.IsNullOrEmpty(name))
+            public static void store(Models.Place place)
             {
-                throw new Exception("Name cannot be empty");
-            }
-            if (String.IsNullOrEmpty(address))
-            {
-                throw new Exception("Address cannot be empty");
+                if (!String.IsNullOrEmpty(place.Name))
+                {
+                    Models.Place.store(place);
+                }
+                
             }
 
-            return new Place(name, address);
-        }
-
-        public List<Models.Place> index()
-        {
-            try
+            public static List<Models.Place> index()
             {
                 return Models.Place.index();
             }
-            catch (System.Exception e)
-            {
-                throw e;
-            }
-        }
 
-        public static Place show(int id)
-        {
-            Place place = (
-                from Place in Place.index()
-                where Place.id == id
-                select Place
-            ).First();
-
-            if (place == null)
+            public static List<Models.Place> show(string PlaceId)
             {
-                throw new Exception("Place not found");
+                try
+                {
+                    int Id = Int32.Parse(PlaceId);
+                    return Models.Place.show(Id);
+                }
+                catch (System.Exception e)
+                {
+                    throw e;
+                }
             }
 
-            return place;
-        }
-
-        public void update(int id, Models.Place place)
-        {
-            Place place = Models.Place.show(id);
-
-            if (place == null)
+            public static void update(string IdPlace,Models.Place place)
             {
-                throw new Exception("Place not found");
+                try
+                {
+                    int id = Int32.Parse(IdPlace);
+                    if (!String.IsNullOrEmpty(place.Name))
+                    {
+                        Models.Place.update(id, place);
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    throw e;
+                }
             }
 
-            if (String.IsNullOrEmpty(place.name))
+            public static void delete(int id)
             {
-                throw new Exception("Name cannot be empty");
+                if (id < 0 || id == null)
+                {
+                    throw new Exception("Id cannot be empty");
+                }
+                Models.Place.delete(id);
             }
 
-            if (String.IsNullOrEmpty(place.address))
+            public static Place getPlaceByName(string name)
             {
-                throw new Exception("Address cannot be empty");
+                return Models.Place.getPlaceByName(name);
             }
-
-            Models.Place.update(id, place);
-        }
-
-        public void delete(int id)
-        {
-            Place place = Models.Place.show(id);
-
-            if (place == null)
-            {
-                throw new Exception("Place not found");
-            }
-
-            Models.Place.delete(id);
         }
     }
-}

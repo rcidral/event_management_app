@@ -1,28 +1,36 @@
 using System;
 using System.Collections.Generic;
 using Models;
+using System.Text.RegularExpressions;
 
 namespace Controllers
 {
 
-    public class Sponsor
+    public class SponsorControllers
     {
 
-        public static store(string name)
-        {
-            if (String.IsNullOrEmpty(name))
+        public static void store(Sponsor sponsor)
+        {   
+            if (String.IsNullOrEmpty(sponsor.Name))
             {
                 throw new Exception("Name cannot be empty");
 
-                return new Sponsor(name);
+                
             }
+            Models.Sponsor.store(sponsor);
         }
 
-        public List<Models.Sponsor> index()
+        public static List<Models.Sponsor> index()
+        {
+            return Models.Sponsor.index();
+        }
+
+        public static List<Sponsor> show(string Id)
         {
             try
             {
-                return Models.Sponsor.index();
+                int id = Int32.Parse(Id);
+                return Models.Sponsor.show(id);
             }
             catch (System.Exception e)
             {
@@ -30,39 +38,38 @@ namespace Controllers
             }
         }
 
-        public static Sponsor show(int id)
+        public static void update(int id, Models.Sponsor sponsor)
         {
-            Sponsor sponsor = (
-                from Sponsor in Sponsor.index()
-                where Sponsor.id == id
-                select Sponsor
-            ).First();
-
-            if (sponsor == null)
+            try
             {
-                throw new Exception("Sponsor not found");
+                if (String.IsNullOrEmpty(sponsor.Name))
+                {
+                    throw new Exception("Name cannot be empty");
+                }
+                Models.Sponsor.update(id, sponsor);
             }
-
-            return sponsor;
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
 
-        public static update(int id, string name)
+        public static void delete(int id)
         {
-            Sponsor sponsor = Models.Sponsor.show(id);
-
-            if (!String.IsNullOrEmpty(name))
+            if (id < 0 || id == null)
             {
-                sponsor.name = name;
+                throw new Exception("Id not found");
             }
-            return sponsor;
-        }
-
-        public static delete(int id)
-        {
-            Sponsor sponsor = Models.Sponsor.show(id);
             Models.Sponsor.delete(id);
+        }
 
-            return sponsor;
+        public static Sponsor getByName(string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new Exception("Name cannot be empty");
+            }
+            return Models.Sponsor.getByName(name);
         }
     }
 }

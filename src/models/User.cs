@@ -1,4 +1,4 @@
-using Data;
+     using Data;
 
 namespace Models
 {
@@ -115,11 +115,34 @@ namespace Models
             }
         }
 
-        public static User GetLast()
+        public static int LastId ()
         {
-            return index.Last();
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Users.Max(user => user.Id);
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
 
-    }
-            
+        public static User getUserByName(string name)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Users.Where(user => user.Name == name).FirstOrDefault();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+    }        
 }

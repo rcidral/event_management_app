@@ -86,5 +86,20 @@ namespace Models
                 throw e;
             }
         }
+
+        public static Artist getByName(string name)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Artists.Where(artist => artist.Name == name).FirstOrDefault();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
