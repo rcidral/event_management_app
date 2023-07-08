@@ -1,4 +1,4 @@
-/*using Controllers;
+using Controllers;
 
 namespace Views
 {
@@ -115,29 +115,29 @@ namespace Views
 
             TextBox txtDescription = new TextBox();
             txtDescription.Location = new System.Drawing.Point(190, 70);
-            txtDescription.Size = new System.Drawing.Size(200, 20);
+            txtDescription.Size = new System.Drawing.Size(250, 20);
             form.Controls.Add(txtDescription);
 
             Label lblDate = new Label();
             lblDate.Text = "Data";
-            lblDate.Location = new System.Drawing.Point(190, 100);
+            lblDate.Location = new System.Drawing.Point(450, 50);
             lblDate.Size = new System.Drawing.Size(100, 20);
             form.Controls.Add(lblDate);
 
             DateTimePicker txtDate = new DateTimePicker();
-            txtDate.Location = new System.Drawing.Point(190, 120);
-            txtDate.Size = new System.Drawing.Size(200, 20);
+            txtDate.Location = new System.Drawing.Point(450, 70);
+            txtDate.Size = new System.Drawing.Size(250, 20);
             form.Controls.Add(txtDate);
 
             Label lblUser = new Label();
             lblUser.Text = "Usuário";
-            lblUser.Location = new System.Drawing.Point(190, 190);
+            lblUser.Location = new System.Drawing.Point(190, 100);
             lblUser.Size = new System.Drawing.Size(100, 20);
             form.Controls.Add(lblUser);
 
             ComboBox txtUser = new ComboBox();
-            txtUser.Location = new System.Drawing.Point(190, 210);
-            txtUser.Size = new System.Drawing.Size(500, 40);
+            txtUser.Location = new System.Drawing.Point(190, 120);
+            txtUser.Size = new System.Drawing.Size(250, 40);
             txtUser.DropDownStyle = ComboBoxStyle.DropDownList;
 
             List<Models.User> userList = Controllers.UserController.Index();
@@ -149,13 +149,13 @@ namespace Views
 
             Label lblPlace = new Label();
             lblPlace.Text = "Local";
-            lblPlace.Location = new System.Drawing.Point(190, 250);
+            lblPlace.Location = new System.Drawing.Point(450, 100);
             lblPlace.Size = new System.Drawing.Size(100, 20);
             form.Controls.Add(lblPlace);
 
             ComboBox txtPlace = new ComboBox();
-            txtPlace.Location = new System.Drawing.Point(190, 270);
-            txtPlace.Size = new System.Drawing.Size(500, 40);
+            txtPlace.Location = new System.Drawing.Point(450, 120);
+            txtPlace.Size = new System.Drawing.Size(250, 40);
             txtPlace.DropDownStyle = ComboBoxStyle.DropDownList;
 
             List<Models.Place> placeList = Controllers.PlaceControllers.index();
@@ -168,13 +168,13 @@ namespace Views
 
             Label lblType = new Label();
             lblType.Text = "Tipo";
-            lblType.Location = new System.Drawing.Point(190, 310);
+            lblType.Location = new System.Drawing.Point(190, 150);
             lblType.Size = new System.Drawing.Size(100, 20);
             form.Controls.Add(lblType);
 
             ComboBox txtType = new ComboBox();
-            txtType.Location = new System.Drawing.Point(190, 330);
-            txtType.Size = new System.Drawing.Size(500, 40);
+            txtType.Location = new System.Drawing.Point(190, 170);
+            txtType.Size = new System.Drawing.Size(250, 40);
             txtType.DropDownStyle = ComboBoxStyle.DropDownList;
 
             List<Models.Type> typeList = Controllers.TypeControllers.index();
@@ -188,13 +188,13 @@ namespace Views
 
             Label lblArtist = new Label();
             lblArtist.Text = "Artista";
-            lblArtist.Location = new System.Drawing.Point(190, 370);
+            lblArtist.Location = new System.Drawing.Point(450, 150);
             lblArtist.Size = new System.Drawing.Size(100, 20);
             form.Controls.Add(lblArtist);
 
             ComboBox txtArtist = new ComboBox();
-            txtArtist.Location = new System.Drawing.Point(190, 390);
-            txtArtist.Size = new System.Drawing.Size(500, 40);
+            txtArtist.Location = new System.Drawing.Point(450, 170);
+            txtArtist.Size = new System.Drawing.Size(250, 40);
             txtArtist.DropDownStyle = ComboBoxStyle.DropDownList;
 
             List<Models.Artist> artistList = Controllers.Artist.index();
@@ -208,13 +208,13 @@ namespace Views
 
             Label lblSponsor = new Label();
             lblSponsor.Text = "Patrocinador";
-            lblSponsor.Location = new System.Drawing.Point(190, 430);
+            lblSponsor.Location = new System.Drawing.Point(190, 200);
             lblSponsor.Size = new System.Drawing.Size(100, 20);
             form.Controls.Add(lblSponsor);
 
             ComboBox txtSponsor = new ComboBox();
-            txtSponsor.Location = new System.Drawing.Point(190, 450);
-            txtSponsor.Size = new System.Drawing.Size(500, 40);
+            txtSponsor.Location = new System.Drawing.Point(190, 220);
+            txtSponsor.Size = new System.Drawing.Size(250, 40);
             txtSponsor.DropDownStyle = ComboBoxStyle.DropDownList;
 
             List<Models.Sponsor> sponsorList = Controllers.SponsorControllers.index();
@@ -228,19 +228,19 @@ namespace Views
 
             Label lblValue = new Label();
             lblValue.Text = "Valor";
-            lblValue.Location = new System.Drawing.Point(190, 490);
+            lblValue.Location = new System.Drawing.Point(450, 200);
             lblValue.Size = new System.Drawing.Size(100, 20);
             form.Controls.Add(lblValue);
 
             TextBox txtValue = new TextBox();
-            txtValue.Location = new System.Drawing.Point(190, 510);
-            txtValue.Size = new System.Drawing.Size(200, 20);
+            txtValue.Location = new System.Drawing.Point(450, 220);
+            txtValue.Size = new System.Drawing.Size(250, 20);
             form.Controls.Add(txtValue);
 
             Button btnAdd = new Button();
             btnAdd.Text = "Adicionar";
-            btnAdd.Location = new System.Drawing.Point(400, 150);
-            btnAdd.Size = new System.Drawing.Size(100, 20);
+            btnAdd.Location = new System.Drawing.Point(190, 260);
+            btnAdd.Size = new System.Drawing.Size(510, 20);
             btnAdd.Click += (sender, e) =>
             {
                 Controllers.EventControllers.store(DateOnly.FromDateTime(txtDate.Value.Date), txtDescription.Text, txtUser.Text, txtPlace.Text, txtType.Text, txtArtist.Text, txtSponsor.Text, Double.Parse(txtValue.Text));
@@ -376,7 +376,7 @@ namespace Views
             btnAdd.Text = "Editar";
             btnAdd.Location = new System.Drawing.Point(190, 380);
             btnAdd.Size = new System.Drawing.Size(100, 40);
-            btnAdd.Click += (sender, e) =>
+            /* btnAdd.Click += (sender, e) =>
             {
                 Controllers.EventControllers.update(Int32.Parse(id), DateOnly.FromDateTime(txtDate.Value.Date), txtDescription.Text, txtUser.Text, txtPlace.Text, txtType.Text, txtArtist.Text);
                 panel2.Controls.Clear();
@@ -385,7 +385,7 @@ namespace Views
                 Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Sponsor.Add(panel2), panel2);
                 panel2.Controls.Add(buttonAdd);
                 panel2.Controls.Add(buttonRemove);
-            };
+            }; */
             form.Controls.Add(btnAdd);
 
             return form;
@@ -393,4 +393,4 @@ namespace Views
 
 
     }
-}*/
+}

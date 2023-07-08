@@ -47,7 +47,7 @@ namespace Views
             button1.ForeColor = Color.White;
             button1.Text = "EVENTO";
             button1.TextAlign = ContentAlignment.MiddleCenter;
-            /* button1.Click += (sender, e) =>
+            button1.Click += (sender, e) =>
              {
                  panel2.Controls.Clear();
                  panel2.Controls.Add(Views.Event.List(panel2));
@@ -57,7 +57,7 @@ namespace Views
 
                  panel2.Controls.Add(buttonAdd);
                  panel2.Controls.Add(buttonRemove);
-             };*/
+             };
 
 
             string imagePath = "src/assets/icons8-evento-24.png";
