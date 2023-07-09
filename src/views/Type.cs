@@ -164,7 +164,7 @@ namespace Views
 
         public static Panel Edit(string id, Panel panel2)
         {
-            List<Models.Type> typelist = Controllers.TypeControllers.show(Int32.Parse(id));
+            Models.Type typelist = Controllers.TypeControllers.show(Int32.Parse(id));
             Panel form = new Panel();
             form.Size = new System.Drawing.Size(900, 450);
             form.Location = new System.Drawing.Point(220, 0);
@@ -179,7 +179,7 @@ namespace Views
             TextBox txtName = new TextBox();
             txtName.Location = new System.Drawing.Point(190, 80);
             txtName.Size = new System.Drawing.Size(500, 20);
-            txtName.Text = typelist[0].Description;
+            txtName.Text = typelist.Description;
             form.Controls.Add(txtName);
 
             Button btnAdd = new Button();

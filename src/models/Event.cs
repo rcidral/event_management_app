@@ -41,8 +41,9 @@ namespace Models
                     }
                     context.Events.Add(event_);
                     context.SaveChanges();
-                    ArtistEvent.store(new ArtistEvent(event_.Id, artist.Id));
-                    Values.store(new Values(event_.Date, values, sponsor.Id, event_.Id));
+                    Models.Event eventCreated = Controllers.EventControllers.getByDescription(event_.Description);
+                    ArtistEvent.store(new ArtistEvent(eventCreated.Id, artist.Id));
+                    Values.store(new Values(event_.Date, values, sponsor.Id, eventCreated.Id));
                 }
             }
             catch (System.Exception e)
@@ -66,13 +67,13 @@ namespace Models
             }
         }
 
-        public static List<Event> show(int id)
+        public static Event show(int id)
         {
             try
             {
                 using (Context context = new Context())
                 {
-                    return context.Events.Where(event_ => event_.Id == id).ToList();
+                    return context.Events.Find(id);
                 }
             }
             catch (System.Exception e)
@@ -115,6 +116,21 @@ namespace Models
                     Event event_ = context.Events.Find(id);
                     context.Events.Remove(event_);
                     context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static Models.Event getByDescription(string description)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.Events.Where(event_ => event_.Description == description).FirstOrDefault();
                 }
             }
             catch (System.Exception e)

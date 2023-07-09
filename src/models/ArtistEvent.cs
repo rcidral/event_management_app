@@ -32,6 +32,21 @@ namespace Models
             }
         }
 
+        public static List<ArtistEvent> index()
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.ArtistEvents.ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
         public static void update(int id, ArtistEvent artistEvent)
         {
             try

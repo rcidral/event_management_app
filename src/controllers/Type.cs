@@ -20,7 +20,7 @@ using Models;
                 return Models.Type.index();
             }
 
-            public static List<Models.Type> show(int id)
+            public static Models.Type show(int id)
             {
                 try
                 {

@@ -14,27 +14,41 @@ namespace Views
             lista.BackColor = System.Drawing.Color.White;
             lista.BorderStyle = BorderStyle.None;
             lista.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            lista.Columns.Add("ID", 150);
-            lista.Columns.Add("Data", 150);
-            lista.Columns.Add("Descrição", 150);
-            lista.Columns.Add("Usuário", 150);
-            lista.Columns.Add("Local", 150);
-            lista.Columns.Add("Tipo", 150);
+            lista.Columns.Add("ID", 100);
+            lista.Columns.Add("Data", 100);
+            lista.Columns.Add("Descrição", 100);
+            lista.Columns.Add("Usuário", 100);
+            lista.Columns.Add("Local", 100);
+            lista.Columns.Add("Tipo", 100);
+            lista.Columns.Add("Artista", 100);
+            lista.Columns.Add("Patrocinador", 100);
+            lista.Columns.Add("Valor", 100);
             lista.FullRowSelect = true;
             lista.GridLines = true;
             lista.MultiSelect = false;
             lista.HideSelection = false;
 
-            List<Models.Event> eventList = Controllers.EventControllers.index();
-            foreach (Models.Event event_ in eventList)
+            foreach (Models.ArtistEvent artistEvent in Controllers.ArtistEventController.index())
             {
-                ListViewItem item = new ListViewItem(event_.Id.ToString());
+                Models.Event event_ = Controllers.EventControllers.show(artistEvent.EventId);
+                Models.User user = Controllers.UserController.show(event_.UserId.ToString());
+                Models.Place place = Controllers.PlaceControllers.show(event_.PlaceId.ToString());
+                Models.Type type = Controllers.TypeControllers.show(event_.TypeId);
+                Models.Artist artist = Controllers.Artist.show(artistEvent.ArtistId);
+                Models.Values values = Controllers.ValuesController.showByEventId(event_.Id);
+                Models.Sponsor sponsor = Controllers.SponsorControllers.show(values.SponsorId.ToString());
+                ListViewItem item = new ListViewItem(artistEvent.Id.ToString());
                 item.SubItems.Add(event_.Date.ToString());
-                item.SubItems.Add(event_.Description.ToString());
-                item.SubItems.Add(event_.User.Name);
-                item.SubItems.Add(event_.Place.Name);
-                item.SubItems.Add(event_.Type.Description);
+                item.SubItems.Add(event_.Description);
+                item.SubItems.Add(user.Name);
+                item.SubItems.Add(place.Name);
+                item.SubItems.Add(type.Description);
+                item.SubItems.Add(artist.Name);
+                item.SubItems.Add(sponsor.Name);
+                item.SubItems.Add(values.Value.ToString());
                 lista.Items.Add(item);
+
+
             }
 
             Button buttonEdit = new Button();
@@ -75,12 +89,15 @@ namespace Views
                 string id = lista.SelectedItems[0].Text;
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show("Deseja realmente excluir?", "Confirmação", buttons);
-                if (result == DialogResult.Yes){
+                if (result == DialogResult.Yes)
+                {
 
-                Controllers.SponsorControllers.delete(Int32.Parse(id));
-                panel2.Controls.Clear();
-                panel2.Controls.Add(Views.Event.List(panel2));
-                } else {
+                    Controllers.SponsorControllers.delete(Int32.Parse(id));
+                    panel2.Controls.Clear();
+                    panel2.Controls.Add(Views.Event.List(panel2));
+                }
+                else
+                {
                     panel2.Controls.Clear();
                     panel2.Controls.Add(Views.Event.List(panel2));
                 }
@@ -261,7 +278,7 @@ namespace Views
 
         public static Panel Edit(string id, Panel panel2)
         {
-            List<Models.Event> eventsList = Controllers.EventControllers.show(Int32.Parse(id));
+            Models.Event eventsList = Controllers.EventControllers.show(Int32.Parse(id));
             Panel form = new Panel();
             form.Size = new System.Drawing.Size(900, 450);
             form.Location = new System.Drawing.Point(220, 0);
@@ -276,7 +293,7 @@ namespace Views
             DateTimePicker txtDate = new DateTimePicker();
             txtDate.Location = new System.Drawing.Point(190, 30);
             txtDate.Size = new System.Drawing.Size(200, 20);
-            txtDate.Value = new DateTime(eventsList[0].Date.Year, eventsList[0].Date.Month, eventsList[0].Date.Day);
+            txtDate.Value = new DateTime(eventsList.Date.Year, eventsList.Date.Month, eventsList.Date.Day);
             form.Controls.Add(txtDate);
 
             Label lblDescription = new Label();
@@ -288,7 +305,7 @@ namespace Views
             TextBox txtDescription = new TextBox();
             txtDescription.Location = new System.Drawing.Point(190, 90);
             txtDescription.Size = new System.Drawing.Size(500, 20);
-            txtDescription.Text = eventsList[0].Description;
+            txtDescription.Text = eventsList.Description;
             form.Controls.Add(txtDescription);
 
             Label lblUser = new Label();
@@ -335,7 +352,7 @@ namespace Views
             lblType.Text = "Tipo";
             lblType.Location = new System.Drawing.Point(190, 250);
             lblType.Size = new System.Drawing.Size(100, 20);
-            form.Controls.Add(lblType); 
+            form.Controls.Add(lblType);
 
             ComboBox txtType = new ComboBox();
             txtType.Location = new System.Drawing.Point(190, 270);

@@ -39,13 +39,13 @@ namespace Models
                 throw e;
             }
         }
-        public static List<Sponsor> show(int id)
+        public static Sponsor show(int id)
         {
             try
             {
                 using (Context context = new Context())
                 {
-                    return context.Sponsors.Where(sponsor => sponsor.Id == id).ToList();
+                    return context.Sponsors.Find(id);
                 }
             }
             catch (System.Exception e)

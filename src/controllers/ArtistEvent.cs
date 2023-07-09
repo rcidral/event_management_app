@@ -15,6 +15,18 @@ using Models;
                      Models.ArtistEvent.store(new Models.ArtistEvent(artistId.Id, artistEvent.Id));
                  }
              }
+
+                public static List<ArtistEvent> index()
+                {
+                    try
+                    {
+                        return Models.ArtistEvent.index();
+                    }
+                    catch (System.Exception e)
+                    {
+                        throw e;
+                    }
+                }
             
             public static void update(int id, ArtistEvent artistEvent)
              {

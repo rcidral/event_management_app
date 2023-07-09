@@ -184,7 +184,7 @@ namespace Migrations
 
                     b.HasIndex("SponsorId");
 
-                    b.ToTable("Values");
+                    b.ToTable("ValuesEvent");
                 });
 
             modelBuilder.Entity("Models.ArtistEvent", b =>

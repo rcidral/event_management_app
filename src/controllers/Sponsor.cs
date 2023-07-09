@@ -25,7 +25,7 @@ namespace Controllers
             return Models.Sponsor.index();
         }
 
-        public static List<Sponsor> show(string Id)
+        public static Sponsor show(string Id)
         {
             try
             {

@@ -45,13 +45,13 @@ namespace Models
             }
         }
 
-        public static List<Place> show(int id)
+        public static Place show(int id)
         {
             try
             {
                 using (Context context = new Context())
                 {
-                    return context.Places.Where(place => place.Id == id).ToList();
+                    return context.Places.Find(id);
                 }
             }
             catch (System.Exception e)

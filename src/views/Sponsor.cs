@@ -165,7 +165,7 @@ namespace Views
 
         public static Panel Edit(string id, Panel panel2)
         {
-            List<Models.Sponsor> sponsorsList = Controllers.SponsorControllers.show(id);
+            Models.Sponsor sponsorsList = Controllers.SponsorControllers.show(id);
             Panel form = new Panel();
             form.Size = new System.Drawing.Size(900, 450);
             form.Location = new System.Drawing.Point(220, 0);
@@ -180,7 +180,7 @@ namespace Views
             TextBox txtName = new TextBox();
             txtName.Location = new System.Drawing.Point(190, 70);
             txtName.Size = new System.Drawing.Size(500, 40);
-            txtName.Text = sponsorsList[0].Name;
+            txtName.Text = sponsorsList.Name;
             form.Controls.Add(txtName);
 
             Button btnAdd = new Button();

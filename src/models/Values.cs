@@ -2,8 +2,9 @@ using Data;
 
 namespace Models
 {
-    public class Values{
-        public int Id { get; set;}
+    public class Values
+    {
+        public int Id { get; set; }
         public DateOnly Date { get; set; }
         public double Value { get; set; }
         public int SponsorId { get; set; }
@@ -25,7 +26,7 @@ namespace Models
             {
                 using (Context context = new Context())
                 {
-                    context.Values.Add(values);
+                    context.ValuesEvent.Add(values);
                     context.SaveChanges();
                 }
             }
@@ -34,8 +35,38 @@ namespace Models
                 throw e;
             }
         }
-        
-        
+
+        public static List<Values> index()
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.ValuesEvent.ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static Values show(int id)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.ValuesEvent.Find(id);
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+
 
         public static void update(int id, Values values)
         {
@@ -43,12 +74,27 @@ namespace Models
             {
                 using (Context context = new Context())
                 {
-                    Values values_ = context.Values.Find(id);
+                    Values values_ = context.ValuesEvent.Find(id);
                     values_.Date = values.Date;
                     values_.Value = values.Value;
                     values_.SponsorId = values.SponsorId;
                     values_.EventId = values.EventId;
                     context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static Values showByEventId(int id)
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.ValuesEvent.Where(x => x.EventId == id).FirstOrDefault();
                 }
             }
             catch (System.Exception e)
@@ -63,8 +109,8 @@ namespace Models
             {
                 using (Context context = new Context())
                 {
-                    Values values = context.Values.Find(id);
-                    context.Values.Remove(values);
+                    Values values = context.ValuesEvent.Find(id);
+                    context.ValuesEvent.Remove(values);
                     context.SaveChanges();
                 }
             }
@@ -74,6 +120,5 @@ namespace Models
             }
         }
 
-        
     }
 }
