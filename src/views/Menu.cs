@@ -51,12 +51,6 @@ namespace Views
              {
                  panel2.Controls.Clear();
                  panel2.Controls.Add(Views.Event.List(panel2));
-
-                 Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Event.Add(panel2), panel2);
-                 Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Event.Add(panel2), panel2);
-
-                 panel2.Controls.Add(buttonAdd);
-                 panel2.Controls.Add(buttonRemove);
              };
 
 

@@ -13,6 +13,7 @@ namespace Models
         public virtual User User { get; set; }
         public virtual Place Place { get; set; }
         public virtual Type Type { get; set; }
+        
 
         public Event(DateOnly date, string description, int userId, int placeId, int typeId)
         {

@@ -1,4 +1,5 @@
 using Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Models
 {
@@ -9,6 +10,7 @@ namespace Models
         public int EventId { get; set; }
         public virtual Artist Artist { get; set; }
         public virtual Event Event { get; set; }
+        
 
         public ArtistEvent(int artistId, int eventId)
         {
@@ -16,7 +18,7 @@ namespace Models
             EventId = eventId;
         }
 
-        public static void  store(ArtistEvent artistEvent)
+        public static void store(ArtistEvent artistEvent)
         {
             try
             {
@@ -82,6 +84,24 @@ namespace Models
             }
         }
 
+        public static List<ArtistEvent> showByActualMonth()
+        {
+            try
+            {
+                using (Context context = new Context())
+                {
+                    return context.ArtistEvents
+                    .Include(a => a.Artist)
+                    .Include(e => e.Event)
+                    .Where(e => e.Event.Date.Month == DateTime.Now.Month)
+                    .ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
 
     }
 }

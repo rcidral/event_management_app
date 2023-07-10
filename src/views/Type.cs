@@ -15,7 +15,7 @@ namespace Views
             lista.BorderStyle = BorderStyle.None;
             lista.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lista.Columns.Add("ID", 450);
-            lista.Columns.Add("Name", 450);
+            lista.Columns.Add("Descrição", 450);
             lista.FullRowSelect = true;
             lista.GridLines = true;
             lista.MultiSelect = false;
