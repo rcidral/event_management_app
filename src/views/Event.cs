@@ -31,6 +31,7 @@ namespace Views
             foreach (Models.ArtistEvent artistEvent in Controllers.ArtistEventController.index())
             {
                 Models.Event event_ = Controllers.EventControllers.show(artistEvent.EventId);
+                if(event_ == null) continue;
                 Models.User user = Controllers.UserController.show(event_.UserId.ToString());
                 Models.Place place = Controllers.PlaceControllers.show(event_.PlaceId.ToString());
                 Models.Type type = Controllers.TypeControllers.show(event_.TypeId);
@@ -92,7 +93,7 @@ namespace Views
                 if (result == DialogResult.Yes)
                 {
 
-                    Controllers.SponsorControllers.delete(Int32.Parse(id));
+                    Controllers.EventControllers.delete(Int32.Parse(id));
                     panel2.Controls.Clear();
                     panel2.Controls.Add(Views.Event.List(panel2));
                 }
@@ -262,7 +263,7 @@ namespace Views
             {
                 Controllers.EventControllers.store(DateOnly.FromDateTime(txtDate.Value.Date), txtDescription.Text, txtUser.Text, txtPlace.Text, txtType.Text, txtArtist.Text, txtSponsor.Text, Double.Parse(txtValue.Text));
                 panel.Controls.Clear();
-                panel.Controls.Add(Views.Sponsor.List(panel));
+                panel.Controls.Add(Views.Event.List(panel));
 
                 Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Event.Add(panel), panel);
                 Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Event.Add(panel), panel);
