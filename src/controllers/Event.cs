@@ -33,13 +33,16 @@ namespace Controllers
             }
         }
 
-        /* public static void update(DateOnly date, string description, string user, string place, string type, string artistId, string sponsorId, Double values)
-         {
-             Models.Event.update(new Models.Event(date, description, 
-                 Controllers.UserController.getUserByName(user).Id, 
-                 Controllers.PlaceControllers.getPlaceByName(place).Id, 
-                 Controllers.TypeControllers.getByDescription(type).Id), artistId, sponsorId, values);
-         }*/
+        public static void update(int id, DateOnly date, string description, string user, string place, string type, string artistId, string sponsorId, Double values)
+        {
+            Models.Event.update(id, date, description,
+                Controllers.UserController.getUserByName(user).Id.ToString(),
+                Controllers.PlaceControllers.getPlaceByName(place).Id.ToString(),
+                Controllers.TypeControllers.getByDescription(type).Id.ToString(),
+                artistId,
+                sponsorId,
+                values);
+        }
 
         public static void delete(int id)
         {

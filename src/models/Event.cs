@@ -12,7 +12,7 @@ namespace Models
         public int TypeId { get; set; }
         public virtual User User { get; set; }
         public virtual Place Place { get; set; }
-        public virtual Type Type { get; set; }        
+        public virtual Type Type { get; set; }
 
         public Event(DateOnly date, string description, int userId, int placeId, int typeId)
         {
@@ -83,24 +83,36 @@ namespace Models
         }
 
 
-        public static void update(int id, Event event_, int artistId, int sponsorId, Values values)
+        public static void update(int id, DateOnly date, string description, string user, string place, string type, string artistId, string sponsorId, Double values)
         {
             try
             {
                 using (Context context = new Context())
                 {
                     Event eventOld_ = context.Events.Find(id);
-                    eventOld_.Date = event_.Date;
-                    eventOld_.Description = event_.Description;
-                    eventOld_.UserId = event_.UserId;
-                    eventOld_.PlaceId = event_.PlaceId;
-                    eventOld_.TypeId = event_.TypeId;
+                    eventOld_.Date = date;
+                    eventOld_.Description = description;
+                    eventOld_.UserId = Int32.Parse(user);
+                    eventOld_.PlaceId = Int32.Parse(place);
+                    eventOld_.TypeId = Int32.Parse(type);
 
                     context.SaveChanges();
-                    ArtistEvent.update(id, new ArtistEvent(artistId, eventOld_.Id));
-                    Values.update(id, new Values(values.Date, values.Value, sponsorId, eventOld_.Id));
+
+                    Artist artist = Artist.getByName(artistId);
+                    if (artist == null)
+                    {
+                        throw new System.Exception("Artist not found");
+                    }
+                    Sponsor sponsor = Sponsor.getByName(sponsorId);
+                    if (sponsor == null)
+                    {
+                        throw new System.Exception("Sponsor not found");
+                    }
+
+                    ArtistEvent.update(id, new ArtistEvent(artist.Id, eventOld_.Id));
+                    Values.update(id, new Values(date, values, sponsor.Id, eventOld_.Id));
                 }
-            } 
+            }
             catch (System.Exception e)
             {
                 throw e;
