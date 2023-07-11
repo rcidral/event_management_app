@@ -13,7 +13,7 @@ namespace Models
         public virtual User User { get; set; }
         public virtual Place Place { get; set; }
         public virtual Type Type { get; set; }
-        
+
 
         public Event(DateOnly date, string description, int userId, int placeId, int typeId)
         {
@@ -127,6 +127,8 @@ namespace Models
                 using (Context context = new Context())
                 {
                     Event event_ = context.Events.Find(id);
+                    context.ArtistEvents.RemoveRange(context.ArtistEvents.Where(artistEvent => artistEvent.EventId == id));
+                    context.ValuesEvent.RemoveRange(context.ValuesEvent.Where(valuesEvent => valuesEvent.EventId == id));
                     context.Events.Remove(event_);
                     context.SaveChanges();
                 }
