@@ -15,8 +15,8 @@ namespace Views
             lista.BorderStyle = BorderStyle.None;
             lista.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lista.Columns.Add("ID", 300);
-            lista.Columns.Add("Name", 300);
-            lista.Columns.Add("Address", 300);
+            lista.Columns.Add("Nome", 300);
+            lista.Columns.Add("Endereço", 300);
             lista.FullRowSelect = true;
             lista.GridLines = true;
             lista.MultiSelect = false;
@@ -176,7 +176,7 @@ namespace Views
 
         public static Panel Edit(string id, Panel panel2)
         {
-            List<Models.Place> placeList = Controllers.PlaceControllers.show(id);
+            Models.Place placeList = Controllers.PlaceControllers.show(id);
             Panel form = new Panel();
             form.Size = new System.Drawing.Size(900, 450);
             form.Location = new System.Drawing.Point(220, 0);
@@ -191,7 +191,7 @@ namespace Views
             TextBox txtName = new TextBox();
             txtName.Location = new System.Drawing.Point(190, 70);
             txtName.Size = new System.Drawing.Size(500, 40);
-            txtName.Text = placeList[0].Name;
+            txtName.Text = placeList.Name;
             form.Controls.Add(txtName);
 
 
@@ -204,7 +204,7 @@ namespace Views
             TextBox txtAdress = new TextBox();
             txtAdress.Location = new System.Drawing.Point(190, 120);
             txtAdress.Size = new System.Drawing.Size(500, 40);
-            txtAdress.Text = placeList[0].Address;
+            txtAdress.Text = placeList.Address;
             form.Controls.Add(txtAdress);
 
             Button btnAdd = new Button();

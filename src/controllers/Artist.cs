@@ -23,7 +23,7 @@ namespace Controllers
             return Models.Artist.index();
         }
 
-        public static List<Models.Artist> show(int id)
+        public static Models.Artist show(int id)
         {
             if (id != null)
             {

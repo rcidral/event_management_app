@@ -47,17 +47,11 @@ namespace Views
             button1.ForeColor = Color.White;
             button1.Text = "EVENTO";
             button1.TextAlign = ContentAlignment.MiddleCenter;
-            /* button1.Click += (sender, e) =>
+            button1.Click += (sender, e) =>
              {
                  panel2.Controls.Clear();
                  panel2.Controls.Add(Views.Event.List(panel2));
-
-                 Button buttonAdd = Views.ButtonAED.btnAdicionar(Views.Event.Add(panel2), panel2);
-                 Button buttonRemove = Views.ButtonAED.btnDeletar(Views.Event.Add(panel2), panel2);
-
-                 panel2.Controls.Add(buttonAdd);
-                 panel2.Controls.Add(buttonRemove);
-             };*/
+             };
 
 
             string imagePath = "src/assets/icons8-evento-24.png";
@@ -163,7 +157,6 @@ namespace Views
                 panel2.Controls.Add(buttonRemove);
             };
 
-
             string imagePath5 = "src/assets/list.png";
             Image image5 = Image.FromFile(imagePath5);
             image5 = new Bitmap(image5, new Size(26, 26));
@@ -177,7 +170,6 @@ namespace Views
             button6.FlatAppearance.BorderSize = 0;
             button6.ForeColor = Color.White;
             button6.Text = "USUÁRIO";
-
 
             string imagePath6 = "src/assets/user.png";
             Image image6 = Image.FromFile(imagePath6);
@@ -201,7 +193,6 @@ namespace Views
             lineLabel.Location = new System.Drawing.Point(15, 470);
             lineLabel.Size = new System.Drawing.Size(180, 1);
 
-
             Button button7 = new Button();
             button7.Location = new System.Drawing.Point(15, 500);
             button7.Size = new System.Drawing.Size(180, 40);
@@ -215,7 +206,6 @@ namespace Views
                 menu.Hide();
                 Views.Login.Show();
             };
-
 
             string imagePath7 = "src/assets/sair.png";
             Image image7 = Image.FromFile(imagePath7);
@@ -238,7 +228,6 @@ namespace Views
             pictureBox2.Size = new System.Drawing.Size(30, 30);
             pictureBox2.Image = image8;
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-
 
             Label label = new Label();
             label.Text = "CRM Technology";

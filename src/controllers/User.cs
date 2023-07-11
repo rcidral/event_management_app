@@ -34,7 +34,7 @@ namespace Controllers
 
 
 
-        public static List<User> show(string UserId)
+        public static User show(string UserId)
         {
             try
             {

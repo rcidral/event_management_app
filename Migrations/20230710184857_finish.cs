@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Migrations
 {
     /// <inheritdoc />
-    public partial class createuser : Migration
+    public partial class finish : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -161,7 +161,7 @@ namespace Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Values",
+                name: "ValuesEvent",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -173,15 +173,15 @@ namespace Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Values", x => x.Id);
+                    table.PrimaryKey("PK_ValuesEvent", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Values_Events_EventId",
+                        name: "FK_ValuesEvent_Events_EventId",
                         column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Values_Sponsors_SponsorId",
+                        name: "FK_ValuesEvent_Sponsors_SponsorId",
                         column: x => x.SponsorId,
                         principalTable: "Sponsors",
                         principalColumn: "Id",
@@ -215,13 +215,13 @@ namespace Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Values_EventId",
-                table: "Values",
+                name: "IX_ValuesEvent_EventId",
+                table: "ValuesEvent",
                 column: "EventId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Values_SponsorId",
-                table: "Values",
+                name: "IX_ValuesEvent_SponsorId",
+                table: "ValuesEvent",
                 column: "SponsorId");
         }
 
@@ -232,7 +232,7 @@ namespace Migrations
                 name: "ArtistEvents");
 
             migrationBuilder.DropTable(
-                name: "Values");
+                name: "ValuesEvent");
 
             migrationBuilder.DropTable(
                 name: "Artists");

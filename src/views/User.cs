@@ -131,7 +131,7 @@ namespace Views
 
         public static Panel Editar(string id, Panel panel2)
         {
-            List<Models.User> users = Controllers.UserController.show(id);
+            Models.User users = Controllers.UserController.show(id);
 
 
             Panel editar = new Panel();
@@ -148,7 +148,7 @@ namespace Views
             TextBox txtName = new TextBox();
             txtName.Location = new System.Drawing.Point(190, 70);
             txtName.Size = new System.Drawing.Size(500, 40);
-            txtName.Text = users[0].Name;
+            txtName.Text = user.Name;
             editar.Controls.Add(txtName);
 
             Label lblLogin = new Label();
@@ -160,7 +160,7 @@ namespace Views
             TextBox txtLogin = new TextBox();
             txtLogin.Location = new System.Drawing.Point(190, 140);
             txtLogin.Size = new System.Drawing.Size(500, 40);
-            txtLogin.Text = users[0].Login;
+            txtLogin.Text = users.Login;
             editar.Controls.Add(txtLogin);
 
             Label lblSenha = new Label();
@@ -172,7 +172,7 @@ namespace Views
             TextBox txtSenha = new TextBox();
             txtSenha.Location = new System.Drawing.Point(190, 210);
             txtSenha.Size = new System.Drawing.Size(500, 40);
-            txtSenha.Text = users[0].Password;
+            txtSenha.Text = users.Password;
             editar.Controls.Add(txtSenha);
 
             Button btnSalvar = new Button();

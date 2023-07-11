@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230606003521_create-user")]
-    partial class createuser
+    [Migration("20230710184857_finish")]
+    partial class finish
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -187,7 +187,7 @@ namespace Migrations
 
                     b.HasIndex("SponsorId");
 
-                    b.ToTable("Values");
+                    b.ToTable("ValuesEvent");
                 });
 
             modelBuilder.Entity("Models.ArtistEvent", b =>

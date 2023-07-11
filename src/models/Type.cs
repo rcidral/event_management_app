@@ -30,11 +30,11 @@ namespace Models
             }
         }
 
-        public static List<Type> show(int id){
+        public static Type show(int id){
             try{
                 using(Context context = new Context())
                 {
-                    return context.Types.Where(type => type.Id == id).ToList();
+                    return context.Types.Find(id);
                 }
             }catch(System.Exception e){
                 throw e;

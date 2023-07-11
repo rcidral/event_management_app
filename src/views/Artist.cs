@@ -15,7 +15,7 @@ namespace Views
             lista.BorderStyle = BorderStyle.None;
             lista.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lista.Columns.Add("ID", 450);
-            lista.Columns.Add("Name", 450);
+            lista.Columns.Add("Nome", 450);
             lista.FullRowSelect = true;
             lista.GridLines = true;
             lista.MultiSelect = false;
@@ -165,7 +165,7 @@ namespace Views
 
         public static Panel Edit(string id, Panel panel2)
         {
-            List<Models.Artist> artistlist = Controllers.Artist.show(Int32.Parse(id));
+            Models.Artist artistlist = Controllers.Artist.show(Int32.Parse(id));
             Panel form = new Panel();
             form.Size = new System.Drawing.Size(900, 450);
             form.Location = new System.Drawing.Point(220, 0);
@@ -180,7 +180,7 @@ namespace Views
             TextBox txtName = new TextBox();
             txtName.Location = new System.Drawing.Point(190, 70);
             txtName.Size = new System.Drawing.Size(500, 40);
-            txtName.Text = artistlist[0].Name;
+            txtName.Text = artistlist.Name;
             form.Controls.Add(txtName);
 
             Button btnAdd = new Button();

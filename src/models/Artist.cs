@@ -39,13 +39,13 @@ namespace Models
                 throw e;
             }
         }
-        public static List<Artist> show(int id)
+        public static Artist show(int id)
         {
             try
             {
                 using (Context context = new Context())
                 {
-                    return context.Artists.Where(artist => artist.Id == id).ToList();
+                    return context.Artists.Find(id);
                 }
             }
             catch (System.Exception e)
@@ -101,5 +101,6 @@ namespace Models
                 throw e;
             }
         }
+        
     }
 }
